@@ -19,8 +19,8 @@ FPS = 120
 # Độ dày đường kẻ
 MARGIN = 2
 # Số hàng, cột
-ROWNUM = 3
-COLNUM = 3
+ROWNUM = 25
+COLNUM = 30
 
 my_game = caro.Caro(ROWNUM, COLNUM, 3, XO)
 
@@ -272,7 +272,7 @@ while not done:
             pos = pygame.mouse.get_pos()
             col = int(pos[0] // (WIDTH + MARGIN))
             row =  int(pos[1] // (HEIGHT + MARGIN))
-            print(pos, col, row)
+            # print(pos, col, row)
             if col < COLNUM and row < ROWNUM:
                 my_game.make_move(row, col)
             status = my_game.get_winner()
