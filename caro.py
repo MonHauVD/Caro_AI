@@ -135,10 +135,9 @@ class Caro:
         '''
 
         def check_consecutive(cons: list[list[str]]) -> int:
-            count_x = 0
-            count_y = 0
-
             for con in cons:
+                count_x = 0
+                count_y = 0
                 for c in con:
                     if c == 'X':
                         count_x += 1    
