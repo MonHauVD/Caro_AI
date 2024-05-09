@@ -105,6 +105,10 @@ def draw(this_game : caro.Caro, this_screen):
     for row in range(ROWNUM):
         for column in range(COLNUM):
             color = WHITE
+            if len(this_game.lastMove) > 0:
+                lastmove_row, lastmove_col = this_game.lastMove[-1][0], this_game.lastMove[-1][1]
+                if row == lastmove_row and column == lastmove_col:
+                    color = GREEN
             pygame.draw.rect(this_screen,
                              color,
                               [(MARGIN + WIDTH) * column + MARGIN,
