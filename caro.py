@@ -14,6 +14,7 @@ class Caro:
             winning_condition (int): Number of consecutive cells that a player need to have in order to win the game. Default: 5
 
         '''
+        self.originXO = XO
         self.rows = rows
         self.cols = cols
         self.grid = [['.' for _ in range(cols)] for _ in range(rows)]
@@ -31,6 +32,8 @@ class Caro:
         '''
         self.grid = [['.' for _ in range(self.cols)] for _ in range(self.rows)]
         self.lastMove = []
+        self.turn = 1
+        self.XO = self.originXO
 
     def get_possible_moves(self) -> list[list[int]]:
         '''
