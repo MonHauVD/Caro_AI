@@ -99,6 +99,7 @@ status = None
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
 
+# ----------------------- Function ------------------------------------
 def logo():
     font = pygame.font.Font('freesansbold.ttf', 36)
     text = font.render('By nhóm 2', True, WHITE, BLACK)
@@ -178,11 +179,12 @@ def Undo(self : caro.Caro):
     pass
 
 
-# -------- Main Program Loop -----------
+# --------- Main Program Loop -------------------------------------------
 while not done:
     for event in pygame.event.get():  # User did something
         # if start_button.draw(Screen):
         #     print('START')
+# ------------- Setup button---------------------------------------------
         if len(my_game.lastMove) > 0:
             person_btn.disable_button()
             ai_btn.disable_button()
@@ -196,19 +198,23 @@ while not done:
             m_btn.disable_button()
             e_btn.disable_button()
         else:
+# --------------------- AI turn-------------------------------------------
             if my_game.turn == my_game.ai_turn:
                 if my_game.get_winner() == -1:
-                    my_game.random_ai()
-                    pygame.time.delay(500)
+# ---------------------AI MAKE MOVE---------------------------------------- ==================================
+                    my_game.random_ai()                                    #||  Here is where to change AI  ||
+                    pygame.time.delay(500)                                 #||          (❁´◡`❁)           ||
+# ------------------------------------------------------------------------- =================================
                     draw(my_game, Screen)
                 ai_thinking_btn.disable_button()
                 ai_thinking_btn.re_draw(Screen)
             else:
                 pass
-
+#---------------- Undo button ---------------------------------------------
         if undo_button.draw(Screen): # Ấn nút Undo
             Undo(my_game)
             pass
+# -----------pvp button----------------------------------------------------
         if pvp_btn.draw(Screen):
             my_game.use_ai(False)
             pvp_btn.disable_button()
@@ -219,6 +225,7 @@ while not done:
             m_btn.disable_button()
             e_btn.disable_button()
             pass
+# ------------ai vs p button------------------------------------------------
         if aivp_btn.draw(Screen):
             my_game.use_ai(True)
             aivp_btn.disable_button()
@@ -227,26 +234,31 @@ while not done:
             h_btn.enable_button()
             e_btn.enable_button()
             pass
+# --------------Draw ai thinking button ------------------------------------
         if ai_thinking_btn.draw(Screen):
             pass
+# ----------hard button-----------------------------------------------------
         if h_btn.draw(Screen):
             h_btn.disable_button()
             m_btn.enable_button()
             e_btn.enable_button()
             my_game.change_hard_ai("hard")
             pass
+# ----------medium button---------------------------------------------------
         if m_btn.draw(Screen):
             h_btn.enable_button()
             m_btn.disable_button()
             e_btn.enable_button()
             my_game.change_hard_ai("medium")
             pass
+# -------------easy button--------------------------------------------------
         if e_btn.draw(Screen):
             h_btn.enable_button()
             m_btn.enable_button()
             e_btn.disable_button()
             my_game.change_hard_ai("easy")
             pass
+# -------Choose person play first button------------------------------------
         if person_btn.draw(Screen):  # Ấn nút Chọn người đi trước
             if my_game.is_use_ai:
                 person_btn.disable_button()
@@ -257,6 +269,7 @@ while not done:
                 person_btn.disable_button()
                 ai_btn.disable_button()
             pass
+# -------Choose AI play first button------------------------------------
         if ai_btn.draw(Screen): # Ấn nút Chọn AI đi trước
             if my_game.is_use_ai:
                 ai_btn.disable_button()
@@ -267,10 +280,12 @@ while not done:
                 person_btn.disable_button()
                 ai_btn.disable_button()
             pass
+# --------------Exit button--------------------------------------------
         if exit_button.draw(Screen): # Ấn nút Thoát
             print('EXIT')
             #quit game
             done = True
+# --------------Replay button-------------------------------------------
         if replay_button.draw(Screen): # Ấn nút Chơi lại
             print('Replay')
             my_game.reset()
@@ -278,10 +293,11 @@ while not done:
             ai_btn.enable_button()
             h_btn.enable_button()
             e_btn.enable_button()
-
+# -----------------checking is exit game? ------------------------------
         if event.type == pygame.QUIT:  # If user clicked close
             done = True  # Flag that we are done so we exit this loop
             # Set the screen background
+# -------Find pos mouse clicked and make a move-------------------------
         if event.type == pygame.MOUSEBUTTONDOWN:
             pos = pygame.mouse.get_pos()
             col = int(pos[0] // (WIDTH + MARGIN))
@@ -294,10 +310,10 @@ while not done:
                 ai_thinking_btn.enable_button()
                 ai_thinking_btn.re_draw(Screen)
                 draw(my_game, Screen)
-
+# ------ Draw screen---------------------------------------------------
     draw(my_game, Screen)
 
-
+# -------- checking winner --------------------------------------------
     if status == 2:
         font = pygame.font.Font('freesansbold.ttf', 100)
         text = font.render('Draw', True, GREEN, BLUE)
