@@ -3,6 +3,7 @@ import Buttons as button
 import pygame
 import sys
 import caro
+import os
 
 # -------------------------Setup----------------------------
 # Định nghĩa màu
@@ -34,7 +35,10 @@ WIDTH = my_len_min
 HEIGHT = my_len_min
 
 Screen = pygame.display.set_mode(Window_size)
-path = "Caro/asset"
+# path = "Caro/asset"
+path = os.getcwd()
+path = os.path.join(path, './asset')
+
 # ------------------------------Load asset----------------------------------------
 x_img = pygame.transform.smoothscale(pygame.image.load(path + "/X_caro.png").convert_alpha(),(my_len_min,my_len_min))
 o_img = pygame.transform.smoothscale(pygame.image.load(path + "/O_caro.png").convert_alpha(),(my_len_min,my_len_min))
