@@ -9,9 +9,9 @@ import caro
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
-BLUE = (0,0,255)    
+GREEN = (77, 199, 61)
+RED = (199, 36, 55)
+BLUE = (68, 132, 222)   
 
 # Kí hiệu lúc ban đầu
 XO = 'X'
@@ -21,8 +21,10 @@ MARGIN = 2
 # Số hàng, cột
 ROWNUM = 25
 COLNUM = 30
+# Số dòng thắng
+winning_condition = 5
 
-my_game = caro.Caro(ROWNUM, COLNUM, 3, XO)
+my_game = caro.Caro(ROWNUM, COLNUM, winning_condition, XO)
 
 Window_size = [1280, 720]
 
@@ -289,14 +291,14 @@ while not done:
         # done = True
     if status == 0:
         font = pygame.font.Font('freesansbold.ttf', 100)
-        text = font.render('X wins', True, GREEN, BLUE)
+        text = font.render('X wins', True, RED, GREEN)
         textRect = text.get_rect()
         textRect.center = (int(Window_size[0]/2), int(Window_size[1]/2))
         Screen.blit(text,textRect)
         # done = True
     if status == 1:
         font = pygame.font.Font('freesansbold.ttf', 100)
-        text = font.render('O wins', True, GREEN, BLUE)
+        text = font.render('O wins', True, BLUE, GREEN)
         textRect = text.get_rect()
         textRect.center = (int(Window_size[0]/2), int(Window_size[1]/2))
         Screen.blit(text,textRect)
