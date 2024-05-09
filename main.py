@@ -16,23 +16,26 @@ BLUE = (0,0,255)
 # Kí hiệu lúc ban đầu
 XO = 'X'
 FPS = 120
-# Chiều dài, rộng mỗi ô
-WIDTH = 28
-HEIGHT = 28
 # Độ dày đường kẻ
 MARGIN = 2
 # Số hàng, cột
-ROWNUM = 25
-COLNUM = 30
+ROWNUM = 3
+COLNUM = 3
 
-my_game = caro.Caro(ROWNUM, COLNUM, 5, XO)
+my_game = caro.Caro(ROWNUM, COLNUM, 3, XO)
 
 Window_size = [1280, 720]
+
+# Chiều dài, rộng mỗi ô
+my_len_min = min(900/COLNUM - MARGIN, Window_size[1]/ ROWNUM - MARGIN)
+WIDTH = my_len_min
+HEIGHT = my_len_min
+
 Screen = pygame.display.set_mode(Window_size)
 path = "Caro/asset"
 # ------------------------------Load asset----------------------------------------
-x_img = pygame.transform.smoothscale(pygame.image.load(path + "/X_caro.png").convert_alpha(),(28,28))
-o_img = pygame.transform.smoothscale(pygame.image.load(path + "/O_caro.png").convert_alpha(),(28,28))
+x_img = pygame.transform.smoothscale(pygame.image.load(path + "/X_caro.png").convert_alpha(),(my_len_min,my_len_min))
+o_img = pygame.transform.smoothscale(pygame.image.load(path + "/O_caro.png").convert_alpha(),(my_len_min,my_len_min))
 #load button images
 start_img = pygame.transform.smoothscale(pygame.image.load(path + '/start_btn.png').convert_alpha(), (240, 105))
 exit_img = pygame.transform.smoothscale(pygame.image.load(path + '/exit_btn.png').convert_alpha(), (240, 105))
@@ -267,9 +270,10 @@ while not done:
             # Set the screen background
         if event.type == pygame.MOUSEBUTTONDOWN:
             pos = pygame.mouse.get_pos()
-            col = pos[0] // (WIDTH + MARGIN)
-            row =  pos[1] // (HEIGHT + MARGIN)
-            if col <= COLNUM and row <= ROWNUM:
+            col = int(pos[0] // (WIDTH + MARGIN))
+            row =  int(pos[1] // (HEIGHT + MARGIN))
+            print(pos, col, row)
+            if col < COLNUM and row < ROWNUM:
                 my_game.make_move(row, col)
             status = my_game.get_winner()
 
