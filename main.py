@@ -18,8 +18,8 @@ BLUE = (68, 132, 222)
 XO = 'X'
 FPS = 120
 # Số hàng, cột
-ROWNUM = 3
-COLNUM = 3
+ROWNUM = 25
+COLNUM = 30
 # Số dòng thắng
 winning_condition = 5
 
@@ -197,12 +197,13 @@ while not done:
             e_btn.disable_button()
         else:
             if my_game.turn == my_game.ai_turn:
-                ai_thinking_btn.enable_button()
-                ai_thinking_btn.re_draw(Screen)
-                my_game.random_ai()
-                draw(my_game, Screen)
-                ai_thinking_btn.re_draw(Screen)
-                pygame.time.delay(500)
+                if my_game.get_winner() == -1:
+                    ai_thinking_btn.enable_button()
+                    ai_thinking_btn.re_draw(Screen)
+                    my_game.random_ai()
+                    draw(my_game, Screen)
+                    ai_thinking_btn.re_draw(Screen)
+                    pygame.time.delay(500)
                 # ai_thinking_btn.disable_button()
             else:
                 ai_thinking_btn.disable_button()
