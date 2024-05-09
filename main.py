@@ -18,8 +18,8 @@ BLUE = (68, 132, 222)
 XO = 'X'
 FPS = 120
 # Số hàng, cột
-ROWNUM = 50
-COLNUM = 50
+ROWNUM = 25
+COLNUM = 30
 # Số dòng thắng
 winning_condition = 5
 
