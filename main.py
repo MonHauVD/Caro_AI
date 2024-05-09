@@ -198,15 +198,12 @@ while not done:
         else:
             if my_game.turn == my_game.ai_turn:
                 if my_game.get_winner() == -1:
-                    ai_thinking_btn.enable_button()
-                    ai_thinking_btn.re_draw(Screen)
                     my_game.random_ai()
-                    draw(my_game, Screen)
-                    ai_thinking_btn.re_draw(Screen)
                     pygame.time.delay(500)
-                # ai_thinking_btn.disable_button()
-            else:
+                    draw(my_game, Screen)
                 ai_thinking_btn.disable_button()
+                ai_thinking_btn.re_draw(Screen)
+            else:
                 pass
 
         if undo_button.draw(Screen): # Ấn nút Undo
@@ -293,6 +290,10 @@ while not done:
             if col < COLNUM and row < ROWNUM:
                 my_game.make_move(row, col)
             status = my_game.get_winner()
+            if my_game.is_use_ai and my_game.turn == my_game.ai_turn:
+                ai_thinking_btn.enable_button()
+                ai_thinking_btn.re_draw(Screen)
+                draw(my_game, Screen)
 
     draw(my_game, Screen)
 
