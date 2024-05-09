@@ -18,8 +18,8 @@ BLUE = (68, 132, 222)
 XO = 'X'
 FPS = 120
 # Số hàng, cột
-ROWNUM = 25
-COLNUM = 30
+ROWNUM = 3
+COLNUM = 3
 # Số dòng thắng
 winning_condition = 5
 
@@ -28,11 +28,11 @@ my_game = caro.Caro(ROWNUM, COLNUM, winning_condition, XO)
 Window_size = [1280, 720]
 
 
-my_len_min = min(900/COLNUM, (Window_size[1])/ ROWNUM)
+my_len_min = min(900/COLNUM, (720)/ ROWNUM)
 # Độ dày đường kẻ
 MARGIN = my_len_min/15
-my_len_min = min((900 - MARGIN*3)/COLNUM, (Window_size[1]- MARGIN*3)/ ROWNUM)
-my_len_min - my_len_min - MARGIN
+my_len_min = min((900 - MARGIN)/COLNUM, (720 - MARGIN)/ ROWNUM)
+my_len_min = my_len_min - MARGIN
 # Chiều dài, rộng mỗi ô
 WIDTH = my_len_min
 HEIGHT = my_len_min
