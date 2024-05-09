@@ -66,6 +66,7 @@ aivp_img = pygame.transform.smoothscale(pygame.image.load(path + '/ai_vs_player.
 aivp_img_gray = pygame.transform.smoothscale(pygame.image.load(path + '/ai_vs_player_gray.jpg').convert_alpha(), (105, 105))
 ai_thinking_img = pygame.transform.smoothscale(pygame.image.load(path + '/ai_thinking.png').convert_alpha(), (105, 105))
 ai_thinking_img_gray = pygame.transform.smoothscale(pygame.image.load(path + '/ai_thinking_gray.png').convert_alpha(), (105, 105))
+icon_img = pygame.transform.smoothscale(pygame.image.load(path + '/old/icon.jpg').convert_alpha(), (20, 20))
 #create button instances
 # start_button = button.Button(1000, 200, start_img, 0.8)
 replay_button = button.Button(970, 575, replay_img, replay_img, 0.8)
@@ -84,6 +85,8 @@ person_btn.disable_button()
 m_btn.disable_button()
 pvp_btn.disable_button()
 ai_thinking_btn.disable_button()
+pygame.display.set_caption('Caro game by nhóm 2 Trí tuệ nhân tạo')
+pygame.display.set_icon(icon_img)
 pygame.init()
 
 
