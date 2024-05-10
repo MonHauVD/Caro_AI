@@ -112,9 +112,9 @@ def draw(this_game : caro.Caro, this_screen):
     for row in range(ROWNUM):
         for column in range(COLNUM):
             color = WHITE
-            if len(this_game.lastMove) > 0:
-                lastmove_row, lastmove_col = this_game.lastMove[-1][0], this_game.lastMove[-1][1]
-                if row == lastmove_row and column == lastmove_col:
+            if len(this_game.last_move) > 0:
+                last_move_row, last_move_col = this_game.last_move[-1][0], this_game.last_move[-1][1]
+                if row == last_move_row and column == last_move_col:
                     color = GREEN
             pygame.draw.rect(this_screen,
                              color,
@@ -144,12 +144,12 @@ def re_draw():
 
 def Undo(self : caro.Caro):
     if self.is_use_ai:
-        if len(self.lastMove) > 2:
-                last_move = self.lastMove[-1]
-                last_move_2 = self.lastMove[-2]
-                self.lastMove.pop()
-                self.lastMove.pop()  
-                # print(self.lastMove)
+        if len(self.last_move) > 2:
+                last_move = self.last_move[-1]
+                last_move_2 = self.last_move[-2]
+                self.last_move.pop()
+                self.last_move.pop()  
+                # print(self.last_move)
                 # print(last_move, type(last_move), type(last_move[0]))
                 row = int(last_move[0])
                 col = int(last_move[1])
@@ -159,10 +159,10 @@ def Undo(self : caro.Caro):
                 self.grid[row2][col2] = '.'
                 draw(my_game, Screen)
     else:
-        if len(self.lastMove) > 0:
-            last_move = self.lastMove[-1]
-            self.lastMove.pop()
-            # print(self.lastMove)
+        if len(self.last_move) > 0:
+            last_move = self.last_move[-1]
+            self.last_move.pop()
+            # print(self.last_move)
             # print(last_move, type(last_move), type(last_move[0]))
             row = int(last_move[0])
             col = int(last_move[1])
@@ -185,7 +185,7 @@ while not done:
         # if start_button.draw(Screen):
         #     print('START')
 # ------------- Setup button---------------------------------------------
-        if len(my_game.lastMove) > 0:
+        if len(my_game.last_move) > 0:
             person_btn.disable_button()
             ai_btn.disable_button()
             h_btn.disable_button()
