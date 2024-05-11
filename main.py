@@ -3,6 +3,7 @@ import Buttons as button
 import pygame
 import sys
 import caro
+import agent
 import os
 
 # -------------------------Setup----------------------------
@@ -18,12 +19,14 @@ BLUE = (68, 132, 222)
 XO = 'X'
 FPS = 120
 # Số hàng, cột
-ROWNUM = 25
-COLNUM = 30
+ROWNUM = 6
+COLNUM = 6
 # Số dòng thắng
 winning_condition = 5
 
 my_game = caro.Caro(ROWNUM, COLNUM, winning_condition, XO)
+
+my_agent = agent.Agent(4)
 
 Window_size = [1280, 720]
 
@@ -202,7 +205,13 @@ while not done:
             if my_game.turn == my_game.ai_turn:
                 if my_game.get_winner() == -1:
 # ---------------------AI MAKE MOVE---------------------------------------- ==================================
-                    my_game.random_ai()                                    #||  Here is where to change AI  ||
+                    # my_game.random_ai()   
+                    move = my_agent.get_move(my_game)
+                    x_move = move[0]
+                    y_move = move[1]
+                    print(move)
+                    my_game.make_move(x_move, y_move)  
+                    # my_game.random_ai()                                #||  Here is where to change AI  ||
                     pygame.time.delay(500)                                 #||          (❁´◡`❁)           ||
 # ------------------------------------------------------------------------- =================================
                     draw(my_game, Screen)
