@@ -14,12 +14,13 @@ class Caro:
             winning_condition (int): Number of consecutive cells that a player need to have in order to win the game. Default: 5
 
         '''
+        self.originXO = XO
         self.rows = rows
         self.cols = cols
         self.grid = [['.' for _ in range(cols)] for _ in range(rows)]
         self.winning_condition = winning_condition
         self.XO = XO
-        self.lastMove = []
+        self.last_move = []
         self.hard_ai = 2 # thay đổi trong hàm change_hard_ai()
         self.turn = 1
         self.ai_turn = 2
@@ -30,7 +31,9 @@ class Caro:
             Reset the game board.
         '''
         self.grid = [['.' for _ in range(self.cols)] for _ in range(self.rows)]
-        self.lastMove = []
+        self.last_move = []
+        self.turn = 1
+        self.XO = self.originXO
 
     def get_possible_moves(self) -> list[list[int]]:
         '''
@@ -196,8 +199,8 @@ class Caro:
 
         self.grid[x][y] = self.XO
         move = (x, y)
-        self.lastMove.append(move)
-        # print(self.lastMove)
+        self.last_move.append(move)
+        # print(self.last_move)
         if self.XO == 'X':
             self.XO = 'O'
         else:
@@ -238,6 +241,17 @@ class Caro:
             return True
         return False
     
+    def get_current_XO_for_AI(self):
+        if self.originXO == "X":
+            if self.ai_turn == 2:
+                return "O"
+            else:
+                return "X"
+        else:
+            if self.ai_turn == 1:
+                return "O"
+            else:
+                return "X"
 
 
 
