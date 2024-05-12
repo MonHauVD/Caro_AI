@@ -4,9 +4,12 @@ import pygame
 import sys
 import caro
 import os
+from agent import Agent
 
 # -------------------------Setup----------------------------
 # Định nghĩa màu
+
+agent = Agent(max_depth=2, XO='O')
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -18,8 +21,8 @@ BLUE = (68, 132, 222)
 XO = 'X'
 FPS = 120
 # Số hàng, cột
-ROWNUM = 25
-COLNUM = 30
+ROWNUM = 15
+COLNUM = 20
 # Số dòng thắng
 winning_condition = 5
 
@@ -178,7 +181,6 @@ def Undo(self : caro.Caro):
             draw(my_game, Screen)
     pass
 
-
 # --------- Main Program Loop -------------------------------------------
 while not done:
     for event in pygame.event.get():  # User did something
@@ -202,7 +204,9 @@ while not done:
             if my_game.turn == my_game.ai_turn:
                 if my_game.get_winner() == -1:
 # ---------------------AI MAKE MOVE---------------------------------------- ==================================
-                    my_game.random_ai()                                    #||  Here is where to change AI  ||
+                    # my_game.random_ai()                                    #||  Here is where to change AI  ||
+                    best_move = agent.get_move(my_game)
+                    my_game.make_move(best_move[0], best_move[1])
                     pygame.time.delay(500)                                 #||          (❁´◡`❁)           ||
 # ------------------------------------------------------------------------- =================================
                     draw(my_game, Screen)
