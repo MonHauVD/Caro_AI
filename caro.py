@@ -241,17 +241,18 @@ class Caro:
             return True
         return False
     
-    def get_current_XO_for_AI(self):
+    def get_current_XO_for_AI(self) -> str:
         if self.originXO == "X":
             if self.ai_turn == 2:
-                return "O"
+                return 'O'
             else:
-                return "X"
+                return 'X'
         else:
             if self.ai_turn == 1:
-                return "O"
+                return 'O'
             else:
-                return "X"
+                return 'X'
+        
 
 
 

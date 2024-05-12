@@ -9,8 +9,6 @@ from agent import Agent
 # -------------------------Setup----------------------------
 # Định nghĩa màu
 
-agent = Agent(max_depth=2, XO='O')
-
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (77, 199, 61)
@@ -27,6 +25,8 @@ COLNUM = 20
 winning_condition = 5
 
 my_game = caro.Caro(ROWNUM, COLNUM, winning_condition, XO)
+
+agent = Agent(max_depth=my_game.hard_ai, XO = my_game.get_current_XO_for_AI())
 
 Window_size = [1280, 720]
 
@@ -181,6 +181,29 @@ def Undo(self : caro.Caro):
             draw(my_game, Screen)
     pass
 
+def checking_winning(status):
+    if status == 2:
+        font = pygame.font.Font('freesansbold.ttf', 100)
+        text = font.render('Draw', True, GREEN, BLUE)
+        textRect = text.get_rect()
+        textRect.center = (int(Window_size[0]/2), int(Window_size[1]/2))
+        Screen.blit(text,textRect)
+        # done = True
+    if status == 0:
+        font = pygame.font.Font('freesansbold.ttf', 100)
+        text = font.render('X wins', True, RED, GREEN)
+        textRect = text.get_rect()
+        textRect.center = (int(Window_size[0]/2), int(Window_size[1]/2))
+        Screen.blit(text,textRect)
+        # done = True
+    if status == 1:
+        font = pygame.font.Font('freesansbold.ttf', 100)
+        text = font.render('O wins', True, BLUE, GREEN)
+        textRect = text.get_rect()
+        textRect.center = (int(Window_size[0]/2), int(Window_size[1]/2))
+        Screen.blit(text,textRect)
+        # done = True
+
 # --------- Main Program Loop -------------------------------------------
 while not done:
     for event in pygame.event.get():  # User did something
@@ -212,6 +235,8 @@ while not done:
                     draw(my_game, Screen)
                 ai_thinking_btn.disable_button()
                 ai_thinking_btn.re_draw(Screen)
+                status = my_game.get_winner()
+                checking_winning(status)
             else:
                 pass
 #---------------- Undo button ---------------------------------------------
@@ -247,6 +272,7 @@ while not done:
             m_btn.enable_button()
             e_btn.enable_button()
             my_game.change_hard_ai("hard")
+            agent = Agent(max_depth=my_game.hard_ai, XO = my_game.get_current_XO_for_AI())
             pass
 # ----------medium button---------------------------------------------------
         if m_btn.draw(Screen):
@@ -254,6 +280,7 @@ while not done:
             m_btn.disable_button()
             e_btn.enable_button()
             my_game.change_hard_ai("medium")
+            agent = Agent(max_depth=my_game.hard_ai, XO = my_game.get_current_XO_for_AI())
             pass
 # -------------easy button--------------------------------------------------
         if e_btn.draw(Screen):
@@ -261,6 +288,7 @@ while not done:
             m_btn.enable_button()
             e_btn.disable_button()
             my_game.change_hard_ai("easy")
+            agent = Agent(max_depth=my_game.hard_ai, XO = my_game.get_current_XO_for_AI())
             pass
 # -------Choose person play first button------------------------------------
         if person_btn.draw(Screen):  # Ấn nút Chọn người đi trước
@@ -268,6 +296,7 @@ while not done:
                 person_btn.disable_button()
                 ai_btn.enable_button()
                 my_game.set_ai_turn(2)
+                agent = Agent(max_depth=my_game.hard_ai, XO = my_game.get_current_XO_for_AI())
                 print("Human")
             else:
                 person_btn.disable_button()
@@ -279,6 +308,7 @@ while not done:
                 ai_btn.disable_button()
                 person_btn.enable_button()
                 my_game.set_ai_turn(1)
+                agent = Agent(max_depth=my_game.hard_ai, XO = my_game.get_current_XO_for_AI())
                 print("AI")
             else:
                 person_btn.disable_button()
@@ -318,27 +348,7 @@ while not done:
     draw(my_game, Screen)
 
 # -------- checking winner --------------------------------------------
-    if status == 2:
-        font = pygame.font.Font('freesansbold.ttf', 100)
-        text = font.render('Draw', True, GREEN, BLUE)
-        textRect = text.get_rect()
-        textRect.center = (int(Window_size[0]/2), int(Window_size[1]/2))
-        Screen.blit(text,textRect)
-        # done = True
-    if status == 0:
-        font = pygame.font.Font('freesansbold.ttf', 100)
-        text = font.render('X wins', True, RED, GREEN)
-        textRect = text.get_rect()
-        textRect.center = (int(Window_size[0]/2), int(Window_size[1]/2))
-        Screen.blit(text,textRect)
-        # done = True
-    if status == 1:
-        font = pygame.font.Font('freesansbold.ttf', 100)
-        text = font.render('O wins', True, BLUE, GREEN)
-        textRect = text.get_rect()
-        textRect.center = (int(Window_size[0]/2), int(Window_size[1]/2))
-        Screen.blit(text,textRect)
-        # done = True
+    checking_winning(status)
 # Limit to 999999999 frames per second
     clock.tick(FPS)
  
