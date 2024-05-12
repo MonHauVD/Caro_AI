@@ -257,6 +257,10 @@ while not done:
 # ------------ai vs p button------------------------------------------------
         if aivp_btn.draw(Screen):
             my_game.use_ai(True)
+            person_btn.disable_button()
+            ai_btn.enable_button()
+            my_game.set_ai_turn(2)
+            agent = Agent(max_depth=my_game.hard_ai, XO = my_game.get_current_XO_for_AI())
             aivp_btn.disable_button()
             pvp_btn.enable_button()
             ai_btn.enable_button()
