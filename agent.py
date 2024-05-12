@@ -34,6 +34,8 @@ class Agent:
         self.max_depth = max_depth
         self.XO = XO
 
+        # print("max_depth:", max_depth, "; XO:", XO)
+
     def compute(self, sequences: list[list[str]]) -> int:
         '''
             Parameters

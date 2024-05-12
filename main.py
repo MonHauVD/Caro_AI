@@ -85,7 +85,7 @@ pvp_btn = button.Button(1075, 145, pvp_img, pvp_img_gray, 0.8)
 aivp_btn = button.Button(970, 145, aivp_img, aivp_img_gray, 0.8)
 
 person_btn.disable_button()
-m_btn.disable_button()
+e_btn.disable_button()
 pvp_btn.disable_button()
 ai_thinking_btn.disable_button()
 pygame.display.set_caption('Caro game by nhóm 2 Trí tuệ nhân tạo')

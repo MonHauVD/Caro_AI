@@ -214,8 +214,8 @@ class Caro:
     def change_hard_ai(self, hard: str):
         if hard == 'easy':
             self.hard_ai = 1
-        elif hard == 3:
-            self.hard_ai = 'hard'
+        elif hard == 'hard':
+            self.hard_ai = 3
         elif hard == 'medium':
             self.hard_ai = 2
         else:
