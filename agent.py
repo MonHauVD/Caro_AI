@@ -1,11 +1,12 @@
 from caro import Caro
 import copy
+import random
 
 TWO = 10
 TWO_OBSTACLE = 5
 THREE = 1000
 THREE_OBSTACLE = 500
-FOUR = 10000000
+FOUR = 30000000
 FOUR_OBSTACLE = 2000
 WINNING = 2000000000
 
@@ -13,7 +14,7 @@ TWO_OPPONENT = -20
 TWO_OBSTACLE_OPPONENT = -3
 THREE_OPPONENT = -5000
 THREE_OBSTACLE_OPPONENT = -750
-FOUR_OPPONENT = -30000000
+FOUR_OPPONENT = -10000000
 FOUR_OBSTACLE_OPPONENT = -50000
 LOSING = -1000000000
 
@@ -23,6 +24,13 @@ INF = 999999999999
 class Agent:
 
     def __init__(self, max_depth: int, XO: str) -> None:
+        '''
+            Parameters
+            ----------------
+            max_depth: Maximum depth for the Minimax tree 
+            XO: 'X' or 'O', depend on the agent's turn
+
+        '''
         self.max_depth = max_depth
         self.XO = XO
 
@@ -43,9 +51,6 @@ class Agent:
         result = 0
 
         for sequence in sequences:
-            if sequence == ['.', 'O', 'O', 'O', 'X']:
-                print(f'sequence: {sequence}')
-
             player = 0
             opponent = 0
             obstacle = 1
@@ -87,8 +92,6 @@ class Agent:
                     obstacle_opponent = 1
 
                 else:
-                    # print(f'player: {player}')
-                    # print(f'opponent: {opponent}')
                     if player != 0:
                         if player == 2:
                             if obstacle_opponent == 1:
@@ -134,9 +137,6 @@ class Agent:
                     obstacle_player = 0
                     obstacle_opponent = 0
 
-                # print(
-                    # f'opponent: {opponent}, player: {player}, obstacle: {obstacle}, obstacle_player: {obstacle_player}, obstacle_opponent: {obstacle_opponent}')
-
             if opponent != 0:
                 if opponent == 2 and obstacle_player == 0:
                     result += TWO_OBSTACLE_OPPONENT
@@ -157,7 +157,6 @@ class Agent:
                 elif player == 5:
                     result += WINNING
 
-        # print(f'result : {result}')
         return result
 
     def get_heuristic(self, game: Caro) -> int:
@@ -185,12 +184,14 @@ class Agent:
             --------------
             The best move of the current position
         '''
+        if len(game.last_move) <= 1:
+            possible_moves = game.get_possible_moves()
+            move = random.choice(possible_moves)
+            return move
 
         best_score, best_move = self.minimax(
             game, self.max_depth, -INF * 10, INF * 10)
 
-        # print(f'best_score: {best_score}')
-        # print(f'best_move: {best_move}')
         return best_move
 
     def minimax(self, game: Caro, depth: int, alpha: int, beta: int, maximizing_player: int = 1) -> tuple[int, list[int]]:
@@ -234,15 +235,10 @@ class Agent:
                 eval, move = self.minimax(new_game, depth - 1,
                                           alpha, beta, maximizing_player ^ 1)
 
-                # print(f'eval: {eval}')
-                # print(f'move: {[x, y]}')
-                # print(f'max_eval: {max_eval}')
                 if eval > max_eval:
                     max_eval = eval
                     best_move = [x, y]
 
-
-                # print(f'best_move: {best_move}, max_eval: {max_eval}')
                 alpha = max(alpha, eval)
                 if beta <= alpha:
                     break
@@ -261,7 +257,6 @@ class Agent:
                 eval, move = self.minimax(new_game, depth - 1,
                                           alpha, beta, maximizing_player ^ 1)
 
-                # print(eval)
                 if eval < min_eval:
                     min_eval = eval
                     best_move = [x, y]
@@ -271,6 +266,8 @@ class Agent:
                     break
             return min_eval, best_move
 
+
+# Testing 
 
 if __name__ == '__main__':
     game = Caro(rows=5, cols=5)
@@ -282,9 +279,7 @@ if __name__ == '__main__':
         ['.', '.', '.', '.', '.'],
     ]
 
-    print(game.grid)
     agent = Agent(max_depth=2, XO='X')
+    best_move = agent.get_move(game)
 
-    move = agent.get_move(game)
-    print(move)
-    # agent.compute([['O', 'X', 'X', 'X', 'X', 'O']])
+    print(best_move)
