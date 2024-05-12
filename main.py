@@ -328,9 +328,16 @@ while not done:
             print('Replay')
             my_game.reset()
             re_draw()
-            ai_btn.enable_button()
-            h_btn.enable_button()
-            e_btn.enable_button()
+            pvp_btn.disable_button()
+            aivp_btn.enable_button()
+            person_btn.disable_button()
+            ai_btn.disable_button()
+            h_btn.disable_button()
+            m_btn.disable_button()
+            e_btn.disable_button()
+            my_game.change_hard_ai("medium")
+            my_game.set_ai_turn(2)
+            my_game.use_ai(False)
 # -----------------checking is exit game? ------------------------------
         if event.type == pygame.QUIT:  # If user clicked close
             done = True  # Flag that we are done so we exit this loop
