@@ -112,6 +112,8 @@ ai_thinking_img_gray = pygame.transform.smoothscale(pygame.image.load(
     path + '/ai_thinking_gray.png').convert_alpha(), (105, 105))
 icon_img = pygame.transform.smoothscale(pygame.image.load(
     path + '/old/icon.jpg').convert_alpha(), (20, 20))
+logo_img = pygame.transform.smoothscale(pygame.image.load(
+    path + '/logo.jpg').convert_alpha(), (240, 105))
 # create button instances
 start_button = button.Button(970, 200, start_img, start_img, 0.8)
 replay_button = button.Button(970, 575, replay_img, replay_img, 0.8)
@@ -126,6 +128,7 @@ ai_thinking_btn = button.Button(
     1020, 30, ai_thinking_img, ai_thinking_img_gray, 0.8)
 pvp_btn = button.Button(1075, 145, pvp_img, pvp_img_gray, 0.8)
 aivp_btn = button.Button(970, 145, aivp_img, aivp_img_gray, 0.8)
+logo_btn = button.Button(990, 660, logo_img, logo_img, 0.6)
 
 person_btn.disable_button()
 m_btn.disable_button()
@@ -141,7 +144,7 @@ if (is_developer_mode == True):
     e_btn.disable_button()
     ai_thinking_btn.disable_button()
 
-pygame.display.set_caption('Caro game by nhóm 2 Trí tuệ nhân tạo')
+pygame.display.set_caption('Caro game by nhóm 12 Trí tuệ nhân tạo')
 pygame.display.set_icon(icon_img)
 pygame.init()
 
@@ -157,10 +160,11 @@ clock = pygame.time.Clock()
 
 def logo():
     font = pygame.font.Font('freesansbold.ttf', 36)
-    text = font.render('By nhóm 2', True, WHITE, BLACK)
+    text = font.render('By AI - nhóm 12', True, WHITE, BLACK)
     textRect = text.get_rect()
     textRect.center = (1100, 700)
     Screen.blit(text, textRect)
+    # logo_btn.draw(Screen)
 
 
 def draw(this_game: caro.Caro, this_screen):
