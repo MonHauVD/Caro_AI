@@ -4,7 +4,7 @@ import pygame
 import sys
 import caro
 import os
-from optimized_agent import OptimizedAgent
+from agent import Agent
 
 # -------------------------Setup----------------------------
 # Định nghĩa màu
@@ -27,8 +27,8 @@ winning_condition = 5
 # developer_mode: ai vs ai
 # Đặt is_developer_mode = True nếu muốn cho ai đấu với ai
 
-# is_developer_mode = False
-is_developer_mode = True
+is_developer_mode = False
+# is_developer_mode = True
 
 dev_mode_setup = {
     'ai_1': 'X',
@@ -40,12 +40,12 @@ dev_mode_setup = {
 # init game and ai
 my_game = caro.Caro(ROWNUM, COLNUM, winning_condition, XO)
 
-agent = OptimizedAgent(max_depth=my_game.hard_ai,
+agent = Agent(max_depth=my_game.hard_ai,
                        XO=my_game.get_current_XO_for_AI())
 
-agent1 = OptimizedAgent(max_depth=dev_mode_setup['ai_1_depth'],
+agent1 = Agent(max_depth=dev_mode_setup['ai_1_depth'],
                        XO=dev_mode_setup['ai_1'])
-agent2 = OptimizedAgent(max_depth=dev_mode_setup['ai_2_depth'],
+agent2 = Agent(max_depth=dev_mode_setup['ai_2_depth'],
                        XO=dev_mode_setup['ai_2'])
 
 Window_size = [1280, 720]
@@ -331,7 +331,7 @@ while not done:
                 pvp_btn.enable_button()
                 
 
-                agent = OptimizedAgent(max_depth=my_game.hard_ai,
+                agent = Agent(max_depth=my_game.hard_ai,
                                     XO=my_game.get_current_XO_for_AI())
                 print("AI_P")
                 pass
@@ -346,7 +346,7 @@ while not done:
                 my_game.change_hard_ai("hard")
                 
 
-                agent = OptimizedAgent(max_depth=my_game.hard_ai,
+                agent = Agent(max_depth=my_game.hard_ai,
                                     XO=my_game.get_current_XO_for_AI())
                 print("Hard")
                 pass
@@ -358,7 +358,7 @@ while not done:
                 my_game.change_hard_ai("medium")
                 
 
-                agent = OptimizedAgent(max_depth=my_game.hard_ai,
+                agent = Agent(max_depth=my_game.hard_ai,
                                     XO=my_game.get_current_XO_for_AI())
                 print("Medium")
                 pass
@@ -370,7 +370,7 @@ while not done:
                 my_game.change_hard_ai("easy")
                 
 
-                agent = OptimizedAgent(max_depth=my_game.hard_ai,
+                agent = Agent(max_depth=my_game.hard_ai,
                                     XO=my_game.get_current_XO_for_AI())
                 print("Easy")
                 pass
@@ -381,7 +381,7 @@ while not done:
                 my_game.set_ai_turn(2)
                 
 
-                agent = OptimizedAgent(max_depth=my_game.hard_ai,
+                agent = Agent(max_depth=my_game.hard_ai,
                                         XO=my_game.get_current_XO_for_AI())
                 print("Human")
                 pass
@@ -392,7 +392,7 @@ while not done:
                 my_game.set_ai_turn(1)
                 
 
-                agent = OptimizedAgent(max_depth=my_game.hard_ai,
+                agent = Agent(max_depth=my_game.hard_ai,
                                 XO=my_game.get_current_XO_for_AI())
                 print("AI")
                 pass

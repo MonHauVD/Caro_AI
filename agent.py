@@ -24,7 +24,7 @@ dx = [1, 1, 1, -1, -1, -1, 0, 0]
 dy = [1, -1, 0, 1, -1, 0, 1, -1]
 
 
-class OptimizedAgent:
+class Agent:
 
     def __init__(self, max_depth: int, XO: str) -> None:
         '''
@@ -306,7 +306,7 @@ if __name__ == '__main__':
         ['.', '.', '.', '.', '.'],
     ]
 
-    agent = OptimizedAgent(max_depth=2, XO='X')
+    agent = Agent(max_depth=2, XO='X')
     possible_moves = agent.get_possible_moves_optimized(game)
     print(f'possible_moves: {possible_moves}')
     best_move = agent.get_move(game)
