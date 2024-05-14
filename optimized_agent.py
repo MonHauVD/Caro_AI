@@ -83,50 +83,50 @@ class OptimizedAgent:
                     player += 1
 
                     if opponent != 0:
-                        if opponent == 2 and obstacle_player == 0:
+                        if opponent == 2 and obstacle_player == 0 and obstacle == 0:
                             result += TWO_OBSTACLE_OPPONENT
-                        elif opponent == 3 and obstacle_player == 0:
+                        elif opponent == 3 and obstacle_player == 0 and obstacle == 0:
                             result += THREE_OBSTACLE_OPPONENT
-                        elif opponent == 4 and obstacle_player == 0:
+                        elif opponent == 4 and obstacle_player == 0 and obstacle == 0:
                             result += FOUR_OBSTACLE_OPPONENT
                         elif opponent == 5:
                             result += LOSING
 
                     opponent = 0
                     obstacle_player = 1
-                    obstacle = 0
+                    # obstacle = 0
 
                 elif c != '.':
                     opponent += 1
 
                     if player != 0:
-                        if player == 2 and obstacle_opponent == 0:
+                        if player == 2 and obstacle_opponent == 0 and obstacle == 0:
                             result += TWO_OBSTACLE
-                        elif player == 3 and obstacle_opponent == 0:
+                        elif player == 3 and obstacle_opponent == 0 and obstacle == 0:
                             result += THREE_OBSTACLE
-                        elif player == 4 and obstacle_opponent == 0:
+                        elif player == 4 and obstacle_opponent == 0 and obstacle == 0:
                             result += FOUR_OBSTACLE
                         elif player == 5:
                             result += WINNING
 
                     player = 0
-                    obstacle = 0
+                    # obstacle = 0
                     obstacle_opponent = 1
 
                 else:
                     if player != 0:
                         if player == 2:
-                            if obstacle_opponent == 1:
+                            if obstacle_opponent == 1 or obstacle == 1:
                                 result += TWO_OBSTACLE
                             else:
                                 result += TWO
                         elif player == 3:
-                            if obstacle_opponent == 1:
+                            if obstacle_opponent == 1 or obstacle == 1:
                                 result += THREE_OBSTACLE
                             else:
                                 result += THREE
                         elif player == 4:
-                            if obstacle_opponent == 1:
+                            if obstacle_opponent == 1 or obstacle == 1:
                                 result += FOUR_OBSTACLE
                             else:
                                 result += FOUR
@@ -136,17 +136,17 @@ class OptimizedAgent:
 
                     if opponent != 0:
                         if opponent == 2:
-                            if obstacle_player == 1:
+                            if obstacle_player == 1 or obstacle == 1:
                                 result += TWO_OBSTACLE_OPPONENT
                             else:
                                 result += TWO_OPPONENT
                         elif opponent == 3:
-                            if obstacle_player == 1:
+                            if obstacle_player == 1 or obstacle == 1:
                                 result += THREE_OBSTACLE_OPPONENT
                             else:
                                 result += THREE_OPPONENT
                         elif opponent == 4:
-                            if obstacle_player == 1:
+                            if obstacle_player == 1 or obstacle == 1:
                                 result += FOUR_OBSTACLE_OPPONENT
                             else:
                                 result += FOUR_OPPONENT
@@ -160,21 +160,21 @@ class OptimizedAgent:
                     obstacle_opponent = 0
 
             if opponent != 0:
-                if opponent == 2 and obstacle_player == 0:
+                if opponent == 2 and obstacle_player == 0 and obstacle == 0:
                     result += TWO_OBSTACLE_OPPONENT
-                elif opponent == 3 and obstacle_player == 0:
+                elif opponent == 3 and obstacle_player == 0 and obstacle == 0:
                     result += THREE_OBSTACLE_OPPONENT
-                elif opponent == 4 and obstacle_player == 0:
+                elif opponent == 4 and obstacle_player == 0 and obstacle == 0:
                     result += FOUR_OBSTACLE_OPPONENT
                 elif opponent == 5:
                     result += LOSING
 
             if player != 0:
-                if player == 2 and obstacle_opponent == 0:
+                if player == 2 and obstacle_opponent == 0 and obstacle == 0:
                     result += TWO_OBSTACLE
-                elif player == 3 and obstacle_opponent == 0:
+                elif player == 3 and obstacle_opponent == 0 and obstacle == 0:
                     result += THREE_OBSTACLE
-                elif player == 4 and obstacle_opponent == 0:
+                elif player == 4 and obstacle_opponent == 0 and obstacle == 0:
                     result += FOUR_OBSTACLE
                 elif player == 5:
                     result += WINNING
@@ -207,9 +207,9 @@ class OptimizedAgent:
             The best move of the current position
         '''
         # if len(game.last_move) <= 1:
-            # possible_moves = self.get_possible_moves_optimized(game)
-            # move = random.choice(possible_moves)
-            # return move
+        # possible_moves = self.get_possible_moves_optimized(game)
+        # move = random.choice(possible_moves)
+        # return move
 
         best_score, best_move = self.minimax(
             game, self.max_depth, -INF * 10, INF * 10)
