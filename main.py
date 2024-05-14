@@ -112,7 +112,7 @@ pvp_btn = button.Button(1075, 145, pvp_img, pvp_img_gray, 0.8)
 aivp_btn = button.Button(970, 145, aivp_img, aivp_img_gray, 0.8)
 
 person_btn.disable_button()
-e_btn.disable_button()
+m_btn.disable_button()
 pvp_btn.disable_button()
 ai_thinking_btn.disable_button()
 pygame.display.set_caption('Caro game by nhóm 2 Trí tuệ nhân tạo')
@@ -242,26 +242,28 @@ while not done:
         #     print('START')
         # ------------- Setup button---------------------------------------------
         if len(my_game.last_move) > 0:
-            person_btn.disable_button()
-            ai_btn.disable_button()
-            h_btn.disable_button()
-            m_btn.disable_button()
-            e_btn.disable_button()
+            # person_btn.disable_button()
+            # ai_btn.disable_button()
+            # h_btn.disable_button()
+            # m_btn.disable_button()
+            # e_btn.disable_button()
+            pass
         if not my_game.is_use_ai:
-            person_btn.disable_button()
-            ai_btn.disable_button()
-            h_btn.disable_button()
-            m_btn.disable_button()
-            e_btn.disable_button()
+            # person_btn.disable_button()
+            # ai_btn.disable_button()
+            # h_btn.disable_button()
+            # m_btn.disable_button()
+            # e_btn.disable_button()
+            pass
         else:
-            # --------------------- AI turn-------------------------------------------
+# --------------------- AI turn-------------------------------------------
             if my_game.turn == my_game.ai_turn:
                 if my_game.get_winner() == -1:
-                    # ---------------------AI MAKE MOVE---------------------------------------- ==================================
+# ---------------------AI MAKE MOVE---------------------------------------- ==================================
                     # my_game.random_ai()                                    #||  Here is where to change AI  ||
-                    best_move = agent.get_move(my_game)
-                    my_game.make_move(best_move[0], best_move[1])
-                    pygame.time.delay(500)  # ||          (❁´◡`❁)           ||
+                    best_move = agent.get_move(my_game)                      #||                              ||
+                    my_game.make_move(best_move[0], best_move[1])            #||                              ||
+                    pygame.time.delay(500)                                   #||          (❁´◡`❁)           ||
 # ------------------------------------------------------------------------- =================================
                     draw(my_game, Screen)
                 ai_thinking_btn.disable_button()
@@ -279,28 +281,29 @@ while not done:
             my_game.use_ai(False)
             pvp_btn.disable_button()
             aivp_btn.enable_button()
-            person_btn.disable_button()
-            ai_btn.disable_button()
-            h_btn.disable_button()
-            m_btn.disable_button()
-            e_btn.disable_button()
+            # person_btn.disable_button()
+            # ai_btn.disable_button()
+            # h_btn.disable_button()
+            # m_btn.disable_button()
+            # e_btn.disable_button()
             pass
 # ------------ai vs p button------------------------------------------------
         if aivp_btn.draw(Screen):
             my_game.use_ai(True)
-            person_btn.disable_button()
-            ai_btn.enable_button()
+            aivp_btn.disable_button()
+            pvp_btn.enable_button()
             my_game.set_ai_turn(2)
             # agent = Agent(max_depth=my_game.hard_ai,
             #               XO=my_game.get_current_XO_for_AI())
 
             agent = OptimizedAgent(max_depth=my_game.hard_ai,
                                    XO=my_game.get_current_XO_for_AI())
-            aivp_btn.disable_button()
-            pvp_btn.enable_button()
-            ai_btn.enable_button()
-            h_btn.enable_button()
-            e_btn.enable_button()
+            
+            # person_btn.disable_button()
+            # ai_btn.enable_button()
+            # ai_btn.enable_button()
+            # h_btn.enable_button()
+            # e_btn.enable_button()
             pass
 # --------------Draw ai thinking button ------------------------------------
         if ai_thinking_btn.draw(Screen):
