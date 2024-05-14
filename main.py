@@ -27,8 +27,9 @@ winning_condition = 5
 # developer_mode: ai vs ai
 # Đặt is_developer_mode = True nếu muốn cho ai đấu với ai
 
-is_developer_mode = False
-# is_developer_mode = True
+# is_developer_mode = False
+is_developer_mode = True
+
 dev_mode_setup = {
     'ai_1': 'X',
     'ai_2': 'O',
@@ -165,6 +166,12 @@ def logo():
     textRect.center = (1100, 700)
     Screen.blit(text, textRect)
     # logo_btn.draw(Screen)
+    if is_developer_mode:
+        font = pygame.font.Font('freesansbold.ttf', 36)
+        text = font.render('Developer_Mode', True, WHITE, BLACK)
+        textRect = text.get_rect()
+        textRect.center = (1080, 160)
+        Screen.blit(text, textRect)
 
 
 def draw(this_game: caro.Caro, this_screen):
