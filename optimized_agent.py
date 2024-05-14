@@ -14,7 +14,7 @@ TWO_OPPONENT = -20
 TWO_OBSTACLE_OPPONENT = -3
 THREE_OPPONENT = -2000
 THREE_OBSTACLE_OPPONENT = -750
-FOUR_OPPONENT = -10000000
+FOUR_OPPONENT = -40000000
 FOUR_OBSTACLE_OPPONENT = -5000000
 LOSING = -1000000000
 
@@ -37,7 +37,7 @@ class OptimizedAgent:
         self.max_depth = max_depth
         self.XO = XO
 
-        # print("max_depth:", max_depth, "; XO:", XO)
+        print("max_depth:", max_depth, "; XO:", XO)
 
     def get_possible_moves_optimized(self, game: Caro) -> list[list[int]]:
         visited = [[0 for _ in range(game.cols)] for _ in range(game.rows)]
@@ -206,10 +206,14 @@ class OptimizedAgent:
             --------------
             The best move of the current position
         '''
-        # if len(game.last_move) <= 1:
-        # possible_moves = self.get_possible_moves_optimized(game)
-        # move = random.choice(possible_moves)
-        # return move
+        if len(game.last_move) < 1:
+            possible_moves = game.get_possible_moves()
+            move = random.choice(possible_moves)
+            return move
+        elif len(game.last_move) == 1:
+            possible_moves = self.get_possible_moves_optimized(game)
+            move = random.choice(possible_moves)
+            return move
 
         best_score, best_move = self.minimax(
             game, self.max_depth, -INF * 10, INF * 10)
