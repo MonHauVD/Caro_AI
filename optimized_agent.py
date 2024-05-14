@@ -7,21 +7,24 @@ TWO_OBSTACLE = 5
 THREE = 1000
 THREE_OBSTACLE = 500
 FOUR = 30000000
-FOUR_OBSTACLE = 2000
+FOUR_OBSTACLE = 2000000
 WINNING = 2000000000
 
 TWO_OPPONENT = -20
 TWO_OBSTACLE_OPPONENT = -3
 THREE_OPPONENT = -2000
 THREE_OBSTACLE_OPPONENT = -750
-FOUR_OPPONENT = -50000000
-FOUR_OBSTACLE_OPPONENT = -50000
+FOUR_OPPONENT = -10000000
+FOUR_OBSTACLE_OPPONENT = -5000000
 LOSING = -1000000000
 
 INF = 999999999999
 
+dx = [1, 1, 1, -1, -1, -1, 0, 0]
+dy = [1, -1, 0, 1, -1, 0, 1, -1]
 
-class Agent:
+
+class OptimizedAgent:
 
     def __init__(self, max_depth: int, XO: str) -> None:
         '''
@@ -35,6 +38,23 @@ class Agent:
         self.XO = XO
 
         # print("max_depth:", max_depth, "; XO:", XO)
+
+    def get_possible_moves_optimized(self, game: Caro) -> list[list[int]]:
+        visited = [[0 for _ in range(game.cols)] for _ in range(game.rows)]
+        result = []
+        for x in range(game.rows):
+            for y in range(game.cols):
+                if game.grid[x][y] == '.':
+                    continue
+                for k in range(8):
+                    nx = x + dx[k]
+                    ny = y + dy[k]
+
+                    if nx >= 0 and ny >= 0 and nx < game.rows and ny < game.cols and game.grid[nx][ny] == '.' and visited[nx][ny] == 0:
+                        visited[nx][ny] = 1
+                        result.append([nx, ny])
+
+        return result
 
     def compute(self, sequences: list[list[str]]) -> int:
         '''
@@ -186,10 +206,10 @@ class Agent:
             --------------
             The best move of the current position
         '''
-        if len(game.last_move) <= 1:
-            possible_moves = game.get_possible_moves()
-            move = random.choice(possible_moves)
-            return move
+        # if len(game.last_move) <= 1:
+            # possible_moves = self.get_possible_moves_optimized(game)
+            # move = random.choice(possible_moves)
+            # return move
 
         best_score, best_move = self.minimax(
             game, self.max_depth, -INF * 10, INF * 10)
@@ -221,7 +241,8 @@ class Agent:
         if depth == 0 or game.get_winner() != -1:
             return self.get_heuristic(game), None
 
-        possible_moves = game.get_possible_moves()
+        possible_moves = self.get_possible_moves_optimized(game)
+        # possible_moves = game.get_possible_moves()
 
         if maximizing_player:
             max_eval = -INF
@@ -269,7 +290,7 @@ class Agent:
             return min_eval, best_move
 
 
-# Testing 
+# Testing
 
 if __name__ == '__main__':
     game = Caro(rows=5, cols=5)
@@ -281,7 +302,12 @@ if __name__ == '__main__':
         ['.', '.', '.', '.', '.'],
     ]
 
-    agent = Agent(max_depth=2, XO='X')
+    agent = OptimizedAgent(max_depth=2, XO='X')
+    possible_moves = agent.get_possible_moves_optimized(game)
+    print(f'possible_moves: {possible_moves}')
     best_move = agent.get_move(game)
 
     print(best_move)
+    game.make_move(best_move[0], best_move[1])
+
+    print(game.grid)
