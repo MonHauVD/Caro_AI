@@ -19,7 +19,7 @@ BLUE = (68, 132, 222)
 XO = 'X'
 FPS = 120
 # Số hàng, cột
-ROWNUM = 15
+ROWNUM = 18
 COLNUM = 20
 # Số dòng thắng
 winning_condition = 5
@@ -34,7 +34,7 @@ dev_mode_setup = {
     'ai_1': 'X',
     'ai_2': 'O',
     'ai_1_depth': 1,
-    'ai_2_depth': 2,
+    'ai_2_depth': 3,
     'start': False,
 }
 # init game and ai
