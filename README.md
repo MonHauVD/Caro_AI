@@ -7,7 +7,7 @@ To use code: setup library in require and run a main.py
 
 Thank you!
 
-# Caro
-# Caro AI
-# Github
-# Minimax Algorithm
+#Caro
+#Caro AI
+#Github
+#Minimax Algorithm
