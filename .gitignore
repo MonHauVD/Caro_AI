@@ -1,2 +1,6 @@
 /tempCodeRunnerFile.py
 test/
+build/
+*.so
+*.pyd
+agent_accel.c

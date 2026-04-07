@@ -30,6 +30,10 @@ sudo apt install python3.11-tk
 
 pip install pygame
 
+Optional (tang toc voi Cython):
+pip install cython setuptools
+python3 setup_cython.py build_ext --inplace
+
 #### Run:
 python main.py
 
@@ -39,6 +43,10 @@ python main.py
 
 #### Setup library:
 pip install pygame
+
+Optional (tang toc voi Cython):
+pip install cython setuptools
+python setup_cython.py build_ext --inplace
 
 #### Run:
 python main.py

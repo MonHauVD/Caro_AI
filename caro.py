@@ -213,13 +213,13 @@ class Caro:
 
     def change_hard_ai(self, hard: str):
         if hard == 'easy':
-            self.hard_ai = 1
+            self.hard_ai = 4
         elif hard == 'hard':
-            self.hard_ai = 3
+            self.hard_ai = 8
         elif hard == 'medium':
-            self.hard_ai = 2
+            self.hard_ai = 6
         else:
-            self.hard_ai = 2
+            self.hard_ai = 6
     
     def use_ai(self, is_true: bool):
         if is_true == False:
