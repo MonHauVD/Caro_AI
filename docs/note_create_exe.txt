@@ -1,6 +1,6 @@
 # Ubuntu
 sudo apt install pyinstaller
-pyinstaller --onefile main.py
+pyinstaller --onefile --add-data "assets:assets" main.py
 
 # Window
 python -m pip install pyinstaller
