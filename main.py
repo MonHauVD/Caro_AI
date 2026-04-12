@@ -74,9 +74,9 @@ normal_mode_difficulty = 'medium'
 # developer_mode: ai vs ai
 # Đặt is_developer_mode = True nếu muốn cho ai đấu với ai
 
-# is_developer_mode = False
-is_developer_mode = True
-benchmark_mode = True
+is_developer_mode = False
+# is_developer_mode = True
+benchmark_mode = False
 
 dev_mode_setup = {
     'ai_1': 'X',
