@@ -4,23 +4,33 @@ The Caro AI game with a strong heuristic AI built on minimax and alpha-beta prun
 
 ---
 
+## For people who just want to play
+
+### Windows
+
+Open `dist/Caro_AI.exe`
+
+### Ubuntu
+
+Open `dist/Caro_AI_Ubuntu`
+
 ## Project layout
 
 | Path | Role |
 |------|------|
 | `main.py` | Thin entry: run `python main.py` from the repo root. |
 | `caro_ai/` | Python package: game, UI, AI agent, and the main app loop. |
-| `caro_ai/app.py` | Pygame UI, presets (`PLAYER_VS_AI_PRESETS`), dev/benchmark flags. |
+| `caro_ai/app.py` | Pygame UI, presets (`PLAYER_VS_AI_PRESETS`); dev/benchmark modes via CLI flags. |
 | `caro_ai/game/` | Board rules and `Caro` state. |
 | `caro_ai/ui/` | Button widgets. |
 | `caro_ai/ai/` | `Agent` (search / evaluation). |
 | `assets/` | Images and icons for the UI (bundled as `assets` in PyInstaller). |
-| `benchmarks/` | `benchmark_config.json` plus `results/` for summary and board dumps. |
+| `config/` | `dev_mode.json`, `benchmark_config.json` (external JSON settings). |
+| `benchmarks/results/` | Benchmark outputs (summary and board `.txt` files). |
 | `extensions/` | Cython sources (`*.pyx`) for optional acceleration. |
 | `notebooks/` | e.g. `benchmark_analysis.ipynb`. |
 | `docs/` | Extra notes and static pages. |
-
-Older backup folders (`save/`, `Save040826/`, `New folder/`, etc.) are left as-is; they are not imported by the game.
+| `dist/` | Folder containing packaged executables for Windows and Linux. |
 
 ---
 
@@ -61,7 +71,7 @@ Gameplay and UI:
 
 Benchmarking and analysis:
 
-- **Benchmark mode** runs scheduled matchups from **`benchmarks/benchmark_config.json`** (merged over any inline `benchmark_setup` defaults in `caro_ai/app.py`).
+- **Benchmark mode** (`python main.py --benchmark`) runs scheduled matchups from **`config/benchmark_config.json`** (merged over inline `benchmark_setup` defaults in `caro_ai/app.py`).
 - Results append incrementally under **`benchmarks/results/`**:
   - `benchmark_results_summary.txt` — structured fields per game.
   - `benchmark_results_boards.txt` — ASCII board, agents, outcome per side.
@@ -72,19 +82,22 @@ Benchmarking and analysis:
 
 ## How to use (current project)
 
-### 1. Choose the mode in `caro_ai/app.py`
+### 1. Choose the mode on the command line
 
-At the top of `caro_ai/app.py`:
+```text
+python main.py                 # Human vs AI (default)
+python main.py --dev         # AI vs AI; reads config/dev_mode.json
+python main.py --benchmark   # Benchmark; requires config/benchmark_config.json
+```
 
-- **`is_developer_mode`**: `False` for normal **human vs AI**; `True` for **AI vs AI** (developer / watch mode).
-- **`benchmark_mode`**: `True` only when you want the automated benchmark runner; otherwise set `False` for interactive play.
+Options:
 
-Typical **human vs AI** setup:
+- `--dev-config PATH` — dev JSON file (default when using `--dev`: `config/dev_mode.json`).
+- `--benchmark-config PATH` — benchmark JSON file (default when using `--benchmark`: `config/benchmark_config.json`).
 
-- `is_developer_mode = False`
-- `benchmark_mode = False`
+`--dev` and `--benchmark` are mutually exclusive. Run `python main.py -h` for full help.
 
-Then run `python main.py` and use the on-screen buttons (AI vs Player, difficulty, who moves first, etc.).
+**Human vs AI:** run `python main.py` and use the on-screen controls (AI vs Player, difficulty, who moves first, etc.).
 
 ### 2. Player vs AI difficulty presets
 
@@ -97,17 +110,18 @@ The in-game **E / M / H** buttons select which preset is active and rebuild the 
 
 ### 3. Developer mode (AI vs AI)
 
-With `is_developer_mode = True` and `benchmark_mode = False`:
+Run `python main.py --dev` and edit **`config/dev_mode.json`**: `ai_1` / `ai_2`, `ai_*_depth`, `ai_*_config`, and related fields.
 
-- Configure **`dev_mode_setup`**: depths, `ai_1_config` / `ai_2_config`, and piece sides.
-- Use **Start** to begin (timer behavior follows the existing dev-mode rules).
-- **Pause** stops the match loop and, when combined with benchmark-style hard-stop, cancels in-flight worker computation; **Start** resumes from the current board state.
+- **Start** begins the match (timer follows the existing dev-mode rules).
+- **Pause** stops the loop and cancels in-flight worker computation; **Start** resumes.
+
+If `config/dev_mode.json` is missing, the program uses built-in defaults and prints a warning. If you pass **`--dev-config`** explicitly, that file must exist.
 
 ### 4. Benchmark mode
 
-With **`benchmark_mode = True`**:
+Run `python main.py --benchmark` (requires **`config/benchmark_config.json`**).
 
-- Edit **`benchmarks/benchmark_config.json`**: `games_per_matchup`, `matchups` (each with `name`, `agent_a`, `agent_b`, labels, depths, and per-agent `config`).
+- Edit the JSON: `games_per_matchup`, `matchups` (each with `name`, `agent_a`, `agent_b`, labels, `depth`, per-agent `config`).
 - Press **Start** in the UI to begin (exact wiring is in `caro_ai/app.py`).
 - **Pause** pauses the benchmark run and stops the worker; **Start** resumes.
 - **Replay** (in benchmark) restarts the **current** scheduled game for the current pair without advancing the schedule.

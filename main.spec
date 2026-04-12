@@ -4,7 +4,7 @@ a = Analysis(
     ['main.py'],
     pathex=['D:\\Lap trinh\\Tri Tue Nhan Tao\\Caro_AI'],
     binaries=[],
-    datas=[('assets', 'assets')],
+    datas=[('assets', 'assets'), ('config', 'config')],
     hiddenimports=[
         'caro_ai',
         'caro_ai.app',

@@ -1,9 +1,11 @@
 # Ubuntu
 sudo apt install pyinstaller
-pyinstaller --onefile --add-data "assets:assets" main.py
+pyinstaller --onefile --add-data "assets:assets" --add-data "config:config" main.py
 
 # Window
 python -m pip install pyinstaller
 python -m PyInstaller.utils.cliutils.makespec --onefile main.py
 python -m PyInstaller.utils.cliutils.grab_version C:\Windows\explorer.exe version.txt
 python -m PyInstaller main.spec
+# (main.spec already bundles assets + config; one-liner example:)
+# pyinstaller --onefile --add-data "assets;assets" --add-data "config;config" main.py

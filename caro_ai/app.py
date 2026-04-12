@@ -1,5 +1,6 @@
 """Giao diện pygame và vòng lặp game Caro AI."""
 
+import argparse
 import copy
 import json
 import multiprocessing
@@ -16,6 +17,13 @@ from caro_ai.ui import buttons as button
 
 _PKG_DIR = os.path.dirname(os.path.abspath(__file__))
 _PROJECT_ROOT = os.path.abspath(os.path.join(_PKG_DIR, '..'))
+
+
+def _resolve_config_dir() -> str:
+    meipass = getattr(sys, '_MEIPASS', None)
+    if meipass:
+        return os.path.join(meipass, 'config')
+    return os.path.join(_PROJECT_ROOT, 'config')
 
 # -------------------------Setup----------------------------
 # Định nghĩa màu
@@ -79,14 +87,16 @@ PLAYER_VS_AI_PRESETS = {
 # Đồng bộ với UI: mặc định Medium (nút M đang disable lúc khởi động).
 normal_mode_difficulty = 'medium'
 
-# developer_mode: ai vs ai
-# Đặt is_developer_mode = True nếu muốn cho ai đấu với ai
+# Chế độ dev / benchmark: bật bằng cờ dòng lệnh (xem parse_args / main).
 
 is_developer_mode = False
-# is_developer_mode = True
 benchmark_mode = False
 
-dev_mode_setup = {
+CONFIG_DIR = _resolve_config_dir()
+DEV_MODE_CONFIG_FILE = os.path.join(CONFIG_DIR, 'dev_mode.json')
+BENCHMARK_CONFIG_FILE = os.path.join(CONFIG_DIR, 'benchmark_config.json')
+
+_DEFAULT_DEV_MODE_SETUP = {
     'ai_1': 'X',
     'ai_2': 'O',
     'ai_1_depth': 6,
@@ -110,6 +120,9 @@ dev_mode_setup = {
     'start': False,
     'pause': False,
 }
+
+dev_mode_setup: dict = copy.deepcopy(_DEFAULT_DEV_MODE_SETUP)
+
 benchmark_setup = {
     'games_per_matchup': 4,  # Auto-swap first move by alternating X/O each game.
     'output_dir': 'benchmarks/results',
@@ -144,7 +157,6 @@ benchmark_setup = {
     ],
 }
 
-BENCHMARK_CONFIG_FILE = os.path.join(_PROJECT_ROOT, 'benchmarks', 'benchmark_config.json')
 BENCHMARK_RESULT_SUMMARY_FILE = os.path.join(
     _PROJECT_ROOT, 'benchmarks', 'results', 'benchmark_results_summary.txt')
 BENCHMARK_RESULT_BOARD_FILE = os.path.join(
@@ -155,6 +167,63 @@ def _ensure_benchmark_result_dirs():
     d = os.path.dirname(BENCHMARK_RESULT_SUMMARY_FILE)
     if d:
         os.makedirs(d, exist_ok=True)
+
+
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    p = argparse.ArgumentParser(description='Caro AI (pygame + minimax agent).')
+    mode = p.add_mutually_exclusive_group()
+    mode.add_argument(
+        '--dev',
+        action='store_true',
+        help='AI vs AI; loads dev JSON (--dev-config, default: config/dev_mode.json).',
+    )
+    mode.add_argument(
+        '--benchmark',
+        action='store_true',
+        help='Automated benchmark; requires benchmark JSON (--benchmark-config, default: config/benchmark_config.json).',
+    )
+    p.add_argument(
+        '--dev-config',
+        metavar='PATH',
+        default=None,
+        help='Path to dev_mode.json (default when using --dev: config/dev_mode.json).',
+    )
+    p.add_argument(
+        '--benchmark-config',
+        metavar='PATH',
+        default=None,
+        help='Path to benchmark config JSON (default with --benchmark: config/benchmark_config.json).',
+    )
+    if argv is None:
+        argv = sys.argv[1:]
+    return p.parse_args(argv)
+
+
+def load_dev_mode_config(path: str, *, explicit_file: bool) -> None:
+    """Đặt lại dev_mode_setup từ path; nếu không có file: defaults (hoặc thoát nếu explicit_file)."""
+    global dev_mode_setup
+    dev_mode_setup = copy.deepcopy(_DEFAULT_DEV_MODE_SETUP)
+    if not os.path.isfile(path):
+        if explicit_file:
+            print(f"[DEV] error: file not found: {path}", file=sys.stderr)
+            sys.exit(2)
+        print(f"[DEV] config not found ({path}), using built-in defaults")
+        return
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            loaded = json.load(f)
+    except Exception as ex:
+        print(f"[DEV] failed to read {path}: {ex}", file=sys.stderr)
+        sys.exit(2)
+    if not isinstance(loaded, dict):
+        print(f"[DEV] invalid config (expected object): {path}", file=sys.stderr)
+        sys.exit(2)
+    for k, v in loaded.items():
+        if k in ('ai_1_config', 'ai_2_config') and isinstance(v, dict):
+            dev_mode_setup[k].update(v)
+        else:
+            dev_mode_setup[k] = copy.deepcopy(v) if isinstance(v, dict) else v
+    print(f"[DEV] loaded config from {path}")
 
 
 # Cửa sổ pygame + ProcessPoolExecutor chỉ trong tiến trình chính (Windows spawn import lại module).
@@ -495,18 +564,23 @@ def set_turn_timer_pause(is_paused: bool):
         turn_timer_paused = False
 
 
-def load_benchmark_config():
-    config_path = BENCHMARK_CONFIG_FILE
-    if not os.path.exists(config_path):
+def load_benchmark_config(config_path: str | None = None, *, must_exist: bool = False):
+    path = config_path or BENCHMARK_CONFIG_FILE
+    if not os.path.isfile(path):
+        if must_exist:
+            print(f"[BENCH] error: config not found: {path}", file=sys.stderr)
+            sys.exit(2)
         return
     try:
-        with open(config_path, "r", encoding="utf-8") as f:
+        with open(path, 'r', encoding='utf-8') as f:
             loaded = json.load(f)
         if isinstance(loaded, dict):
             benchmark_setup.update(loaded)
-            print(f"[BENCH] loaded config from {config_path}")
+            print(f"[BENCH] loaded config from {path}")
     except Exception as ex:
-        print(f"[BENCH] failed to load config file {config_path}: {ex}")
+        print(f"[BENCH] failed to load config file {path}: {ex}", file=sys.stderr)
+        if must_exist:
+            sys.exit(2)
 
 
 def _parse_match_id(match_id: str) -> tuple[str, int] | None:
@@ -911,10 +985,24 @@ def checking_winning(status):
 
 
 # --------- Main Program Loop -------------------------------------------
-def main():
+def main(argv: list[str] | None = None):
     global done, ai_is_thinking, ai_future, dev_future, ai_executor
     global normal_mode_difficulty, agent, turn_elapsed_paused, turn_started_at, turn_elapsed_frozen
-    load_benchmark_config()
+    global is_developer_mode, benchmark_mode, dev_mode_setup
+
+    args = parse_args(argv)
+    is_developer_mode = bool(args.dev)
+    benchmark_mode = bool(args.benchmark)
+
+    if args.dev:
+        dev_path = args.dev_config if args.dev_config is not None else DEV_MODE_CONFIG_FILE
+        load_dev_mode_config(dev_path, explicit_file=args.dev_config is not None)
+    else:
+        dev_mode_setup = copy.deepcopy(_DEFAULT_DEV_MODE_SETUP)
+
+    bench_path = args.benchmark_config if args.benchmark_config is not None else BENCHMARK_CONFIG_FILE
+    load_benchmark_config(bench_path, must_exist=args.benchmark)
+
     init_application()
     while not done:
         if benchmark_mode and not benchmark_state['initialized']:
