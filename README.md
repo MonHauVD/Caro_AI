@@ -4,6 +4,26 @@ The Caro AI game with a strong heuristic AI built on minimax and alpha-beta prun
 
 ---
 
+## Project layout
+
+| Path | Role |
+|------|------|
+| `main.py` | Thin entry: run `python main.py` from the repo root. |
+| `caro_ai/` | Python package: game, UI, AI agent, and the main app loop. |
+| `caro_ai/app.py` | Pygame UI, presets (`PLAYER_VS_AI_PRESETS`), dev/benchmark flags. |
+| `caro_ai/game/` | Board rules and `Caro` state. |
+| `caro_ai/ui/` | Button widgets. |
+| `caro_ai/ai/` | `Agent` (search / evaluation). |
+| `assets/` | Images and icons for the UI (bundled as `assets` in PyInstaller). |
+| `benchmarks/` | `benchmark_config.json` plus `results/` for summary and board dumps. |
+| `extensions/` | Cython sources (`*.pyx`) for optional acceleration. |
+| `notebooks/` | e.g. `benchmark_analysis.ipynb`. |
+| `docs/` | Extra notes and static pages. |
+
+Older backup folders (`save/`, `Save040826/`, `New folder/`, etc.) are left as-is; they are not imported by the game.
+
+---
+
 ## Version note
 
 ### Original baseline (early README / classic behavior)
@@ -37,24 +57,24 @@ Gameplay and UI:
 - **Resizable window** with layout that scales the board and controls.
 - **Single turn timer** for the active side; timer stops when the game ends.
 - **Player vs AI** and **AI vs AI (developer mode)** with Start / Pause (dev and benchmark), Undo, Replay.
-- **Player vs AI difficulty** is no longer “depth only”: **Easy / Medium / Hard** map to full **preset configs** (`PLAYER_VS_AI_PRESETS` at the top of `main.py`: depth plus all relevant `Agent` options).
+- **Player vs AI difficulty** is no longer “depth only”: **Easy / Medium / Hard** map to full **preset configs** (`PLAYER_VS_AI_PRESETS` near the top of `caro_ai/app.py`: depth plus all relevant `Agent` options).
 
 Benchmarking and analysis:
 
-- **Benchmark mode** runs scheduled matchups from an external **`benchmark_config.json`** (merged over any inline `benchmark_setup` defaults in `main.py`).
-- Results append incrementally to:
+- **Benchmark mode** runs scheduled matchups from **`benchmarks/benchmark_config.json`** (merged over any inline `benchmark_setup` defaults in `caro_ai/app.py`).
+- Results append incrementally under **`benchmarks/results/`**:
   - `benchmark_results_summary.txt` — structured fields per game.
   - `benchmark_results_boards.txt` — ASCII board, agents, outcome per side.
 - **Resume**: on a fresh program start, benchmark mode can advance to the **next** matchup/game based on the last valid `match_id` in the summary file (entries that do not match the current config are ignored).
-- **`benchmark_analysis.ipynb`**: parse the text outputs and plot win rates, timings, Elo-style summaries, heatmaps, etc.
+- **`notebooks/benchmark_analysis.ipynb`**: parse the text outputs and plot win rates, timings, Elo-style summaries, heatmaps, etc.
 
 ---
 
 ## How to use (current project)
 
-### 1. Choose the mode in `main.py`
+### 1. Choose the mode in `caro_ai/app.py`
 
-At the top of `main.py`:
+At the top of `caro_ai/app.py`:
 
 - **`is_developer_mode`**: `False` for normal **human vs AI**; `True` for **AI vs AI** (developer / watch mode).
 - **`benchmark_mode`**: `True` only when you want the automated benchmark runner; otherwise set `False` for interactive play.
@@ -64,11 +84,11 @@ Typical **human vs AI** setup:
 - `is_developer_mode = False`
 - `benchmark_mode = False`
 
-Then run `main.py` and use the on-screen buttons (AI vs Player, difficulty, who moves first, etc.).
+Then run `python main.py` and use the on-screen buttons (AI vs Player, difficulty, who moves first, etc.).
 
 ### 2. Player vs AI difficulty presets
 
-Edit **`PLAYER_VS_AI_PRESETS`** near the top of `main.py`. Each of `easy`, `medium`, and `hard` has:
+Edit **`PLAYER_VS_AI_PRESETS`** near the top of `caro_ai/app.py`. Each of `easy`, `medium`, and `hard` has:
 
 - **`depth`**: search depth for that preset.
 - **`config`**: full agent configuration (Cython search, TSS, lazy SMP, beam widths, time budget, and any other keys supported by `Agent`).
@@ -87,15 +107,15 @@ With `is_developer_mode = True` and `benchmark_mode = False`:
 
 With **`benchmark_mode = True`**:
 
-- Edit **`benchmark_config.json`** in the project root: `games_per_matchup`, `matchups` (each with `name`, `agent_a`, `agent_b`, labels, depths, and per-agent `config`).
-- Press **Start** in the UI to begin (exact wiring is in `main.py`).
+- Edit **`benchmarks/benchmark_config.json`**: `games_per_matchup`, `matchups` (each with `name`, `agent_a`, `agent_b`, labels, depths, and per-agent `config`).
+- Press **Start** in the UI to begin (exact wiring is in `caro_ai/app.py`).
 - **Pause** pauses the benchmark run and stops the worker; **Start** resumes.
 - **Replay** (in benchmark) restarts the **current** scheduled game for the current pair without advancing the schedule.
-- Output files **`benchmark_results_summary.txt`** and **`benchmark_results_boards.txt`** grow by append; restarting the app can **resume** from the last completed valid game if the config still matches.
+- Output files under **`benchmarks/results/`** (`benchmark_results_summary.txt`, `benchmark_results_boards.txt`) grow by append; restarting the app can **resume** from the last completed valid game if the config still matches.
 
 ### 5. Analysis notebook
 
-Open **`benchmark_analysis.ipynb`** in Jupyter, ensure the summary and boards text files are present, and run the cells to regenerate tables and plots.
+Open **`notebooks/benchmark_analysis.ipynb`** in Jupyter, ensure the summary and boards text files are present under `benchmarks/results/`, and run the cells to regenerate tables and plots.
 
 ---
 
@@ -107,7 +127,7 @@ Install build tools:
 pip install cython setuptools
 ```
 
-Compile extensions in the project directory:
+Compile extensions from the project root (sources live in `extensions/`; built modules are placed in the root for `import agent_accel` / `import search_accel`):
 
 ```bash
 python3 setup_cython.py build_ext --inplace

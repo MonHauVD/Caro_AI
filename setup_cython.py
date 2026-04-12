@@ -11,11 +11,11 @@ except ImportError as exc:
 extensions = [
     Extension(
         "agent_accel",
-        ["agent_accel.pyx"],
+        ["extensions/agent_accel.pyx"],
     ),
     Extension(
         "search_accel",
-        ["search_accel.pyx"],
+        ["extensions/search_accel.pyx"],
     ),
 ]
 

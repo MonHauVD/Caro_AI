@@ -1,6 +1,11 @@
 /tempCodeRunnerFile.py
 test/
 build/
+dist/
+__pycache__/
+*.py[cod]
 *.so
 *.pyd
 agent_accel.c
+extensions/agent_accel.c
+extensions/search_accel.c

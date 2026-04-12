@@ -1,0 +1,9 @@
+# Ubuntu
+sudo apt install pyinstaller
+pyinstaller --onefile main.py
+
+# Window
+python -m pip install pyinstaller
+python -m PyInstaller.utils.cliutils.makespec --onefile main.py
+python -m PyInstaller.utils.cliutils.grab_version C:\Windows\explorer.exe version.txt
+python -m PyInstaller main.spec
