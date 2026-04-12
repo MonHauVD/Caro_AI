@@ -5,12 +5,18 @@ import copy
 import json
 import multiprocessing
 import os
+import signal
 import sys
 import time
+from collections import deque
 from concurrent.futures import ProcessPoolExecutor
 
 import pygame
 
+from caro_ai import app_helpers
+from caro_ai.benchmark import session as bench_sess
+from caro_ai.benchmark.worker import compute_ai_move_worker
+from caro_ai.ui import layout as ui_layout
 from caro_ai.ai.agent import Agent
 from caro_ai.modes import GameMode
 import caro_ai.game.caro as caro
@@ -18,13 +24,6 @@ from caro_ai.ui import buttons as button
 
 _PKG_DIR = os.path.dirname(os.path.abspath(__file__))
 _PROJECT_ROOT = os.path.abspath(os.path.join(_PKG_DIR, '..'))
-
-
-def _resolve_config_dir() -> str:
-    meipass = getattr(sys, '_MEIPASS', None)
-    if meipass:
-        return os.path.join(meipass, 'config')
-    return os.path.join(_PROJECT_ROOT, 'config')
 
 # -------------------------Setup----------------------------
 # Định nghĩa màu
@@ -61,13 +60,13 @@ PLAYER_VS_AI_PRESETS = {
         },
     },
     'medium': {
-        'depth': 7,
+        'depth': 5,
         'config': {
             'use_cython_search': False,
             'use_tss': False,
             'use_lazy_smp': False,
-            'beam_width_root': 12,
-            'beam_width_inner': 9,
+            'beam_width_root': 0,
+            'beam_width_inner': 0,
             'move_time_budget_sec': 20,
         },
     },
@@ -85,13 +84,14 @@ PLAYER_VS_AI_PRESETS = {
     },
 }
 
-# Đồng bộ với UI: mặc định Medium (nút M đang disable lúc khởi động).
-normal_mode_difficulty = 'medium'
+# Độ khó AI lúc mở app — chỉ chỉnh giá trị tại đây ('easy' | 'medium' | 'hard').
+INITIAL_AI_DIFFICULTY = 'easy'
+normal_mode_difficulty = INITIAL_AI_DIFFICULTY
 
 
 game_mode = GameMode.NORMAL
 
-CONFIG_DIR = _resolve_config_dir()
+CONFIG_DIR = app_helpers.resolve_config_dir(_PROJECT_ROOT)
 DEV_MODE_CONFIG_FILE = os.path.join(CONFIG_DIR, 'dev_mode.json')
 BENCHMARK_CONFIG_FILE = os.path.join(CONFIG_DIR, 'benchmark_config.json')
 
@@ -125,6 +125,8 @@ dev_mode_setup: dict = copy.deepcopy(_DEFAULT_DEV_MODE_SETUP)
 benchmark_setup = {
     'games_per_matchup': 4,  # Auto-swap first move by alternating X/O each game.
     'output_dir': 'benchmarks/results',
+    # 0 = chỉ gộp master khi hết phiên / thoát / CLI; N>0 = gộp sau mỗi N ván đã ghi fragment.
+    'export_merged_every_n_games': 4,
     'matchups': [
         {
             'name': 'depth6_vs_depth8_plain',
@@ -160,12 +162,24 @@ BENCHMARK_RESULT_SUMMARY_FILE = os.path.join(
     _PROJECT_ROOT, 'benchmarks', 'results', 'benchmark_results_summary.txt')
 BENCHMARK_RESULT_BOARD_FILE = os.path.join(
     _PROJECT_ROOT, 'benchmarks', 'results', 'benchmark_results_boards.txt')
+BENCHMARK_RESULT_MOVES_FILE = os.path.join(
+    _PROJECT_ROOT, 'benchmarks', 'results', 'benchmark_results_moves.txt')
+BENCHMARK_FRAGMENTS_DIR = os.path.join(
+    _PROJECT_ROOT, 'benchmarks', 'results', 'fragments')
+
+bench_rt = None
 
 
 def _ensure_benchmark_result_dirs():
-    d = os.path.dirname(BENCHMARK_RESULT_SUMMARY_FILE)
-    if d:
-        os.makedirs(d, exist_ok=True)
+    for p in (
+        BENCHMARK_RESULT_SUMMARY_FILE,
+        BENCHMARK_RESULT_BOARD_FILE,
+        BENCHMARK_RESULT_MOVES_FILE,
+    ):
+        d = os.path.dirname(p)
+        if d:
+            os.makedirs(d, exist_ok=True)
+    os.makedirs(BENCHMARK_FRAGMENTS_DIR, exist_ok=True)
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -193,9 +207,61 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default=None,
         help='Path to benchmark config JSON (default with --benchmark: config/benchmark_config.json).',
     )
+    p.add_argument(
+        '--benchmark-workers',
+        type=int,
+        default=4,
+        metavar='N',
+        help=(
+            'Chỉ với --benchmark: số bàn cờ hiển thị song song trong một cửa sổ. '
+            '1 = một bàn như cũ; >1 = lưới nhiều bàn + Start/Pause chung và riêng. Mặc định: 4.'
+        ),
+    )
+    p.add_argument(
+        '--bench-export-merge',
+        action='store_true',
+        help=(
+            'Chỉ gộp thư mục fragments/ → 3 file benchmark_results_*.txt rồi thoát; không mở pygame. '
+            'Đường dẫn lấy từ --bench-results-dir hoặc output_dir trong --benchmark-config.'
+        ),
+    )
+    p.add_argument(
+        '--bench-results-dir',
+        metavar='DIR',
+        default=None,
+        help=(
+            'Với --bench-export-merge: thư mục chứa benchmark_results_summary.txt và fragments/ '
+            '(mặc định: output_dir trong file benchmark JSON, hoặc benchmarks/results dưới project).'
+        ),
+    )
     if argv is None:
         argv = sys.argv[1:]
     return p.parse_args(argv)
+
+
+def run_benchmark_export_merge_cli(args: argparse.Namespace) -> None:
+    """Gộp fragments → 3 file master; dùng khi --bench-export-merge (logic trong merge_cli, không pygame)."""
+    from caro_ai.benchmark import merge_cli
+
+    bench_cfg = args.benchmark_config if args.benchmark_config is not None else BENCHMARK_CONFIG_FILE
+    if merge_cli.run_export_merge(
+        benchmark_config=bench_cfg,
+        bench_results_dir=args.bench_results_dir,
+    ):
+        rd = merge_cli.resolve_benchmark_results_dir(
+            benchmark_config=bench_cfg,
+            bench_results_dir=args.bench_results_dir,
+        )
+        print(f"[BENCH] đã gộp fragments → master trong {rd}")
+    else:
+        rd = merge_cli.resolve_benchmark_results_dir(
+            benchmark_config=bench_cfg,
+            bench_results_dir=args.bench_results_dir,
+        )
+        print(
+            f"[BENCH] không có summary_*.txt trong {os.path.join(rd, 'fragments')}",
+            file=sys.stderr,
+        )
 
 
 def load_dev_mode_config(path: str, *, explicit_file: bool) -> None:
@@ -225,7 +291,7 @@ def load_dev_mode_config(path: str, *, explicit_file: bool) -> None:
     print(f"[DEV] loaded config from {path}")
 
 
-# Cửa sổ pygame + ProcessPoolExecutor chỉ trong tiến trình chính (Windows spawn import lại module).
+# Cửa sổ pygame chỉ tiến trình chính; worker AI ở caro_ai.benchmark.worker (không import pygame).
 
 START_BTN_ANCHOR_TOP = 120
 START_BTN_ANCHOR_RIGHT_MARGIN = 60
@@ -233,12 +299,7 @@ SHOW_DEV_START_DEBUG_BORDER = True
 
 
 def resource_path(relative_path):
-    try:
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = _PROJECT_ROOT
-
-    return os.path.join(base_path, relative_path)
+    return app_helpers.resource_path(relative_path, _PROJECT_ROOT)
 
 
 def build_player_vs_ai_agent() -> Agent:
@@ -268,7 +329,7 @@ def init_application():
     global start_button, pause_button, replay_button, exit_button, undo_button
     global ai_btn, person_btn, h_btn, m_btn, e_btn, ai_thinking_btn, pvp_btn, aivp_btn, logo_btn
     global done, status, clock, turn_started_at, turn_elapsed_frozen, turn_timer_paused, turn_elapsed_paused
-    global ai_is_thinking, ai_future, dev_future, ai_executor, benchmark_state
+    global ai_is_thinking, ai_future, dev_future, ai_executor, benchmark_state, bench_rt
 
     pygame.init()
 
@@ -357,7 +418,6 @@ def init_application():
     logo_btn = button.Button(990, 660, logo_img, logo_img, 0.6)
 
     person_btn.disable_button()
-    m_btn.disable_button()
     pvp_btn.disable_button()
     ai_thinking_btn.disable_button()
     if game_mode is not GameMode.NORMAL:
@@ -369,6 +429,16 @@ def init_application():
         m_btn.disable_button()
         e_btn.disable_button()
         ai_thinking_btn.disable_button()
+    else:
+        h_btn.enable_button()
+        m_btn.enable_button()
+        e_btn.enable_button()
+        if normal_mode_difficulty == 'hard':
+            h_btn.disable_button()
+        elif normal_mode_difficulty == 'medium':
+            m_btn.disable_button()
+        else:
+            e_btn.disable_button()
 
     pygame.display.set_caption('Caro game by nhóm 12 Trí tuệ nhân tạo')
     pygame.display.set_icon(icon_img)
@@ -398,6 +468,7 @@ def init_application():
     ai_future = None
     dev_future = None
     ai_executor = ProcessPoolExecutor(max_workers=1)
+    bench_sess.benchmark_warm_executor(ai_executor, 1)
     benchmark_state = {
         'initialized': False,
         'running': False,
@@ -410,96 +481,151 @@ def init_application():
         'current': None,
         'stats': {},
         'results': [],
+        'parallel_workers': 1,
+        'parallel_total': 0,
+        'parallel_done': 0,
+        'slots': [],
+        'bench_slots_n': 0,
+        'task_queue': deque(),
+        'bench_session_started': False,
+        'bench_paused': False,
+        '_rownum': ROWNUM,
+        '_colnum': COLNUM,
+        '_winning_condition': winning_condition,
+        '_xo': XO,
+        '_summary_path': BENCHMARK_RESULT_SUMMARY_FILE,
+        '_board_path': BENCHMARK_RESULT_BOARD_FILE,
+        '_moves_path': BENCHMARK_RESULT_MOVES_FILE,
+        '_fragments_dir': BENCHMARK_FRAGMENTS_DIR,
     }
+
+    def _bench_get_executor():
+        global ai_executor
+        return ai_executor
+
+    def _bench_set_executor(ex):
+        global ai_executor
+        ai_executor = ex
+
+    def _bench_set_thinking(v: bool):
+        global ai_is_thinking
+        ai_is_thinking = v
+
+    bench_rt = bench_sess.BenchRuntime(
+        get_executor=_bench_get_executor,
+        set_executor=_bench_set_executor,
+        compute_ai_move_worker=compute_ai_move_worker,
+        ai_thinking_btn=ai_thinking_btn,
+        set_ai_is_thinking=_bench_set_thinking,
+    )
 
     update_layout(Window_size[0], Window_size[1])
 
 
 # ----------------------- Function ------------------------------------
-def set_button_position(btn: button.Button, x: int, y: int):
-    btn.x = x
-    btn.y = y
-    btn.rect.topleft = (x, y)
-
-
-def set_button_scale(btn: button.Button, normal_img, gray_img, scale: float):
-    btn.image = pygame.transform.smoothscale(
-        normal_img,
-        (max(20, int(normal_img.get_width() * scale)), max(20, int(normal_img.get_height() * scale))),
-    )
-    btn.gray_image = pygame.transform.smoothscale(
-        gray_img,
-        (max(20, int(gray_img.get_width() * scale)), max(20, int(gray_img.get_height() * scale))),
-    )
-    btn.rect = btn.image.get_rect(topleft=(btn.x, btn.y))
-
-
 def update_layout(new_width: int, new_height: int):
     global Window_size, WIDTH, HEIGHT, MARGIN
     global BOARD_OFFSET_X, BOARD_OFFSET_Y, PANEL_X, x_img, o_img
 
-    new_width = max(980, int(new_width))
-    new_height = max(640, int(new_height))
-    Window_size[0] = new_width
-    Window_size[1] = new_height
+    if (
+        game_mode is GameMode.BENCHMARK
+        and benchmark_state.get('initialized')
+        and benchmark_state.get('parallel_workers', 1) > 1
+    ):
+        bench_sess.ensure_benchmark_slots(
+            benchmark_state,
+            benchmark_state['parallel_workers'],
+            ROWNUM,
+            COLNUM,
+            winning_condition,
+            XO,
+        )
 
-    panel_width = max(320, int(new_width * 0.28))
-    board_available_w = max(200, new_width - panel_width - 30)
-    board_available_h = max(200, new_height - 20)
-    cell_total = max(8, int(min(board_available_w / COLNUM, board_available_h / ROWNUM)))
-    MARGIN = max(1, cell_total // 15)
-    WIDTH = max(6, cell_total - MARGIN)
-    HEIGHT = WIDTH
-
-    board_pixel_w = COLNUM * (WIDTH + MARGIN) + MARGIN
-    board_pixel_h = ROWNUM * (HEIGHT + MARGIN) + MARGIN
-    BOARD_OFFSET_X = max(5, int((board_available_w - board_pixel_w) / 2))
-    BOARD_OFFSET_Y = max(5, int((new_height - board_pixel_h) / 2))
-    PANEL_X = int(BOARD_OFFSET_X + board_pixel_w + 20)
-
-    x_img = pygame.transform.smoothscale(x_img_org, (max(6, int(WIDTH)), max(6, int(HEIGHT))))
-    o_img = pygame.transform.smoothscale(o_img_org, (max(6, int(WIDTH)), max(6, int(HEIGHT))))
-
-    ui_scale = max(0.5, min(1.0, min(new_width / 1280, new_height / 720)))
-    start_scale = max(0.75, 0.8 * ui_scale)
-    set_button_scale(start_button, start_img_org, start_img_org, start_scale)
-    set_button_scale(pause_button, pause_img_org, pause_img_org, start_scale)
-    set_button_scale(replay_button, replay_img_org, replay_img_org, 0.8 * ui_scale)
-    set_button_scale(exit_button, exit_img_org, exit_img_org, 0.8 * ui_scale)
-    set_button_scale(undo_button, undo_img_org, undo_img_org, 0.8 * ui_scale)
-    set_button_scale(ai_btn, ai_img_org, ai_img_gray_org, 0.8 * ui_scale)
-    set_button_scale(person_btn, person_img_org, person_img_gray_org, 0.8 * ui_scale)
-    set_button_scale(h_btn, h_img_org, h_img_gray_org, 0.8 * ui_scale)
-    set_button_scale(m_btn, m_img_org, m_img_gray_org, 0.8 * ui_scale)
-    set_button_scale(e_btn, e_img_org, e_img_gray_org, 0.8 * ui_scale)
-    set_button_scale(ai_thinking_btn, ai_thinking_img_org, ai_thinking_img_gray_org, 0.8 * ui_scale)
-    set_button_scale(pvp_btn, pvp_img_org, pvp_img_gray_org, 0.8 * ui_scale)
-    set_button_scale(aivp_btn, aivp_img_org, aivp_img_gray_org, 0.8 * ui_scale)
-    set_button_scale(logo_btn, logo_img_org, logo_img_org, 0.6 * ui_scale)
-
-    set_button_position(replay_button, PANEL_X + 30, new_height - 145)
-    set_button_position(exit_button, PANEL_X + 30, new_height - 235)
-    set_button_position(undo_button, PANEL_X + 30, new_height - 325)
-    # Keep dev start/pause stacked above Undo button.
-    pause_x = undo_button.rect.x
-    pause_y = max(40, undo_button.rect.y - pause_button.rect.height - 12)
-    start_x = undo_button.rect.x
-    start_y = max(40, pause_y - start_button.rect.height - 12)
-    set_button_position(start_button, start_x, start_y)
-    set_button_position(pause_button, pause_x, pause_y)
-    set_button_position(ai_btn, PANEL_X + 30, 305)
-    set_button_position(person_btn, PANEL_X + 135, 305)
-    set_button_position(h_btn, PANEL_X + 160, 235)
-    set_button_position(m_btn, PANEL_X + 95, 235)
-    set_button_position(e_btn, PANEL_X + 30, 235)
-    set_button_position(ai_thinking_btn, PANEL_X + 80, 30)
-    set_button_position(pvp_btn, PANEL_X + 135, 145)
-    set_button_position(aivp_btn, PANEL_X + 30, 145)
-    set_button_position(logo_btn, PANEL_X + 50, new_height - 55)
+    layout_globals: dict = {}
+    normal_assets = {
+        'x_img_org': x_img_org,
+        'o_img_org': o_img_org,
+        'start_button': start_button,
+        'pause_button': pause_button,
+        'replay_button': replay_button,
+        'exit_button': exit_button,
+        'undo_button': undo_button,
+        'ai_btn': ai_btn,
+        'person_btn': person_btn,
+        'h_btn': h_btn,
+        'm_btn': m_btn,
+        'e_btn': e_btn,
+        'ai_thinking_btn': ai_thinking_btn,
+        'pvp_btn': pvp_btn,
+        'aivp_btn': aivp_btn,
+        'logo_btn': logo_btn,
+        'start_img_org': start_img_org,
+        'pause_img_org': pause_img_org,
+        'replay_img_org': replay_img_org,
+        'exit_img_org': exit_img_org,
+        'undo_img_org': undo_img_org,
+        'ai_img_org': ai_img_org,
+        'person_img_org': person_img_org,
+        'ai_img_gray_org': ai_img_gray_org,
+        'person_img_gray_org': person_img_gray_org,
+        'h_img_org': h_img_org,
+        'h_img_gray_org': h_img_gray_org,
+        'm_img_org': m_img_org,
+        'm_img_gray_org': m_img_gray_org,
+        'e_img_org': e_img_org,
+        'e_img_gray_org': e_img_gray_org,
+        'pvp_img_org': pvp_img_org,
+        'pvp_img_gray_org': pvp_img_gray_org,
+        'aivp_img_org': aivp_img_org,
+        'aivp_img_gray_org': aivp_img_gray_org,
+        'ai_thinking_img_org': ai_thinking_img_org,
+        'ai_thinking_img_gray_org': ai_thinking_img_gray_org,
+        'logo_img_org': logo_img_org,
+    }
+    benchmark_bar_assets = {
+        'start_button': start_button,
+        'pause_button': pause_button,
+        'replay_button': replay_button,
+        'exit_button': exit_button,
+        'start_img': start_img,
+        'pause_img': pause_img,
+        'replay_img': replay_img,
+        'start_img_org': start_img_org,
+        'pause_img_org': pause_img_org,
+        'replay_img_org': replay_img_org,
+        'x_img_org': x_img_org,
+        'o_img_org': o_img_org,
+    }
+    ui_layout.update_window_layout(
+        new_width,
+        new_height,
+        game_mode=game_mode,
+        benchmark_state=benchmark_state,
+        colnum=COLNUM,
+        rownum=ROWNUM,
+        window_size_mut=Window_size,
+        layout_globals=layout_globals,
+        normal_assets=normal_assets,
+        benchmark_bar_assets=benchmark_bar_assets,
+    )
+    if not (
+        game_mode is GameMode.BENCHMARK
+        and benchmark_state.get('initialized')
+        and benchmark_state.get('parallel_workers', 1) > 1
+    ):
+        MARGIN = layout_globals['MARGIN']
+        WIDTH = layout_globals['WIDTH']
+        HEIGHT = layout_globals['HEIGHT']
+        BOARD_OFFSET_X = layout_globals['BOARD_OFFSET_X']
+        BOARD_OFFSET_Y = layout_globals['BOARD_OFFSET_Y']
+        PANEL_X = layout_globals['PANEL_X']
+        x_img = layout_globals['x_img']
+        o_img = layout_globals['o_img']
 
 
 def logo():
     font = pygame.font.Font('freesansbold.ttf', 36)
+    small_font = pygame.font.Font('freesansbold.ttf', 24)
     text = font.render('By AI - nhóm 12', True, WHITE, BLACK)
     textRect = text.get_rect()
     textRect.center = (PANEL_X + 150, Window_size[1] - 20)
@@ -517,7 +643,6 @@ def logo():
         textRect = text.get_rect()
         textRect.center = (PANEL_X + 140, 160)
         Screen.blit(text, textRect)
-    small_font = pygame.font.Font('freesansbold.ttf', 24)
     if status == -1:
         if turn_timer_paused:
             elapsed = turn_elapsed_paused
@@ -544,11 +669,6 @@ def apply_move_with_timer(this_game: caro.Caro, row: int, col: int, actor: str =
     return None
 
 
-def compute_ai_move_worker(game_snapshot: caro.Caro, max_depth: int, xo: str, agent_config: dict | None = None) -> list[int]:
-    worker_agent = Agent(max_depth=max_depth, XO=xo, config=agent_config, log_init=False)
-    return worker_agent.get_move(game_snapshot)
-
-
 def update_game_status(new_status: int):
     global status, turn_started_at, turn_elapsed_frozen
     if new_status != -1 and status == -1:
@@ -569,250 +689,24 @@ def set_turn_timer_pause(is_paused: bool):
         turn_timer_paused = False
 
 
-def load_benchmark_config(config_path: str | None = None, *, must_exist: bool = False):
-    path = config_path or BENCHMARK_CONFIG_FILE
-    if not os.path.isfile(path):
-        if must_exist:
-            print(f"[BENCH] error: config not found: {path}", file=sys.stderr)
-            sys.exit(2)
-        return
-    try:
-        with open(path, 'r', encoding='utf-8') as f:
-            loaded = json.load(f)
-        if isinstance(loaded, dict):
-            benchmark_setup.update(loaded)
-            print(f"[BENCH] loaded config from {path}")
-    except Exception as ex:
-        print(f"[BENCH] failed to load config file {path}: {ex}", file=sys.stderr)
-        if must_exist:
-            sys.exit(2)
-
-
-def _parse_match_id(match_id: str) -> tuple[str, int] | None:
-    if "__game_" not in match_id:
-        return None
-    matchup_name, game_part = match_id.rsplit("__game_", 1)
-    try:
-        game_no = int(game_part)
-    except Exception:
-        return None
-    return matchup_name, game_no
-
-
-def detect_benchmark_resume_position() -> tuple[int, int]:
-    matchups = benchmark_setup.get('matchups', [])
-    games_per_matchup = max(1, int(benchmark_setup.get('games_per_matchup', 1)))
-    if not matchups:
-        return 0, 0
-
-    summary_path = BENCHMARK_RESULT_SUMMARY_FILE
-    if not os.path.exists(summary_path):
-        return 0, 0
-
-    matchup_name_to_idx = {}
-    for idx, matchup in enumerate(matchups):
-        name = matchup.get('name')
-        if isinstance(name, str) and name != "":
-            matchup_name_to_idx[name] = idx
-
-    last_valid: tuple[int, int] | None = None
-    ignored_count = 0
-    try:
-        with open(summary_path, "r", encoding="utf-8") as f:
-            for raw_line in f:
-                line = raw_line.strip()
-                if not line.startswith("match_id="):
-                    continue
-                match_id = line.split("=", 1)[1].strip()
-                parsed = _parse_match_id(match_id)
-                if parsed is None:
-                    ignored_count += 1
-                    continue
-                matchup_name, game_no = parsed
-                matchup_idx = matchup_name_to_idx.get(matchup_name)
-                if matchup_idx is None:
-                    ignored_count += 1
-                    continue
-                if game_no < 1 or game_no > games_per_matchup:
-                    ignored_count += 1
-                    continue
-                last_valid = (matchup_idx, game_no)
-    except Exception as ex:
-        print(f"[BENCH] failed to inspect summary for resume: {ex}")
-        return 0, 0
-
-    if ignored_count > 0:
-        print(f"[BENCH] ignored {ignored_count} summary entries not in current config or invalid")
-
-    if last_valid is None:
-        print("[BENCH] no valid previous result found; start from first game")
-        return 0, 0
-
-    next_matchup_idx, last_game_no = last_valid
-    next_game_idx = last_game_no  # next zero-based game index after completed game_no
-    if next_game_idx >= games_per_matchup:
-        next_matchup_idx += 1
-        next_game_idx = 0
-
-    if next_matchup_idx >= len(matchups):
-        print("[BENCH] previous run already reached end of configured matchups; start from first game")
-        return 0, 0
-
-    print(
-        f"[BENCH] resume next game at matchup_idx={next_matchup_idx}, game_idx={next_game_idx}"
-    )
-    return next_matchup_idx, next_game_idx
-
-
-def board_to_ascii(this_game: caro.Caro) -> str:
-    return "\n".join(" ".join(row) for row in this_game.grid)
-
-
-def write_benchmark_reports():
-    summary_path = BENCHMARK_RESULT_SUMMARY_FILE
-    board_path = BENCHMARK_RESULT_BOARD_FILE
-
-    lines_summary = []
-    lines_board = []
-
-    for result in benchmark_state['results']:
-        lines_summary.append(f"match_id={result['match_id']}")
-        lines_summary.append(f"agent_x={json.dumps(result['agent_x'], ensure_ascii=False)}")
-        lines_summary.append(f"agent_o={json.dumps(result['agent_o'], ensure_ascii=False)}")
-        lines_summary.append(f"winner={result['winner_label']}")
-        lines_summary.append(
-            "stats="
-            + json.dumps(
-                {
-                    "x_avg_move_sec": result['x_avg_move_sec'],
-                    "o_avg_move_sec": result['o_avg_move_sec'],
-                    "x_moves": result['x_moves'],
-                    "o_moves": result['o_moves'],
-                    "winner_code": result['winner_code'],
-                },
-                ensure_ascii=False,
-            )
-        )
-        lines_summary.append(f"board_ref={result['match_id']}")
-        lines_summary.append("")
-
-        lines_board.append(f"match_id={result['match_id']}")
-        lines_board.append(result['board_ascii'])
-        lines_board.append("")
-
-    _ensure_benchmark_result_dirs()
-    with open(summary_path, "w", encoding="utf-8") as f:
-        f.write("\n".join(lines_summary).strip() + "\n")
-    with open(board_path, "w", encoding="utf-8") as f:
-        f.write("\n".join(lines_board).strip() + "\n")
-
-    print(f"[BENCH] wrote summary to {summary_path}")
-    print(f"[BENCH] wrote board-ascii to {board_path}")
-
-
-def reset_benchmark_report_files():
-    summary_path = BENCHMARK_RESULT_SUMMARY_FILE
-    board_path = BENCHMARK_RESULT_BOARD_FILE
-    _ensure_benchmark_result_dirs()
-    with open(summary_path, "w", encoding="utf-8") as f:
-        f.write("")
-    with open(board_path, "w", encoding="utf-8") as f:
-        f.write("")
-    print(f"[BENCH] reset report files: {summary_path}, {board_path}")
-
-
-def append_benchmark_result_to_files(result: dict):
-    summary_path = BENCHMARK_RESULT_SUMMARY_FILE
-    board_path = BENCHMARK_RESULT_BOARD_FILE
-    _ensure_benchmark_result_dirs()
-
-    with open(summary_path, "a", encoding="utf-8") as f:
-        f.write(f"match_id={result['match_id']}\n")
-        f.write(f"agent_x={json.dumps(result['agent_x'], ensure_ascii=False)}\n")
-        f.write(f"agent_o={json.dumps(result['agent_o'], ensure_ascii=False)}\n")
-        f.write(f"winner={result['winner_label']}\n")
-        f.write(
-            "stats="
-            + json.dumps(
-                {
-                    "x_avg_move_sec": result['x_avg_move_sec'],
-                    "o_avg_move_sec": result['o_avg_move_sec'],
-                    "x_moves": result['x_moves'],
-                    "o_moves": result['o_moves'],
-                    "winner_code": result['winner_code'],
-                },
-                ensure_ascii=False,
-            )
-            + "\n"
-        )
-        f.write(f"board_ref={result['match_id']}\n\n")
-
-    with open(board_path, "a", encoding="utf-8") as f:
-        f.write(f"match_id={result['match_id']}\n")
-        f.write(f"winner={result['winner_label']}\n")
-        f.write(f"agent_x={json.dumps(result['agent_x'], ensure_ascii=False)}\n")
-        f.write(f"agent_o={json.dumps(result['agent_o'], ensure_ascii=False)}\n")
-        if result['winner_label'] == 'draw':
-            f.write("result_for_agent_x=draw\n")
-            f.write("result_for_agent_o=draw\n")
-        else:
-            x_label = result['agent_x']['label']
-            o_label = result['agent_o']['label']
-            f.write(f"result_for_agent_x={'win' if result['winner_label'] == x_label else 'loss'}\n")
-            f.write(f"result_for_agent_o={'win' if result['winner_label'] == o_label else 'loss'}\n")
-        f.write(result['board_ascii'] + "\n\n")
-
-
-def _new_agent_stats():
-    return {'wins': 0, 'losses': 0, 'draws': 0, 'move_time_total': 0.0, 'move_count': 0}
-
-
-def benchmark_record_move(agent_key: str, elapsed: float | None):
-    if elapsed is None:
-        return
-    current = benchmark_state['current']
-    if current is None:
-        return
-    current['stats'][agent_key]['move_time_total'] += elapsed
-    current['stats'][agent_key]['move_count'] += 1
-
-
 def benchmark_setup_game():
     global agent1, agent2, turn_started_at, turn_elapsed_frozen, dev_future, ai_is_thinking
     matchup = benchmark_setup['matchups'][benchmark_state['matchup_idx']]
     game_idx = benchmark_state['game_idx']
     match_id = f"{matchup['name']}__game_{game_idx + 1}"
 
-    swap = (game_idx % 2 == 1)
-    a = matchup['agent_a']
-    b = matchup['agent_b']
-    x_side = b if swap else a
-    o_side = a if swap else b
-
-    my_game.reset()
-    my_game.use_ai(True)
-    my_game.set_ai_turn(2)  # ignored in dev-mode benchmark flow
+    agent1, agent2, cur = bench_sess.make_matchup_setup(
+        benchmark_setup, benchmark_state['matchup_idx'], game_idx, my_game
+    )
+    benchmark_state['current'] = cur
+    gpm = max(1, int(benchmark_setup.get('games_per_matchup', 1)))
+    game_seq = benchmark_state['matchup_idx'] * gpm + benchmark_state['game_idx'] + 1
+    bench_sess.benchmark_on_new_game_begin(benchmark_state, cur, game_seq)
     update_game_status(my_game.get_winner())
     turn_started_at = time.perf_counter()
     turn_elapsed_frozen = None
     set_turn_timer_pause(False)
 
-    agent1 = Agent(max_depth=x_side['depth'], XO='X', config=x_side['config'])
-    agent2 = Agent(max_depth=o_side['depth'], XO='O', config=o_side['config'])
-
-    benchmark_state['current'] = {
-        'matchup_name': matchup['name'],
-        'game_idx': game_idx,
-        'swap': swap,
-        'x_label': x_side['label'],
-        'o_label': o_side['label'],
-        'x_config': {'depth': x_side['depth'], **x_side['config']},
-        'o_config': {'depth': o_side['depth'], **o_side['config']},
-        'stats': {
-            x_side['label']: _new_agent_stats(),
-            o_side['label']: _new_agent_stats(),
-        },
-    }
     benchmark_state['game_active'] = True
     benchmark_state['game_ended_at'] = None
     if dev_future is not None:
@@ -830,62 +724,15 @@ def benchmark_setup_game():
 
 
 def benchmark_finalize_game():
-    current = benchmark_state['current']
-    if current is None:
-        return
-    winner = my_game.get_winner()
-    x_label = current['x_label']
-    o_label = current['o_label']
-    if winner == 0:
-        current['stats'][x_label]['wins'] += 1
-        current['stats'][o_label]['losses'] += 1
-    elif winner == 1:
-        current['stats'][o_label]['wins'] += 1
-        current['stats'][x_label]['losses'] += 1
-    else:
-        current['stats'][x_label]['draws'] += 1
-        current['stats'][o_label]['draws'] += 1
-
-    matchup_name = current['matchup_name']
-    if matchup_name not in benchmark_state['stats']:
-        benchmark_state['stats'][matchup_name] = {}
-    for label, s in current['stats'].items():
-        if label not in benchmark_state['stats'][matchup_name]:
-            benchmark_state['stats'][matchup_name][label] = _new_agent_stats()
-        agg = benchmark_state['stats'][matchup_name][label]
-        agg['wins'] += s['wins']
-        agg['losses'] += s['losses']
-        agg['draws'] += s['draws']
-        agg['move_time_total'] += s['move_time_total']
-        agg['move_count'] += s['move_count']
-
-    x_stat = current['stats'][x_label]
-    o_stat = current['stats'][o_label]
-    x_avg = (x_stat['move_time_total'] / x_stat['move_count']) if x_stat['move_count'] else 0.0
-    o_avg = (o_stat['move_time_total'] / o_stat['move_count']) if o_stat['move_count'] else 0.0
-
-    if winner == 0:
-        winner_label = x_label
-    elif winner == 1:
-        winner_label = o_label
-    else:
-        winner_label = "draw"
-
-    match_id = f"{matchup_name}__game_{current['game_idx'] + 1}"
-    result_entry = {
-        'match_id': match_id,
-        'agent_x': {'label': x_label, 'config': current['x_config']},
-        'agent_o': {'label': o_label, 'config': current['o_config']},
-        'winner_label': winner_label,
-        'winner_code': winner,
-        'x_avg_move_sec': round(x_avg, 4),
-        'o_avg_move_sec': round(o_avg, 4),
-        'x_moves': x_stat['move_count'],
-        'o_moves': o_stat['move_count'],
-        'board_ascii': board_to_ascii(my_game),
-    }
-    benchmark_state['results'].append(result_entry)
-    append_benchmark_result_to_files(result_entry)
+    bench_sess.benchmark_finalize_from_game(
+        benchmark_setup,
+        benchmark_state,
+        BENCHMARK_RESULT_SUMMARY_FILE,
+        BENCHMARK_RESULT_BOARD_FILE,
+        my_game,
+        benchmark_state['current'],
+        bump_parallel_done=False,
+    )
 
 
 def draw(this_game: caro.Caro, this_screen):
@@ -996,6 +843,10 @@ def main(argv: list[str] | None = None):
     global game_mode, dev_mode_setup
 
     args = parse_args(argv)
+    if args.bench_export_merge:
+        run_benchmark_export_merge_cli(args)
+        return
+
     if args.dev:
         game_mode = GameMode.DEVELOPER
     elif args.benchmark:
@@ -1010,14 +861,40 @@ def main(argv: list[str] | None = None):
         dev_mode_setup = copy.deepcopy(_DEFAULT_DEV_MODE_SETUP)
 
     bench_path = args.benchmark_config if args.benchmark_config is not None else BENCHMARK_CONFIG_FILE
-    load_benchmark_config(bench_path, must_exist=(game_mode is GameMode.BENCHMARK))
+    bench_sess.load_benchmark_config(
+        benchmark_setup,
+        bench_path,
+        default_config_file=BENCHMARK_CONFIG_FILE,
+        must_exist=(game_mode is GameMode.BENCHMARK),
+    )
 
     init_application()
+    if game_mode is GameMode.BENCHMARK:
+
+        def _benchmark_sigint_handler(_sig, _frame):
+            try:
+                bench_sess.export_benchmark_fragments_if_any(
+                    BENCHMARK_RESULT_SUMMARY_FILE,
+                    BENCHMARK_RESULT_BOARD_FILE,
+                    BENCHMARK_RESULT_MOVES_FILE,
+                    BENCHMARK_FRAGMENTS_DIR,
+                )
+                print("[BENCH] đã gộp fragments → master (Ctrl+C)", file=sys.stderr)
+            except Exception as ex:
+                print(f"[BENCH] gộp khi Ctrl+C thất bại: {ex}", file=sys.stderr)
+            raise KeyboardInterrupt
+
+        signal.signal(signal.SIGINT, _benchmark_sigint_handler)
+
     while not done:
         if game_mode is GameMode.BENCHMARK and not benchmark_state['initialized']:
             benchmark_state['initialized'] = True
             benchmark_state['running'] = False
-            resume_matchup_idx, resume_game_idx = detect_benchmark_resume_position()
+            resume_matchup_idx, resume_game_idx = bench_sess.detect_benchmark_resume_position(
+                benchmark_setup,
+                BENCHMARK_RESULT_SUMMARY_FILE,
+                BENCHMARK_FRAGMENTS_DIR,
+            )
             benchmark_state['resume_matchup_idx'] = resume_matchup_idx
             benchmark_state['resume_game_idx'] = resume_game_idx
             benchmark_state['matchup_idx'] = resume_matchup_idx
@@ -1027,10 +904,27 @@ def main(argv: list[str] | None = None):
             my_game.reset()
             update_game_status(my_game.get_winner())
             set_turn_timer_pause(True)
+            pw = max(1, min(int(args.benchmark_workers), 32))
+            benchmark_state['parallel_workers'] = pw
+            if pw > 1:
+                bench_sess.ensure_benchmark_slots(
+                    benchmark_state, pw, ROWNUM, COLNUM, winning_condition, XO
+                )
+                update_layout(Window_size[0], Window_size[1])
+                print(
+                    f"[BENCH] {pw} bàn cờ trong một cửa sổ; mỗi bàn có Start/Pause/Replay riêng. "
+                    "Dùng --benchmark-workers 1 để một bàn như trước."
+                )
             print("[BENCH] waiting for Start button")
 
         if game_mode is GameMode.BENCHMARK:
-            if benchmark_state['running'] and benchmark_state['matchup_idx'] < len(benchmark_setup['matchups']):
+            if benchmark_state['running'] and benchmark_state['parallel_workers'] > 1:
+                bench_sess.benchmark_multi_tick_slots(benchmark_setup, benchmark_state, bench_rt)
+            elif (
+                benchmark_state['running']
+                and benchmark_state['parallel_workers'] <= 1
+                and benchmark_state['matchup_idx'] < len(benchmark_setup['matchups'])
+            ):
                 if status == -1:
                     if dev_future is None:
                         ai_is_thinking = True
@@ -1051,8 +945,17 @@ def main(argv: list[str] | None = None):
                             best_move = dev_future.result()
                             if best_move is not None:
                                 current_actor = benchmark_state['current']['x_label'] if my_game.turn == 1 else benchmark_state['current']['o_label']
-                                elapsed = apply_move_with_timer(my_game, best_move[0], best_move[1], actor=current_actor)
-                                benchmark_record_move(current_actor, elapsed)
+                                br, bc = best_move[0], best_move[1]
+                                piece = my_game.XO
+                                elapsed = apply_move_with_timer(my_game, br, bc, actor=current_actor)
+                                bench_sess.benchmark_record_move(
+                                    benchmark_state,
+                                    current_actor,
+                                    elapsed,
+                                    row=br,
+                                    col=bc,
+                                    piece=piece,
+                                )
                                 update_game_status(my_game.get_winner())
                         finally:
                             dev_future = None
@@ -1072,6 +975,12 @@ def main(argv: list[str] | None = None):
                             ai_thinking_btn.disable_button()
                             benchmark_state['running'] = False
                             print("[BENCH] completed all matchups")
+                            bench_sess.export_benchmark_merged_reports(
+                                BENCHMARK_RESULT_SUMMARY_FILE,
+                                BENCHMARK_RESULT_BOARD_FILE,
+                                BENCHMARK_RESULT_MOVES_FILE,
+                                BENCHMARK_FRAGMENTS_DIR,
+                            )
                             for matchup_name, matchup_stats in benchmark_state['stats'].items():
                                 print(f"[BENCH][{matchup_name}]")
                                 for label, s in matchup_stats.items():
@@ -1141,9 +1050,13 @@ def main(argv: list[str] | None = None):
                 ai_thinking_btn.disable_button()
 
         for event in pygame.event.get():  # User did something
+            _bench_multi_skip_panel_btns = (
+                game_mode is GameMode.BENCHMARK
+                and benchmark_state.get('parallel_workers', 1) > 1
+            )
 
     # ---------------- Undo button ---------------------------------------------
-            if undo_button.draw(Screen):  # Ấn nút Undo
+            if not _bench_multi_skip_panel_btns and undo_button.draw(Screen):  # Ấn nút Undo
                 if game_mode is GameMode.BENCHMARK:
                     continue
                 if ai_future is not None:
@@ -1167,12 +1080,11 @@ def main(argv: list[str] | None = None):
                 print("Undo")
                 pass
     # --------------Exit button--------------------------------------------
-            if exit_button.draw(Screen):  # Ấn nút Thoát
+            if not _bench_multi_skip_panel_btns and exit_button.draw(Screen):  # Ấn nút Thoát
                 print('EXIT')
-                # quit game
                 done = True
     # --------------Replay button-------------------------------------------
-            if replay_button.draw(Screen):  # Ấn nút Chơi lại
+            if not _bench_multi_skip_panel_btns and replay_button.draw(Screen):  # Ấn nút Chơi lại
                 if game_mode is GameMode.BENCHMARK:
                     if len(benchmark_setup['matchups']) == 0:
                         print("[BENCH] replay ignored: no matchups configured")
@@ -1190,6 +1102,7 @@ def main(argv: list[str] | None = None):
                         benchmark_state['game_idx'] = 0
                     if ai_executor is None:
                         ai_executor = ProcessPoolExecutor(max_workers=1)
+                        bench_sess.benchmark_warm_executor(ai_executor, 1)
                     benchmark_setup_game()
                     benchmark_state['running'] = True
                     turn_elapsed_paused = 0.0
@@ -1329,7 +1242,7 @@ def main(argv: list[str] | None = None):
                 if event.type == pygame.WINDOWSIZECHANGED:
                     current_w, current_h = pygame.display.get_window_size()
                     update_layout(current_w, current_h)
-                if game_mode is GameMode.BENCHMARK:
+                if game_mode is GameMode.BENCHMARK and benchmark_state.get('parallel_workers', 1) <= 1:
                     if start_button.draw(Screen):
                         can_resume_current = (
                             benchmark_state['current'] is not None
@@ -1340,6 +1253,7 @@ def main(argv: list[str] | None = None):
                         if can_resume_current:
                             if ai_executor is None:
                                 ai_executor = ProcessPoolExecutor(max_workers=1)
+                                bench_sess.benchmark_warm_executor(ai_executor, 1)
                             benchmark_state['running'] = True
                             turn_elapsed_paused = 0.0
                             turn_started_at = time.perf_counter()
@@ -1348,6 +1262,7 @@ def main(argv: list[str] | None = None):
                         else:
                             if ai_executor is None:
                                 ai_executor = ProcessPoolExecutor(max_workers=1)
+                                bench_sess.benchmark_warm_executor(ai_executor, 1)
                             benchmark_state['matchup_idx'] = benchmark_state.get('resume_matchup_idx', 0)
                             benchmark_state['game_idx'] = benchmark_state.get('resume_game_idx', 0)
                             benchmark_state['stats'] = {}
@@ -1371,7 +1286,7 @@ def main(argv: list[str] | None = None):
                             ai_is_thinking = False
                             ai_thinking_btn.disable_button()
                             print("[BENCH] paused (agent computation hard-stopped)")
-                else:
+                elif game_mode is GameMode.DEVELOPER:
                     if start_button.draw(Screen):
                         if not dev_mode_setup['start']:
                             turn_started_at = time.perf_counter()
@@ -1390,20 +1305,57 @@ def main(argv: list[str] | None = None):
                                     dev_future = None
                                 ai_is_thinking = False
                                 ai_thinking_btn.disable_button()
-                ai_thinking_btn.re_draw(Screen)
+                if not (
+                    game_mode is GameMode.BENCHMARK
+                    and benchmark_state.get('parallel_workers', 1) > 1
+                ):
+                    ai_thinking_btn.re_draw(Screen)
 
-    # ------ Draw screen---------------------------------------------------
-        draw(my_game, Screen)
-        if game_mode is not GameMode.NORMAL and SHOW_DEV_START_DEBUG_BORDER:
-            pygame.draw.rect(Screen, (255, 255, 0), start_button.rect, 3)
-            pygame.draw.rect(Screen, (0, 255, 255), pause_button.rect, 3)
-    # -------- checking winner --------------------------------------------
-        checking_winning(status)
-    # Limit to 999999999 frames per second
+        # ------ Draw screen---------------------------------------------------
+        if game_mode is GameMode.BENCHMARK and benchmark_state.get('parallel_workers', 1) > 1:
+            bench_sess.draw_benchmark_multi_screen(
+                Screen,
+                benchmark_state,
+                black=BLACK,
+                white=WHITE,
+                green=GREEN,
+                red=RED,
+                blue=BLUE,
+            )
+            if bench_sess.handle_benchmark_multi_ui_frame(
+                Screen,
+                benchmark_setup,
+                benchmark_state,
+                bench_rt,
+                start_button=start_button,
+                pause_button=pause_button,
+                replay_button=replay_button,
+                exit_button=exit_button,
+            ):
+                done = True
+        else:
+            draw(my_game, Screen)
+            if game_mode is not GameMode.NORMAL and SHOW_DEV_START_DEBUG_BORDER:
+                pygame.draw.rect(Screen, (255, 255, 0), start_button.rect, 3)
+                pygame.draw.rect(Screen, (0, 255, 255), pause_button.rect, 3)
+            checking_winning(status)
+        # Limit to 999999999 frames per second
         clock.tick(FPS)
 
         # Go ahead and update the screen with what we've drawn.
         pygame.display.update()
+
+    if game_mode is GameMode.BENCHMARK and benchmark_state.get('initialized'):
+        try:
+            if bench_sess.export_benchmark_fragments_if_any(
+                BENCHMARK_RESULT_SUMMARY_FILE,
+                BENCHMARK_RESULT_BOARD_FILE,
+                BENCHMARK_RESULT_MOVES_FILE,
+                BENCHMARK_FRAGMENTS_DIR,
+            ):
+                print("[BENCH] đã gộp fragments → 3 file master khi thoát vòng lặp (Exit / hết phiên)")
+        except Exception as ex:
+            print(f"[BENCH] gộp fragments khi thoát thất bại: {ex}", file=sys.stderr)
 
     pygame.time.delay(50)
     if ai_executor is not None:
