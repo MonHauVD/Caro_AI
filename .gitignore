@@ -1,7 +1,6 @@
 /tempCodeRunnerFile.py
 test/
 build/
-dist/
 __pycache__/
 *.py[cod]
 *.so
