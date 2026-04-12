@@ -1,8 +1,8 @@
 {
   "ai_1": "X",
   "ai_2": "O",
-  "ai_1_depth": 6,
-  "ai_2_depth": 8,
+  "ai_1_depth": 3,
+  "ai_2_depth": 4,
   "ai_1_config": {
     "use_cython_search": false,
     "use_tss": false,
