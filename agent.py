@@ -581,40 +581,44 @@ class Agent:
         depth: int,
         pv_move: list[int] | None,
         deadline: float | None,
-    ) -> tuple[int, list[int] | None]:
+    ) -> tuple[int, list[int] | None, bool]:
         possible_moves = self.get_possible_moves_optimized(game)
         if not possible_moves:
-            return self.get_heuristic(game), None
+            return self.get_heuristic(game), None, True
 
         ordered_moves = self._sort_moves(game, possible_moves)
         ordered_moves = self._prioritize_moves(ordered_moves, [pv_move])
         ordered_moves = self._limit_moves(ordered_moves, depth)
         if not ordered_moves:
-            return self.get_heuristic(game), None
+            return self.get_heuristic(game), None, True
 
         best_score = -INF
         best_move = ordered_moves[0]
         max_workers = min(self.lazy_smp_max_workers, len(ordered_moves))
+        completed = True
 
-        def evaluate_root_move(move: list[int]) -> tuple[int, list[int]]:
+        def evaluate_root_move(move: list[int]) -> tuple[int, list[int], bool]:
             if deadline is not None and time.perf_counter() >= deadline:
-                return -INF, move
+                return -INF, move, False
             new_game = copy.deepcopy(game)
             new_game.make_move(move[0], move[1])
-            score, _ = self.minimax(new_game, depth - 1, -INF * 10, INF * 10, 0, None, deadline)
-            return score, move
+            score, _, child_completed = self.minimax(new_game, depth - 1, -INF * 10, INF * 10, 0, None, deadline)
+            return score, move, child_completed
 
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             futures = [executor.submit(evaluate_root_move, move) for move in ordered_moves]
             for future in as_completed(futures):
                 if deadline is not None and time.perf_counter() >= deadline:
+                    completed = False
                     break
-                score, move = future.result()
+                score, move, child_completed = future.result()
+                if not child_completed:
+                    completed = False
                 if score > best_score:
                     best_score = score
                     best_move = move
 
-        return best_score, best_move
+        return best_score, best_move, completed
 
     def _to_flat_board(self, game: Caro) -> list[int]:
         mapped = {'.': 0, 'X': 1, 'O': 2}
@@ -646,6 +650,8 @@ class Agent:
         winning_candidates = self._get_threat_moves(game, piece, min_level=4)
         for x, y in winning_candidates:
             trial = copy.deepcopy(game)
+            # We may test either side's tactical win, so force the simulated side.
+            trial.XO = piece
             trial.make_move(x, y)
             winner = trial.get_winner()
             if (piece == 'X' and winner == 0) or (piece == 'O' and winner == 1):
@@ -681,8 +687,23 @@ class Agent:
         '''
         if len(game.last_move) < 1:
             possible_moves = game.get_possible_moves()
-            move = random.choice(possible_moves)
-            return move
+            if not possible_moves:
+                return None
+            center_x = (game.rows - 1) / 2.0
+            center_y = (game.cols - 1) / 2.0
+
+            weighted_moves = []
+            weights = []
+            for x, y in possible_moves:
+                # Prefer center area for opening instead of edges/corners.
+                dx = x - center_x
+                dy = y - center_y
+                dist2 = dx * dx + dy * dy
+                weight = 1.0 / (1.0 + dist2)
+                weighted_moves.append([x, y])
+                weights.append(weight)
+
+            return random.choices(weighted_moves, weights=weights, k=1)[0]
         elif len(game.last_move) == 1:
             possible_moves = self.get_possible_moves_optimized(game)
             move = random.choice(possible_moves)
@@ -705,9 +726,12 @@ class Agent:
                 return cy_move
 
         if not self.use_iterative_deepening:
-            best_score, best_move = self.minimax(
+            best_score, best_move, completed = self.minimax(
                 game, target_depth, -INF * 10, INF * 10, 1, None, deadline)
-            return best_move
+            if completed and best_move is not None:
+                return best_move
+            fallback = self._sort_moves(game, self.get_possible_moves_optimized(game))
+            return fallback[0] if fallback else None
 
         best_move = None
         pv_move = None
@@ -715,14 +739,15 @@ class Agent:
             if depth > self.min_depth_guarantee and time.perf_counter() >= deadline:
                 break
             if self.use_lazy_smp and depth >= self.lazy_smp_min_depth:
-                best_score, current_best = self._search_depth_lazy_smp(
+                best_score, current_best, completed = self._search_depth_lazy_smp(
                     game, depth, pv_move, deadline
                 )
             else:
-                best_score, current_best = self.minimax(
+                best_score, current_best, completed = self.minimax(
                     game, depth, -INF * 10, INF * 10, 1, pv_move, deadline
                 )
-            if current_best is not None:
+            # Only commit the move when this depth is fully completed.
+            if completed and current_best is not None:
                 best_move = current_best
                 pv_move = current_best
 
@@ -741,7 +766,7 @@ class Agent:
         maximizing_player: int = 1,
         pv_move: list[int] | None = None,
         deadline: float | None = None,
-    ) -> tuple[int, list[int]]:
+    ) -> tuple[int, list[int], bool]:
         '''
             Implement the Minimax algorithm.
 
@@ -764,11 +789,11 @@ class Agent:
         '''
 
         if deadline is not None and time.perf_counter() >= deadline:
-            return self.get_heuristic(game), None
+            return self.get_heuristic(game), None, False
 
         winner = game.get_winner()
         if depth == 0 or winner != -1:
-            return self.get_heuristic(game) + self._tss_leaf_bonus(game), None
+            return self.get_heuristic(game) + self._tss_leaf_bonus(game), None, True
 
         board_hash = self._compute_hash(game)
         alpha_original = alpha
@@ -778,17 +803,17 @@ class Agent:
             tt_entry = self.transposition_table.get(board_hash)
         if tt_entry is not None and tt_entry.depth >= depth:
             if tt_entry.flag == 'EXACT':
-                return tt_entry.score, tt_entry.best_move
+                return tt_entry.score, tt_entry.best_move, True
             if tt_entry.flag == 'LOWERBOUND':
                 alpha = max(alpha, tt_entry.score)
             elif tt_entry.flag == 'UPPERBOUND':
                 beta = min(beta, tt_entry.score)
             if alpha >= beta:
-                return tt_entry.score, tt_entry.best_move
+                return tt_entry.score, tt_entry.best_move, True
 
         possible_moves = self.get_possible_moves_optimized(game)
         if not possible_moves:
-            return self.get_heuristic(game), None
+            return self.get_heuristic(game), None, True
         ordered_moves = self._sort_moves(game, possible_moves)
         ordered_moves = self._prioritize_moves(ordered_moves, [pv_move, tt_entry.best_move if tt_entry else None])
         ordered_moves = self._limit_moves(ordered_moves, depth)
@@ -796,6 +821,7 @@ class Agent:
         if maximizing_player:
             max_eval = -INF
             best_move = ordered_moves[0]
+            completed = True
 
             for possible_move in ordered_moves:
                 x = possible_move[0]
@@ -804,8 +830,11 @@ class Agent:
                 new_game = copy.deepcopy(game)
                 new_game.make_move(x, y)
 
-                eval, move = self.minimax(new_game, depth - 1,
+                eval, move, child_completed = self.minimax(new_game, depth - 1,
                                           alpha, beta, maximizing_player ^ 1, None, deadline)
+                if not child_completed:
+                    completed = False
+                    return max_eval if max_eval != -INF else eval, best_move, False
 
                 if eval > max_eval:
                     max_eval = eval
@@ -821,10 +850,11 @@ class Agent:
                 flag = 'LOWERBOUND'
             with self.cache_lock:
                 self.transposition_table[board_hash] = TTEntry(depth, max_eval, flag, best_move)
-            return max_eval, best_move
+            return max_eval, best_move, completed
         else:
             min_eval = INF
             best_move = ordered_moves[0]
+            completed = True
 
             for possible_move in ordered_moves:
                 x = possible_move[0]
@@ -833,8 +863,11 @@ class Agent:
                 new_game = copy.deepcopy(game)
                 new_game.make_move(x, y)
 
-                eval, move = self.minimax(new_game, depth - 1,
+                eval, move, child_completed = self.minimax(new_game, depth - 1,
                                           alpha, beta, maximizing_player ^ 1, None, deadline)
+                if not child_completed:
+                    completed = False
+                    return min_eval if min_eval != INF else eval, best_move, False
 
                 if eval < min_eval:
                     min_eval = eval
@@ -850,7 +883,7 @@ class Agent:
                 flag = 'LOWERBOUND'
             with self.cache_lock:
                 self.transposition_table[board_hash] = TTEntry(depth, min_eval, flag, best_move)
-            return min_eval, best_move
+            return min_eval, best_move, completed
 
 
 # Testing

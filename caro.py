@@ -21,7 +21,7 @@ class Caro:
         self.winning_condition = winning_condition
         self.XO = XO
         self.last_move = []
-        self.hard_ai = 2 # thay đổi trong hàm change_hard_ai()
+        self.hard_ai = 7  # mặc định medium; đồng bộ với change_hard_ai()
         self.turn = 1
         self.ai_turn = 2
         self.is_use_ai = False
@@ -213,13 +213,13 @@ class Caro:
 
     def change_hard_ai(self, hard: str):
         if hard == 'easy':
-            self.hard_ai = 4
+            self.hard_ai = 3
         elif hard == 'hard':
             self.hard_ai = 8
         elif hard == 'medium':
-            self.hard_ai = 6
+            self.hard_ai = 7
         else:
-            self.hard_ai = 6
+            self.hard_ai = 7
     
     def use_ai(self, is_true: bool):
         if is_true == False:
