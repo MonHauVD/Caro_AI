@@ -23524,3 +23524,77 @@ result_for_agent_o=win
 . . . . O . . . . X O . . . . . . . . .
 . . . . . . . . . . . . . . . . . . . .
 
+match_id=depth_8_smp_no_limit_timer_vs_depth_6_cy_auto__game_2
+winner=draw
+agent_x={"label": "depth_6_cy", "config": {"depth": 6, "use_cython_search": true, "cython_search_min_depth": 5, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 10, "beam_width_inner": 8, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+result_for_agent_x=draw
+result_for_agent_o=draw
+X X O O O X X O X O O O X X X O O X X O
+O O X X X O O O X O X X O O X X X O O X
+O X O O X X O X X X O O X X O O O O X O
+X O X X O O O X O X X O O X O X X O X O
+X X O O X X X X O O X O X O O O X X X O
+X O O X O X X O X X X O X X X O O X O X
+O O O X O X X X X O X X O O X X O X O X
+X X O O X O O O X X O X X O O O X X X O
+X X X O X X O O O O X O O X O O X O O O
+X O O X X X O X O O X O X X O X O O X O
+X O O X O X X O O O X O X O O O O X O X
+O X O X O X X O X O X X O X X X O X X O
+X O O O X O X O O X O X O X X O X O X O
+X X X O X O O X X X X O X X O O X X X O
+O X O X O O X X O X O O X O O X X X O X
+O O O O X X O X O O X O X O X O O O O X
+X O X X O O O X X O X O O O X X X O X O
+X X O O X X O O O X O X X X O O O X X O
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_6_full_a_auto__game_1
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+agent_o={"label": "depth_6_full_a", "config": {"depth": 6, "use_cython_search": true, "cython_search_min_depth": 5, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 12, "beam_width_inner": 9, "move_time_budget_sec": 20}}
+result_for_agent_x=win
+result_for_agent_o=loss
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . X . . . . . . . . . . . .
+. . . . . . . . O . . . . O . . . . . .
+. . . . . . . . . O . . X . . . . . . .
+. . . . . . . . . O O X . . . . . . . .
+. . . . . . . . O . X O O . . . . . . .
+. . . . . . . . . X O X X . . . . . . .
+. . . . . . . . O . X . X . . . . . . .
+. . . . . . . . . . . X X X O . . . . .
+. . . . . . . . . . . . X . O . . . . .
+. . . . . . . . . . . . O X . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_6_full_a_auto__game_2
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_6_full_a", "config": {"depth": 6, "use_cython_search": true, "cython_search_min_depth": 5, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 12, "beam_width_inner": 9, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+result_for_agent_x=loss
+result_for_agent_o=win
+. . . O . . . . . . O . . . . . . . . .
+. . . . X . . . . X . . . . . . . . . .
+. . . . . X O . X . . . . . . . . . . .
+. . . . . . X X O . . . . . . . . . . .
+. . . . . O X X O . . . . . . . . . . .
+. . . . . O X O O X O . . . . . . . . .
+. . . O X X X X O X X X O . . . . . . .
+. . . . O X O O X O O O X . . . . . . .
+. . . . O X O X O X X X O . . . . . . .
+. . . . X O X O O X O . X . . . . . . .
+. . . X X O X O O O X O . X . . . . . .
+. . O O X O X O X X O X X O . X . . . .
+. . . X X O O X X O X O O O O X . . . .
+. . . . O X X O O O X X X O . . . . . .
+. . . . . O X X X O O X O O . . . . . .
+. . . . . . O X O X . O . O . . . . . .
+. . . . . . . X O . X . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
