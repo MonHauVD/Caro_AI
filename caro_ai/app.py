@@ -12,6 +12,7 @@ from concurrent.futures import ProcessPoolExecutor
 import pygame
 
 from caro_ai.ai.agent import Agent
+from caro_ai.modes import GameMode
 import caro_ai.game.caro as caro
 from caro_ai.ui import buttons as button
 
@@ -87,10 +88,8 @@ PLAYER_VS_AI_PRESETS = {
 # Đồng bộ với UI: mặc định Medium (nút M đang disable lúc khởi động).
 normal_mode_difficulty = 'medium'
 
-# Chế độ dev / benchmark: bật bằng cờ dòng lệnh (xem parse_args / main).
 
-is_developer_mode = False
-benchmark_mode = False
+game_mode = GameMode.NORMAL
 
 CONFIG_DIR = _resolve_config_dir()
 DEV_MODE_CONFIG_FILE = os.path.join(CONFIG_DIR, 'dev_mode.json')
@@ -361,7 +360,7 @@ def init_application():
     m_btn.disable_button()
     pvp_btn.disable_button()
     ai_thinking_btn.disable_button()
-    if is_developer_mode:
+    if game_mode is not GameMode.NORMAL:
         aivp_btn.disable_button()
         pvp_btn.disable_button()
         ai_btn.disable_button()
@@ -506,9 +505,15 @@ def logo():
     textRect.center = (PANEL_X + 150, Window_size[1] - 20)
     Screen.blit(text, textRect)
     # logo_btn.draw(Screen)
-    if is_developer_mode:
+    if game_mode is GameMode.DEVELOPER:
         font = pygame.font.Font('freesansbold.ttf', 36)
         text = font.render('Developer_Mode', True, WHITE, BLACK)
+        textRect = text.get_rect()
+        textRect.center = (PANEL_X + 140, 160)
+        Screen.blit(text, textRect)
+    elif game_mode is GameMode.BENCHMARK:
+        font = pygame.font.Font('freesansbold.ttf', 36)
+        text = font.render('Benchmark_Mode', True, WHITE, BLACK)
         textRect = text.get_rect()
         textRect.center = (PANEL_X + 140, 160)
         Screen.blit(text, textRect)
@@ -988,11 +993,15 @@ def checking_winning(status):
 def main(argv: list[str] | None = None):
     global done, ai_is_thinking, ai_future, dev_future, ai_executor
     global normal_mode_difficulty, agent, turn_elapsed_paused, turn_started_at, turn_elapsed_frozen
-    global is_developer_mode, benchmark_mode, dev_mode_setup
+    global game_mode, dev_mode_setup
 
     args = parse_args(argv)
-    is_developer_mode = bool(args.dev)
-    benchmark_mode = bool(args.benchmark)
+    if args.dev:
+        game_mode = GameMode.DEVELOPER
+    elif args.benchmark:
+        game_mode = GameMode.BENCHMARK
+    else:
+        game_mode = GameMode.NORMAL
 
     if args.dev:
         dev_path = args.dev_config if args.dev_config is not None else DEV_MODE_CONFIG_FILE
@@ -1001,11 +1010,11 @@ def main(argv: list[str] | None = None):
         dev_mode_setup = copy.deepcopy(_DEFAULT_DEV_MODE_SETUP)
 
     bench_path = args.benchmark_config if args.benchmark_config is not None else BENCHMARK_CONFIG_FILE
-    load_benchmark_config(bench_path, must_exist=args.benchmark)
+    load_benchmark_config(bench_path, must_exist=(game_mode is GameMode.BENCHMARK))
 
     init_application()
     while not done:
-        if benchmark_mode and not benchmark_state['initialized']:
+        if game_mode is GameMode.BENCHMARK and not benchmark_state['initialized']:
             benchmark_state['initialized'] = True
             benchmark_state['running'] = False
             resume_matchup_idx, resume_game_idx = detect_benchmark_resume_position()
@@ -1020,7 +1029,7 @@ def main(argv: list[str] | None = None):
             set_turn_timer_pause(True)
             print("[BENCH] waiting for Start button")
 
-        if benchmark_mode:
+        if game_mode is GameMode.BENCHMARK:
             if benchmark_state['running'] and benchmark_state['matchup_idx'] < len(benchmark_setup['matchups']):
                 if status == -1:
                     if dev_future is None:
@@ -1069,7 +1078,7 @@ def main(argv: list[str] | None = None):
                                     avg = (s['move_time_total'] / s['move_count']) if s['move_count'] else 0.0
                                     print(f"  {label}: W={s['wins']} L={s['losses']} D={s['draws']} avg_move={avg:.3f}s")
 
-        if (not benchmark_mode and not is_developer_mode and my_game.is_use_ai and my_game.turn == my_game.ai_turn
+        if (game_mode is GameMode.NORMAL and my_game.is_use_ai and my_game.turn == my_game.ai_turn
                 and status == -1):
             if ai_future is None:
                 ai_is_thinking = True
@@ -1096,11 +1105,11 @@ def main(argv: list[str] | None = None):
         else:
             if ai_future is not None and ai_future.done():
                 ai_future = None
-            if (not is_developer_mode) and (not benchmark_mode):
+            if game_mode is GameMode.NORMAL:
                 ai_is_thinking = False
                 ai_thinking_btn.disable_button()
 
-        if (not benchmark_mode) and is_developer_mode and status == -1 and dev_mode_setup['start'] and not dev_mode_setup['pause']:
+        if game_mode is GameMode.DEVELOPER and status == -1 and dev_mode_setup['start'] and not dev_mode_setup['pause']:
             if dev_future is None:
                 ai_is_thinking = True
                 ai_thinking_btn.enable_button()
@@ -1124,7 +1133,7 @@ def main(argv: list[str] | None = None):
                         update_game_status(my_game.get_winner())
                 finally:
                     dev_future = None
-        elif (not benchmark_mode) and is_developer_mode:
+        elif game_mode is GameMode.DEVELOPER:
             if dev_future is not None and dev_future.done():
                 dev_future = None
             if not dev_mode_setup['start']:
@@ -1135,7 +1144,7 @@ def main(argv: list[str] | None = None):
 
     # ---------------- Undo button ---------------------------------------------
             if undo_button.draw(Screen):  # Ấn nút Undo
-                if benchmark_mode:
+                if game_mode is GameMode.BENCHMARK:
                     continue
                 if ai_future is not None:
                     ai_future.cancel()
@@ -1146,7 +1155,7 @@ def main(argv: list[str] | None = None):
                 ai_is_thinking = False
                 ai_thinking_btn.disable_button()
                 Undo(my_game)
-                if is_developer_mode:
+                if game_mode is GameMode.DEVELOPER:
                     dev_mode_setup['pause'] = True
                     set_turn_timer_pause(True)
                     if dev_future is not None:
@@ -1164,7 +1173,7 @@ def main(argv: list[str] | None = None):
                 done = True
     # --------------Replay button-------------------------------------------
             if replay_button.draw(Screen):  # Ấn nút Chơi lại
-                if benchmark_mode:
+                if game_mode is GameMode.BENCHMARK:
                     if len(benchmark_setup['matchups']) == 0:
                         print("[BENCH] replay ignored: no matchups configured")
                         continue
@@ -1202,15 +1211,15 @@ def main(argv: list[str] | None = None):
                     dev_future = None
                 ai_is_thinking = False
                 ai_thinking_btn.disable_button()
-                if is_developer_mode:
+                if game_mode is GameMode.DEVELOPER:
                     dev_mode_setup['pause'] = False
                     set_turn_timer_pause(False)
                 turn_started_at = time.perf_counter()
                 turn_elapsed_frozen = None
                 update_game_status(my_game.get_winner())
                 re_draw()
-    # ---------Normal mode---------------------------------------------------
-            if not is_developer_mode:
+    # --------- Normal PvAI controls (hidden in dev / benchmark) ----------
+            if game_mode is GameMode.NORMAL:
         # ------------- Setup button---------------------------------------------
                 if len(my_game.last_move) > 0:
                     pass
@@ -1295,7 +1304,7 @@ def main(argv: list[str] | None = None):
                     update_layout(current_w, current_h)
         # -------Find pos mouse clicked and make a move-------------------------
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    if benchmark_mode:
+                    if game_mode is GameMode.BENCHMARK:
                         continue
                     if my_game.is_use_ai and (my_game.turn == my_game.ai_turn or ai_is_thinking):
                         continue
@@ -1313,7 +1322,14 @@ def main(argv: list[str] | None = None):
                         ai_thinking_btn.re_draw(Screen)
                         draw(my_game, Screen)
             else:
-                if benchmark_mode:
+                if event.type == pygame.QUIT:
+                    done = True
+                if event.type == pygame.VIDEORESIZE:
+                    update_layout(event.w, event.h)
+                if event.type == pygame.WINDOWSIZECHANGED:
+                    current_w, current_h = pygame.display.get_window_size()
+                    update_layout(current_w, current_h)
+                if game_mode is GameMode.BENCHMARK:
                     if start_button.draw(Screen):
                         can_resume_current = (
                             benchmark_state['current'] is not None
@@ -1378,7 +1394,7 @@ def main(argv: list[str] | None = None):
 
     # ------ Draw screen---------------------------------------------------
         draw(my_game, Screen)
-        if is_developer_mode and SHOW_DEV_START_DEBUG_BORDER:
+        if game_mode is not GameMode.NORMAL and SHOW_DEV_START_DEBUG_BORDER:
             pygame.draw.rect(Screen, (255, 255, 0), start_button.rect, 3)
             pygame.draw.rect(Screen, (0, 255, 255), pause_button.rect, 3)
     # -------- checking winner --------------------------------------------

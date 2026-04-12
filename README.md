@@ -20,7 +20,8 @@ Open `dist/Caro_AI_Ubuntu`
 |------|------|
 | `main.py` | Thin entry: run `python main.py` from the repo root. |
 | `caro_ai/` | Python package: game, UI, AI agent, and the main app loop. |
-| `caro_ai/app.py` | Pygame UI, presets (`PLAYER_VS_AI_PRESETS`); dev/benchmark modes via CLI flags. |
+| `caro_ai/modes.py` | `GameMode` enum (`NORMAL`, `DEVELOPER`, `BENCHMARK`); set from CLI in `app.main`. |
+| `caro_ai/app.py` | Pygame UI, presets (`PLAYER_VS_AI_PRESETS`); parses `--dev` / `--benchmark` into `game_mode`. |
 | `caro_ai/game/` | Board rules and `Caro` state. |
 | `caro_ai/ui/` | Button widgets. |
 | `caro_ai/ai/` | `Agent` (search / evaluation). |
