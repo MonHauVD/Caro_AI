@@ -1,29 +1,45 @@
+completion_index=1
+game_seq=1
 match_id=depth3_vs_depth4_plain__game_1
 agent_x={"label": "depth_3", "config": {"depth": 3, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
 agent_o={"label": "depth_4", "config": {"depth": 4, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
 winner=depth_4
-stats={"x_avg_move_sec": 0.0522, "o_avg_move_sec": 0.1866, "x_moves": 20, "o_moves": 20, "winner_code": 1}
+game_wall_duration_sec=137.6855
+game_moves_time_sec=135.4962
+stats={"completion_index": 1, "game_seq": 1, "x_avg_move_sec": 1.049, "o_avg_move_sec": 2.7147, "x_moves": 36, "o_moves": 36, "winner_code": 1, "game_wall_duration_sec": 137.6855, "game_moves_time_sec": 135.4962, "x_move_time_min_sec": 0.0182, "x_move_time_median_sec": 1.2108, "x_move_time_max_sec": 2.1153, "o_move_time_min_sec": 0.0147, "o_move_time_median_sec": 2.8095, "o_move_time_max_sec": 9.4715}
 board_ref=depth3_vs_depth4_plain__game_1
 
+completion_index=2
+game_seq=2
 match_id=depth3_vs_depth4_plain__game_2
 agent_x={"label": "depth_4", "config": {"depth": 4, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
 agent_o={"label": "depth_3", "config": {"depth": 3, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
 winner=depth_4
-stats={"x_avg_move_sec": 0.2868, "o_avg_move_sec": 0.0935, "x_moves": 83, "o_moves": 82, "winner_code": 0}
+game_wall_duration_sec=151.541
+game_moves_time_sec=149.3273
+stats={"completion_index": 2, "game_seq": 2, "x_avg_move_sec": 3.4816, "o_avg_move_sec": 0.808, "x_moves": 35, "o_moves": 34, "winner_code": 0, "game_wall_duration_sec": 151.541, "game_moves_time_sec": 149.3273, "x_move_time_min_sec": 0.0163, "x_move_time_median_sec": 3.8098, "x_move_time_max_sec": 7.8677, "o_move_time_min_sec": 0.0151, "o_move_time_median_sec": 1.0431, "o_move_time_max_sec": 2.2858}
 board_ref=depth3_vs_depth4_plain__game_2
 
+completion_index=3
+game_seq=3
 match_id=depth3_vs_depth5_plain__game_1
 agent_x={"label": "depth_3", "config": {"depth": 3, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
 agent_o={"label": "depth_5", "config": {"depth": 5, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
-winner=depth_3
-stats={"x_avg_move_sec": 0.0532, "o_avg_move_sec": 0.3602, "x_moves": 14, "o_moves": 13, "winner_code": 0}
+winner=depth_5
+game_wall_duration_sec=110.7892
+game_moves_time_sec=109.7435
+stats={"completion_index": 3, "game_seq": 3, "x_avg_move_sec": 0.662, "o_avg_move_sec": 6.6543, "x_moves": 15, "o_moves": 15, "winner_code": 1, "game_wall_duration_sec": 110.7892, "game_moves_time_sec": 109.7435, "x_move_time_min_sec": 0.0185, "x_move_time_median_sec": 0.4088, "x_move_time_max_sec": 2.2318, "o_move_time_min_sec": 0.0165, "o_move_time_median_sec": 7.3432, "o_move_time_max_sec": 12.3709}
 board_ref=depth3_vs_depth5_plain__game_1
 
+completion_index=4
+game_seq=4
 match_id=depth3_vs_depth5_plain__game_2
 agent_x={"label": "depth_5", "config": {"depth": 5, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
 agent_o={"label": "depth_3", "config": {"depth": 3, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
-winner=depth_5
-stats={"x_avg_move_sec": 0.5021, "o_avg_move_sec": 0.0569, "x_moves": 9, "o_moves": 8, "winner_code": 0}
+winner=depth_3
+game_wall_duration_sec=85.4801
+game_moves_time_sec=84.6742
+stats={"completion_index": 4, "game_seq": 4, "x_avg_move_sec": 5.779, "o_avg_move_sec": 0.7344, "x_moves": 13, "o_moves": 13, "winner_code": 1, "game_wall_duration_sec": 85.4801, "game_moves_time_sec": 84.6742, "x_move_time_min_sec": 0.0202, "x_move_time_median_sec": 4.8233, "x_move_time_max_sec": 14.8841, "o_move_time_min_sec": 0.0216, "o_move_time_median_sec": 1.0373, "o_move_time_max_sec": 1.4508}
 board_ref=depth3_vs_depth5_plain__game_2
 
 match_id=depth3_vs_depth6_plain__game_1
@@ -6605,206 +6621,3 @@ agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cyth
 winner=depth_8_smp_no_limit_timer
 stats={"x_avg_move_sec": 13.2425, "o_avg_move_sec": 50.683, "x_moves": 60, "o_moves": 60, "winner_code": 1}
 board_ref=depth_8_smp_no_limit_timer_vs_depth_6_full_a_auto__game_2
-match_id=depth_8_smp_no_limit_timer_vs_depth_6_full_b_auto__game_1
-agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-agent_o={"label": "depth_6_full_b", "config": {"depth": 6, "use_cython_search": false, "use_tss": true, "tss_max_ply": 10, "tss_branch_limit": 3, "use_lazy_smp": true, "lazy_smp_min_depth": 4, "lazy_smp_max_workers": 6, "beam_width_root": 14, "beam_width_inner": 10, "move_time_budget_sec": 20}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 37.3777, "o_avg_move_sec": 7.6603, "x_moves": 14, "o_moves": 13, "winner_code": 0}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_6_full_b_auto__game_1
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_6_full_b_auto__game_2
-agent_x={"label": "depth_6_full_b", "config": {"depth": 6, "use_cython_search": false, "use_tss": true, "tss_max_ply": 10, "tss_branch_limit": 3, "use_lazy_smp": true, "lazy_smp_min_depth": 4, "lazy_smp_max_workers": 6, "beam_width_root": 14, "beam_width_inner": 10, "move_time_budget_sec": 20}}
-agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-winner=depth_6_full_b
-stats={"x_avg_move_sec": 14.6998, "o_avg_move_sec": 42.99, "x_moves": 69, "o_moves": 68, "winner_code": 0}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_6_full_b_auto__game_2
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_6_plain_auto__game_1
-agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-agent_o={"label": "depth_6_plain", "config": {"depth": 6, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
-winner=depth_6_plain
-stats={"x_avg_move_sec": 35.5115, "o_avg_move_sec": 1.1607, "x_moves": 36, "o_moves": 36, "winner_code": 1}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_6_plain_auto__game_1
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_6_plain_auto__game_2
-agent_x={"label": "depth_6_plain", "config": {"depth": 6, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
-agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 2.0764, "o_avg_move_sec": 46.2291, "x_moves": 17, "o_moves": 17, "winner_code": 1}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_6_plain_auto__game_2
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_6_smp_auto__game_1
-agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-agent_o={"label": "depth_6_smp", "config": {"depth": 6, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 37.9945, "o_avg_move_sec": 4.3577, "x_moves": 11, "o_moves": 10, "winner_code": 0}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_6_smp_auto__game_1
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_6_smp_auto__game_2
-agent_x={"label": "depth_6_smp", "config": {"depth": 6, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
-agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-winner=depth_6_smp
-stats={"x_avg_move_sec": 3.2712, "o_avg_move_sec": 26.6997, "x_moves": 10, "o_moves": 9, "winner_code": 0}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_6_smp_auto__game_2
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_6_tss_auto__game_1
-agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-agent_o={"label": "depth_6_tss", "config": {"depth": 6, "use_cython_search": false, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 44.9733, "o_avg_move_sec": 3.4288, "x_moves": 29, "o_moves": 28, "winner_code": 0}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_6_tss_auto__game_1
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_6_tss_auto__game_2
-agent_x={"label": "depth_6_tss", "config": {"depth": 6, "use_cython_search": false, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
-agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 2.3029, "o_avg_move_sec": 37.8277, "x_moves": 11, "o_moves": 11, "winner_code": 1}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_6_tss_auto__game_2
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_7_auto__game_1
-agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-agent_o={"label": "depth_7", "config": {"depth": 7, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 33.1109, "o_avg_move_sec": 1.7436, "x_moves": 18, "o_moves": 17, "winner_code": 0}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_7_auto__game_1
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_7_auto__game_2
-agent_x={"label": "depth_7", "config": {"depth": 7, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
-agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 4.2483, "o_avg_move_sec": 38.1183, "x_moves": 78, "o_moves": 78, "winner_code": 1}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_7_auto__game_2
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_7_beam_a_auto__game_1
-agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-agent_o={"label": "depth_7_beam_a", "config": {"depth": 7, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 12, "beam_width_inner": 9, "move_time_budget_sec": 20}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 34.2471, "o_avg_move_sec": 1.7496, "x_moves": 15, "o_moves": 14, "winner_code": 0}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_7_beam_a_auto__game_1
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_7_beam_a_auto__game_2
-agent_x={"label": "depth_7_beam_a", "config": {"depth": 7, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 12, "beam_width_inner": 9, "move_time_budget_sec": 20}}
-agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 4.4633, "o_avg_move_sec": 41.4008, "x_moves": 27, "o_moves": 27, "winner_code": 1}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_7_beam_a_auto__game_2
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_7_beam_b_auto__game_1
-agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-agent_o={"label": "depth_7_beam_b", "config": {"depth": 7, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 16, "beam_width_inner": 12, "move_time_budget_sec": 20}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 32.614, "o_avg_move_sec": 1.6848, "x_moves": 13, "o_moves": 12, "winner_code": 0}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_7_beam_b_auto__game_1
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_7_beam_b_auto__game_2
-agent_x={"label": "depth_7_beam_b", "config": {"depth": 7, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 16, "beam_width_inner": 12, "move_time_budget_sec": 20}}
-agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 1.8921, "o_avg_move_sec": 20.6801, "x_moves": 16, "o_moves": 16, "winner_code": 1}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_7_beam_b_auto__game_2
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_7_cy_auto__game_1
-agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-agent_o={"label": "depth_7_cy", "config": {"depth": 7, "use_cython_search": true, "cython_search_min_depth": 5, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 10, "beam_width_inner": 8, "move_time_budget_sec": 20}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 31.8442, "o_avg_move_sec": 1.6786, "x_moves": 13, "o_moves": 12, "winner_code": 0}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_7_cy_auto__game_1
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_7_cy_auto__game_2
-agent_x={"label": "depth_7_cy", "config": {"depth": 7, "use_cython_search": true, "cython_search_min_depth": 5, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 10, "beam_width_inner": 8, "move_time_budget_sec": 20}}
-agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 1.8248, "o_avg_move_sec": 19.988, "x_moves": 16, "o_moves": 16, "winner_code": 1}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_7_cy_auto__game_2
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_7_full_a_auto__game_1
-agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-agent_o={"label": "depth_7_full_a", "config": {"depth": 7, "use_cython_search": true, "cython_search_min_depth": 5, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 12, "beam_width_inner": 9, "move_time_budget_sec": 20}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 25.9689, "o_avg_move_sec": 12.2341, "x_moves": 20, "o_moves": 19, "winner_code": 0}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_7_full_a_auto__game_1
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_7_full_a_auto__game_2
-agent_x={"label": "depth_7_full_a", "config": {"depth": 7, "use_cython_search": true, "cython_search_min_depth": 5, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 12, "beam_width_inner": 9, "move_time_budget_sec": 20}}
-agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 13.4504, "o_avg_move_sec": 42.0559, "x_moves": 27, "o_moves": 27, "winner_code": 1}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_7_full_a_auto__game_2
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_7_full_b_auto__game_1
-agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-agent_o={"label": "depth_7_full_b", "config": {"depth": 7, "use_cython_search": false, "use_tss": true, "tss_max_ply": 10, "tss_branch_limit": 3, "use_lazy_smp": true, "lazy_smp_min_depth": 4, "lazy_smp_max_workers": 6, "beam_width_root": 14, "beam_width_inner": 10, "move_time_budget_sec": 20}}
-winner=depth_7_full_b
-stats={"x_avg_move_sec": 48.9618, "o_avg_move_sec": 11.7307, "x_moves": 22, "o_moves": 22, "winner_code": 1}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_7_full_b_auto__game_1
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_7_full_b_auto__game_2
-agent_x={"label": "depth_7_full_b", "config": {"depth": 7, "use_cython_search": false, "use_tss": true, "tss_max_ply": 10, "tss_branch_limit": 3, "use_lazy_smp": true, "lazy_smp_min_depth": 4, "lazy_smp_max_workers": 6, "beam_width_root": 14, "beam_width_inner": 10, "move_time_budget_sec": 20}}
-agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 16.3797, "o_avg_move_sec": 41.9673, "x_moves": 26, "o_moves": 26, "winner_code": 1}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_7_full_b_auto__game_2
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_7_smp_auto__game_1
-agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-agent_o={"label": "depth_7_smp", "config": {"depth": 7, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 31.9516, "o_avg_move_sec": 6.327, "x_moves": 13, "o_moves": 12, "winner_code": 0}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_7_smp_auto__game_1
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_7_smp_auto__game_2
-agent_x={"label": "depth_7_smp", "config": {"depth": 7, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
-agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 13.1218, "o_avg_move_sec": 54.5589, "x_moves": 83, "o_moves": 83, "winner_code": 1}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_7_smp_auto__game_2
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_7_tss_auto__game_1
-agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-agent_o={"label": "depth_7_tss", "config": {"depth": 7, "use_cython_search": false, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 27.416, "o_avg_move_sec": 3.9846, "x_moves": 18, "o_moves": 17, "winner_code": 0}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_7_tss_auto__game_1
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_7_tss_auto__game_2
-agent_x={"label": "depth_7_tss", "config": {"depth": 7, "use_cython_search": false, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
-agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 4.1894, "o_avg_move_sec": 33.8202, "x_moves": 16, "o_moves": 16, "winner_code": 1}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_7_tss_auto__game_2
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_8_auto__game_1
-agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-agent_o={"label": "depth_8", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
-winner=depth_8
-stats={"x_avg_move_sec": 36.8663, "o_avg_move_sec": 5.5545, "x_moves": 13, "o_moves": 13, "winner_code": 1}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_8_auto__game_1
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_8_auto__game_2
-agent_x={"label": "depth_8", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
-agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 10.564, "o_avg_move_sec": 48.8915, "x_moves": 61, "o_moves": 61, "winner_code": 1}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_8_auto__game_2
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_8_beam_a_auto__game_1
-agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-agent_o={"label": "depth_8_beam_a", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 12, "beam_width_inner": 9, "move_time_budget_sec": 20}}
-winner=depth_8_beam_a
-stats={"x_avg_move_sec": 37.1751, "o_avg_move_sec": 5.5604, "x_moves": 13, "o_moves": 13, "winner_code": 1}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_8_beam_a_auto__game_1
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_8_beam_a_auto__game_2
-agent_x={"label": "depth_8_beam_a", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 12, "beam_width_inner": 9, "move_time_budget_sec": 20}}
-agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-winner=depth_8_beam_a
-stats={"x_avg_move_sec": 9.7068, "o_avg_move_sec": 46.527, "x_moves": 74, "o_moves": 73, "winner_code": 0}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_8_beam_a_auto__game_2
-
-match_id=depth_8_smp_no_limit_timer_vs_depth_8_beam_b_auto__game_1
-agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
-agent_o={"label": "depth_8_beam_b", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 16, "beam_width_inner": 12, "move_time_budget_sec": 20}}
-winner=depth_8_smp_no_limit_timer
-stats={"x_avg_move_sec": 31.1648, "o_avg_move_sec": 5.4775, "x_moves": 17, "o_moves": 16, "winner_code": 0}
-board_ref=depth_8_smp_no_limit_timer_vs_depth_8_beam_b_auto__game_1
-

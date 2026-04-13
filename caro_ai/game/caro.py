@@ -1,5 +1,5 @@
 import random
-import pygame
+
 
 class Caro:
     '''Tic Tac Toe game simulator'''
