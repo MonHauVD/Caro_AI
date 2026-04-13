@@ -14,6 +14,8 @@ Open `dist/Caro_AI.exe`
 
 Open `dist/Caro_AI_Ubuntu`
 
+![Instruction for playing Caro](image/Instructions_for_playing_Caro_game.jpeg)
+
 ## Project layout
 
 | Path | Role |
