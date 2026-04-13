@@ -23598,3 +23598,728 @@ result_for_agent_o=win
 . . . . . . O X O X . O . O . . . . . .
 . . . . . . . X O . X . . . . . . . . .
 . . . . . . . . . . . . . . . . . . . .
+match_id=depth_8_smp_no_limit_timer_vs_depth_6_full_b_auto__game_1
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+agent_o={"label": "depth_6_full_b", "config": {"depth": 6, "use_cython_search": false, "use_tss": true, "tss_max_ply": 10, "tss_branch_limit": 3, "use_lazy_smp": true, "lazy_smp_min_depth": 4, "lazy_smp_max_workers": 6, "beam_width_root": 14, "beam_width_inner": 10, "move_time_budget_sec": 20}}
+result_for_agent_x=win
+result_for_agent_o=loss
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . X . . .
+. . . . . . . . . . O . . . . O . . . .
+. . . . . . . . . . . X . . O . . . . .
+. . . . . . . . . . . . X O O . . . . .
+. . . . . . . . . . . O O X . O . . . .
+. . . . . . . . . . . X X O X . . . . .
+. . . . . . . . . . . X . X . O . . . .
+. . . . . . . . . O X X X . . . . . . .
+. . . . . . . . . O . X . . . . . . . .
+. . . . . . . . . . X O . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_6_full_b_auto__game_2
+winner=depth_6_full_b
+agent_x={"label": "depth_6_full_b", "config": {"depth": 6, "use_cython_search": false, "use_tss": true, "tss_max_ply": 10, "tss_branch_limit": 3, "use_lazy_smp": true, "lazy_smp_min_depth": 4, "lazy_smp_max_workers": 6, "beam_width_root": 14, "beam_width_inner": 10, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+result_for_agent_x=win
+result_for_agent_o=loss
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . O . O . . . . . . . . . .
+. . X O O O O X X . . . . . . . . . . .
+. . . . X X . X O O X X . . . . . . . .
+. . . . . O X X X . O O . X . . . . . .
+. . . . . O O X X X . O O . . . . . . .
+. . . . . . O O X X X O X O . . . . . .
+. . . . . . X X O O O O X . O . . . . .
+. . . . . . X . O X X X O . . X . . . .
+. . . . . O X O O O O X . O O O . . . .
+. . . . . . X O . X O . X O O X . O . .
+. . . . . X O X X X O O O X X X X O . .
+. . . O X O O X O X O X X X O X . . . .
+. . . X X O O X X O X O O O X . X . . .
+. . O X O O O X X X O X X X O . . X . .
+. . . X O X X O O . X X O . . . . . X .
+. . . . . O . . . . . O . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_6_plain_auto__game_1
+winner=depth_6_plain
+agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+agent_o={"label": "depth_6_plain", "config": {"depth": 6, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+result_for_agent_x=loss
+result_for_agent_o=win
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . X . . . . . . . . . . .
+. . . . . . . . . O . . . . . . . . . .
+. . . . . . . . . X O . . . . . . . . .
+. . . . . . . O X X X O . . . . . . . .
+. . . . O O X X X X O O O . . . . . . .
+. . . . X X O X O X O . . O . . . . . .
+. . . . O O X X O O O . . . . . . . . .
+. X O O O O X X X X O . . . . . . . . .
+. . . X O X O O X . X X . . . . . . . .
+. . . O X X X X O O . . . . . . . . . .
+. . O O . X O X X X X O . . . . . . . .
+. X . . . O . . X . . . . . . . . . . .
+. . . . . . . O . O . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_6_plain_auto__game_2
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_6_plain", "config": {"depth": 6, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+result_for_agent_x=loss
+result_for_agent_o=win
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . O . . X . .
+. . . . . . . . . . O . . . . X O . . .
+. . . . . . . . . . . X . . . O X O . .
+. . . . . . . . . . . . X . . O X X X .
+. . . . . . . . . . . X . X O X X X O .
+. . . . . . . . . . . . O . X O O . . .
+. . . . . . . . . . . . . O . O X . . .
+. . . . . . . . . . . . . O O X . . . .
+. . . . . . . . . . . . . X . O . . . .
+. . . . . . . . . . . . . . . . O . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_6_smp_auto__game_1
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+agent_o={"label": "depth_6_smp", "config": {"depth": 6, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+result_for_agent_x=win
+result_for_agent_o=loss
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . O O X X X X X . . . . .
+. . . . . . . . . X O O X . . . . . . .
+. . . . . . . . . O X X X O . . . . . .
+. . . . . . . . . O . X O . . . . . . .
+. . . . . . . . . . . O O . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_6_smp_auto__game_2
+winner=depth_6_smp
+agent_x={"label": "depth_6_smp", "config": {"depth": 6, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+result_for_agent_x=win
+result_for_agent_o=loss
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . O O O . . . . . . . .
+. . . . . . . . . . . X . . . . . . . .
+. . . . . . . . . O X X X X X . . . . .
+. . . . . . . . . . . X O X . . . . . .
+. . . . . . . . . . . X O . . . . . . .
+. . . . . . . . . . . O . . . . . . . .
+. . . . . . . . . . O . . . . . . . . .
+. . . . . . . . . O . . . . . . . . . .
+. . . . . . . . X . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_6_tss_auto__game_1
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+agent_o={"label": "depth_6_tss", "config": {"depth": 6, "use_cython_search": false, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+result_for_agent_x=win
+result_for_agent_o=loss
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . O . . . . . . . . .
+. . . . . . . . X O X X X O . . . . . .
+. . . . . . . X O O O O X . . . . . . .
+. . . . . . . . O . O X O O . . . . . .
+. . . . . . . . O X O X X X O . . . . .
+. . . . . . . . . X O X X X X O . . . .
+. . . . . . . . X O X O O X X X X X . .
+. . . . . . . . O X . X O O X O . . . .
+. . . . . . . O O X O . O X . O . . . .
+. . . . . . X . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_6_tss_auto__game_2
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_6_tss", "config": {"depth": 6, "use_cython_search": false, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+result_for_agent_x=loss
+result_for_agent_o=win
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . X . . . . . . . . . . . . . . . . .
+. . X O X . . . . . . . . . . . . . . .
+. O O X O . . . . . . . . . . . . . . .
+. X O X O O . . . . . . . . . . . . . .
+. X X X O . O . . . . . . . . . . . . .
+. X . O . . . O . . . . . . . . . . . .
+. . X . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_7_auto__game_1
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+agent_o={"label": "depth_7", "config": {"depth": 7, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+result_for_agent_x=win
+result_for_agent_o=loss
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. O . O . O . . . . . . . . . . . . . .
+X O X X X . . . . . . . . . . . . . . .
+O O . X O O . . . . . . . . . . . . . .
+O X X X X O . . . . . . . . . . . . . .
+O X O X X X . . . . . . . . . . . . . .
+O O X O X . X . . . . . . . . . . . . .
+X X . . O . . . . . . . . . . . . . . .
+O . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_7_auto__game_2
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_7", "config": {"depth": 7, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+result_for_agent_x=loss
+result_for_agent_o=win
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . X . . . . . . . . . . . . .
+. . . . X O O O O X O . . O . X . . . .
+. . X . O O X X X X O . . X X O O . O .
+. . . O . . X . X O O . . X O O X X . .
+. . O . O X X X X O X O O X . O X . . .
+. O . X X O X X X . O X O X O X O . X .
+. . . O X O O O O X O O X O X X O O O .
+. . . . O X X X X O O X X O X X O X X .
+. . . . O X X X X O O O X O X O O O X .
+. . . . . X O O X X X . O X X O X X X .
+. . . . X O . O X O X X X X O X O O O .
+. . . O . . . X O . O O X X O O X O . .
+. . . . . . X . . . . O X O O O X O O .
+. . . . . O . . . . . . . . . . . . . X
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_7_beam_a_auto__game_1
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+agent_o={"label": "depth_7_beam_a", "config": {"depth": 7, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 12, "beam_width_inner": 9, "move_time_budget_sec": 20}}
+result_for_agent_x=win
+result_for_agent_o=loss
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . O O . . . . . . . . . . . .
+. . . . . . . X O . . . . . . . . . . .
+. . . O O . O O X . . . . . . . . . . .
+. . . O X X X X O X . . . . . . . . . .
+. . . . . X X . O . . . . . . . . . . .
+. . . . . O X X . . . . . . . . . . . .
+. . . . . . X X X O . . . . . . . . . .
+. . . . . . O . X O . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_7_beam_a_auto__game_2
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_7_beam_a", "config": {"depth": 7, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 12, "beam_width_inner": 9, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+result_for_agent_x=loss
+result_for_agent_o=win
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . O . . . . . . . .
+. . . . . . . . O O O X . . . . . . . .
+. . . . O X . O X X . X O . . . . . . .
+. . . . . X O X X O . X . . . . . . . .
+. . . . O X X X O O X . . . . . . . . .
+. . . . . O O X X X O X X . . . . . . .
+. . . . . . X X O X . O . . . . . . . .
+. . . . . . X O X O O O O X . . . . . .
+. . . . . . . . . O O O . X . . . . . .
+. . . . . . . . . . X O . . . . . . . .
+. . . . . . . . . . . O X . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_7_beam_b_auto__game_1
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+agent_o={"label": "depth_7_beam_b", "config": {"depth": 7, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 16, "beam_width_inner": 12, "move_time_budget_sec": 20}}
+result_for_agent_x=win
+result_for_agent_o=loss
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . O . . . . .
+. . . . . . . . . . . O . X . . . . . .
+. . . . . . . . . . . O X X . . . . . .
+. . . . . . . . . . O X O X . . . . . .
+. . . . . . . . . O X O X O X . . . . .
+. . . . . . . . . O . O X X X X O . . .
+. . . . . . . . . . . . . . O . X . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_7_beam_b_auto__game_2
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_7_beam_b", "config": {"depth": 7, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 16, "beam_width_inner": 12, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+result_for_agent_x=loss
+result_for_agent_o=win
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . X . . . . . . O . . . . . .
+. . . . . . . O . . . . X . . . . . . .
+. . . . . . . . O X . X . . . . . . . .
+. . . . . . . . X O X O . . . . . . . .
+. . . . . . . . O X O X . . . . . . . .
+. . . . . . . . O X O X . . . . . . . .
+. . . . . . . . O X X X X O . . . . . .
+. . . . . . . X O O O O O . . . . . . .
+. . . . . . . . X . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_7_cy_auto__game_1
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+agent_o={"label": "depth_7_cy", "config": {"depth": 7, "use_cython_search": true, "cython_search_min_depth": 5, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 10, "beam_width_inner": 8, "move_time_budget_sec": 20}}
+result_for_agent_x=win
+result_for_agent_o=loss
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . O O . . . . . . . . . . . . . . . .
+. . . X O . . . . . . . . . . . . . . .
+. . O O X O O . . . . . . . . . . . . .
+. . X X O X . . . . . . . . . . . . . .
+. . X O X X X . . . . . . . . . . . . .
+. O X X . . . O . . . . . . . . . . . .
+. . X . . . . . . . . . . . . . . . . .
+. X O . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_7_cy_auto__game_2
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_7_cy", "config": {"depth": 7, "use_cython_search": true, "cython_search_min_depth": 5, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 10, "beam_width_inner": 8, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+result_for_agent_x=loss
+result_for_agent_o=win
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . O . . . . . O . . . . . . . . .
+. . . . . X . . . . X X . . . . . . . .
+. . . . . . X O X X X O . . . . . . . .
+. . . . . . . X O O X O . . . . . . . .
+. . . . . . X O X X X O . . . . . . . .
+. . . . . . O X O O O O X . . . . . . .
+. . . . . O . . . . . O . . . . . . . .
+. . . . X . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_7_full_a_auto__game_1
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+agent_o={"label": "depth_7_full_a", "config": {"depth": 7, "use_cython_search": true, "cython_search_min_depth": 5, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 12, "beam_width_inner": 9, "move_time_budget_sec": 20}}
+result_for_agent_x=win
+result_for_agent_o=loss
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . O . X . . . . . . .
+. . . . . . . O O . X O O . X . . . . .
+. . . . . . . O X X X X O O O O X . . .
+. . . . . . O X X X X O O . . . . . . .
+. . . . . . . . X X X O O . . . . . . .
+. . . . . . . . X O O X X . . . . . . .
+. . . . . . . O X X . . O . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_7_full_a_auto__game_2
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_7_full_a", "config": {"depth": 7, "use_cython_search": true, "cython_search_min_depth": 5, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 12, "beam_width_inner": 9, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+result_for_agent_x=loss
+result_for_agent_o=win
+. . . . X X X . . . . . . . . . . . . .
+. X O O X O O X . X . . . . . . . . . .
+O X X X X O O O O X . . . . . . . . . .
+O X X X X O O O O X . . . . . . . . . .
+X O O O O X O O X O . . . . . . . . . .
+. . . X O O X X O . O . . . . . . . . .
+. . . . X X O O . X . . . . . . . . . .
+. . . . . . X . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_7_full_b_auto__game_1
+winner=depth_7_full_b
+agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+agent_o={"label": "depth_7_full_b", "config": {"depth": 7, "use_cython_search": false, "use_tss": true, "tss_max_ply": 10, "tss_branch_limit": 3, "use_lazy_smp": true, "lazy_smp_min_depth": 4, "lazy_smp_max_workers": 6, "beam_width_root": 14, "beam_width_inner": 10, "move_time_budget_sec": 20}}
+result_for_agent_x=loss
+result_for_agent_o=win
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . X . . . . . . . . . . . .
+. . . . . . O . . . . . . . . . . . . .
+. . . . O O O . . . . . . . . . . . . .
+. . . . O X . . . . . . . . . . . . . .
+. . O O X X X . O . . . . . . . . . . .
+. . O X X O X X . . . . . . . . . . . .
+. . X . X O X X X X O . . . . . . . . .
+. O . . O X O X X O . . . . . . . . . .
+. . . O X . X O X O . . . . . . . . . .
+. . . O . . . O O . . . . . . . . . . .
+. . . . . . . . . X . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_7_full_b_auto__game_2
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_7_full_b", "config": {"depth": 7, "use_cython_search": false, "use_tss": true, "tss_max_ply": 10, "tss_branch_limit": 3, "use_lazy_smp": true, "lazy_smp_min_depth": 4, "lazy_smp_max_workers": 6, "beam_width_root": 14, "beam_width_inner": 10, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+result_for_agent_x=loss
+result_for_agent_o=win
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . O . . . . . . . . . . . .
+. . . . . . . . X . . . . . . . . . . .
+. . . . . . O . . X . O X . . . . . . .
+. . . . . O X . . . X O O . . . . . . .
+. . . . . X X . O X O X O . X . . . . .
+. . . . . O X X X X O X O O . . . . . .
+. . . . . . X O X O O X O . . . . . . .
+. . . . . . O O X X X O O . . . . . . .
+. . . . . . . X O X O . . . . . . . . .
+. . . . . . . O X X . . . . . . . . . .
+. . . . . . . O X O . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_7_smp_auto__game_1
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+agent_o={"label": "depth_7_smp", "config": {"depth": 7, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+result_for_agent_x=win
+result_for_agent_o=loss
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . O . . . . . . .
+. . . . . . . . . O . X . . . . . . . .
+. . . . . . . . . O X X . . . . . . . .
+. . . . . . . . O X O X . . . . . . . .
+. . . . . . . O X O X O X . . . . . . .
+. . . . . . . O . O X X X X O . . . . .
+. . . . . . . . . . . . O . X . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_7_smp_auto__game_2
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_7_smp", "config": {"depth": 7, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+result_for_agent_x=loss
+result_for_agent_o=win
+. . . . . . . . . X X O X X X . . . . .
+. . . . X . O X O X O O O O X . . . . .
+O X . . O X O O O X X O O . . . . . . .
+. X O X O O O X X X O O O O X . . . . .
+. . X O O X X X O O O X O O . . . . . .
+. . X X O O X . X O O . X X X . . . . .
+. . O O X O X X . O X O . . . . . . . .
+O X X X X O X O O O X . O . . . . . . .
+. O X X X X O X O X . . . X . . . . . .
+. X X X O X O O X O X . . . . . . . . .
+O O X X O O X O X X O . . . . . . . . .
+X O O O O X O O O X O X . . . . . . . .
+. O O X X O O X X X X O . . . . . . . .
+. O X O X X O X . O X O . . . . . . . .
+X X O . X X X O . . . . . . . . . . . .
+. . O X X O O O X . . . . . . . . . . .
+. . X . O . . . . . . . . . . . . . . .
+. O . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_7_tss_auto__game_1
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+agent_o={"label": "depth_7_tss", "config": {"depth": 7, "use_cython_search": false, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+result_for_agent_x=win
+result_for_agent_o=loss
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . O O . O . . . . . . . . . . . . .
+. O X X X X X O X . . . . . . . . . . .
+. . X X X O O O O X . . . . . . . . . .
+. . X X X O O . . . . . . . . . . . . .
+. . O X X O O . . . . . . . . . . . . .
+. . . O O X X . . . . . . . . . . . . .
+. . . X . . O . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_7_tss_auto__game_2
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_7_tss", "config": {"depth": 7, "use_cython_search": false, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+result_for_agent_x=loss
+result_for_agent_o=win
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . X . . . . X . . . . . . . . .
+. . . . X . O O X O X X . . . . . . . .
+. . . . . O X O X O X . . . . . . . . .
+. . . . . . O X O X O . . . . . . . . .
+. . . . . X O O O O X . . . . . . . . .
+. . . . . . O . O . X . . . . . . . . .
+. . . . . X . X . O . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_8_auto__game_1
+winner=depth_8
+agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+agent_o={"label": "depth_8", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+result_for_agent_x=loss
+result_for_agent_o=win
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . X . . . . . . . . . . . .
+. . . . . . . . O . O . . . . . . . . .
+. . . . . . O O O O O X . . . . . . . .
+. . . . . . . . O X O . . . . . . . . .
+. . . . . . . X X O X . . . . . . . . .
+. . . . . . . . X O X X X X O . . . . .
+. . . . . . . . . X . . X . . . . . . .
+. . . . . . . . . . . . . O . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_8_auto__game_2
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_8", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+result_for_agent_x=loss
+result_for_agent_o=win
+O . . . . . . . . . . . . . . . . . . .
+. X . X O O X O X . . . . . . . . . . .
+. . X O X O X O . . . . . . . . . . . .
+. . O X X X O X O X . . . . . . . . . .
+. X X O X . O X . O . . . . . . . . . .
+. O X O X O X O O O O X . . . . . . . .
+X O O O O X O O O O X O . . . . . . . .
+. . O X O X X X X O . . . . . . . . . .
+. O O O X X . O . X X . . . . . . . . .
+. X O X X . O . . . . . . . . . . . . .
+. X X X O O O X . X . . . . . . . . . .
+. O O X X X O . O . . . . . . . . . . .
+. O X X O X X O . . . . . . . . . . . .
+. X X O O O O X X . . . . . . . . . . .
+. O X X O O X . O . . . . . . . . . . .
+. O X X X O . . . . . . . . . . . . . .
+. X O X O O X . . . . . . . . . . . . .
+. . . . . X . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_8_beam_a_auto__game_1
+winner=depth_8_beam_a
+agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+agent_o={"label": "depth_8_beam_a", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 12, "beam_width_inner": 9, "move_time_budget_sec": 20}}
+result_for_agent_x=loss
+result_for_agent_o=win
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . X . . . . . . . . . . .
+. . . . . . . . . O . O . . . . . . . .
+. . . . . . . O O O O O X . . . . . . .
+. . . . . . . . . O X O . . . . . . . .
+. . . . . . . . X X O X . . . . . . . .
+. . . . . . . . . X O X X X X O . . . .
+. . . . . . . . . . X . . X . . . . . .
+. . . . . . . . . . . . . . O . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_8_beam_a_auto__game_2
+winner=depth_8_beam_a
+agent_x={"label": "depth_8_beam_a", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 12, "beam_width_inner": 9, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+result_for_agent_x=win
+result_for_agent_o=loss
+. . . . . . . . . . . . . . . . . . . .
+. . . . . O . . X . . . . . . . . . . .
+. . O X X X X O . . . . . . . . . . . .
+. . X . O O O X O . . . O . . . . . . .
+. O X O O O O X X . O . X . O . . . . .
+. . X O O X X . X O X X X O X . . . . .
+. O O X O O . O X . O O X X X . . . . .
+O X X X X O . X O O O X X X X O . . . .
+. O X X X O X X O X O O O . X O . . . .
+. . X O X X O X O X . . . . X O . . . .
+O O O X O X O O O O X . . . . . . . . .
+. X X X O O O O X . . . . . . . . . . .
+. O X O O X O X O . . . . . . . . . . .
+O X X X X O X X O X . . . . . . . . . .
+. . O X X O X X O . . . . . . . . . . .
+. . X . . O X X X O . . . . . . . . . .
+. O . . . O X O X O . . . . . . . . . .
+. . . . . X O . . . . . . . . . . . . .
+
+match_id=depth_8_smp_no_limit_timer_vs_depth_8_beam_b_auto__game_1
+winner=depth_8_smp_no_limit_timer
+agent_x={"label": "depth_8_smp_no_limit_timer", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": true, "lazy_smp_min_depth": 5, "lazy_smp_max_workers": 4, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 999999}}
+agent_o={"label": "depth_8_beam_b", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 16, "beam_width_inner": 12, "move_time_budget_sec": 20}}
+result_for_agent_x=win
+result_for_agent_o=loss
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . O O X . . . . . . . . . . . . . . .
+O . . X . . O . . . . . . . . . . . . .
+O X X X X O O X . . . . . . . . . . . .
+. . X X O X X . . . . . . . . . . . . .
+. . . X . O X O . . . . . . . . . . . .
+. . . O X O O O O X . . . . . . . . . .
+. . . . . X . O . . . . . . . . . . . .
+. . . . . . . . X . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+
