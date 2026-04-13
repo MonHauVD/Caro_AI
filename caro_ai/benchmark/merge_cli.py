@@ -1,4 +1,10 @@
-"""CLI gộp fragments → master; không import pygame (dùng từ python -m caro_ai --bench-export-merge)."""
+"""CLI gộp fragments → master; không import pygame.
+
+Chạy được cả:
+  python3 path/to/caro_ai/benchmark/merge_cli.py [args]
+  python3 -m caro_ai.benchmark.merge_cli [args]
+Hoặc qua entry tích hợp: python3 -m caro_ai --bench-export-merge
+"""
 
 from __future__ import annotations
 
@@ -7,11 +13,16 @@ import json
 import os
 import sys
 
+# Khi chạy `python3 path/to/merge_cli.py`, sys.path[0] là thư mục chứa script,
+# không phải project root — cần chèn root (cha của package `caro_ai`) để import được.
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_PKG_DIR = os.path.dirname(_SCRIPT_DIR)
+_PROJECT_ROOT = os.path.abspath(os.path.join(_PKG_DIR, ".."))
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
+
 from caro_ai.app_helpers import resolve_config_dir
 from caro_ai.benchmark.report_merge import export_benchmark_fragments_if_any
-
-_PKG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-_PROJECT_ROOT = os.path.abspath(os.path.join(_PKG_DIR, ".."))
 
 
 def _default_benchmark_config_path() -> str:
@@ -100,3 +111,6 @@ def main(argv: list[str] | None = None) -> int:
     )
     return 0
 
+
+if __name__ == "__main__":
+    raise SystemExit(main())
