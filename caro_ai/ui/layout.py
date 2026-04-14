@@ -51,6 +51,7 @@ def layout_normal_dev_panel(
     h_btn,
     m_btn,
     e_btn,
+    grand_master_btn,
     ai_thinking_btn,
     pvp_btn,
     aivp_btn,
@@ -70,6 +71,8 @@ def layout_normal_dev_panel(
     m_img_gray_org,
     e_img_org,
     e_img_gray_org,
+    gm_img_org,
+    gm_img_gray_org,
     pvp_img_org,
     pvp_img_gray_org,
     aivp_img_org,
@@ -111,29 +114,39 @@ def layout_normal_dev_panel(
     set_button_scale(h_btn, h_img_org, h_img_gray_org, 0.8 * ui_scale)
     set_button_scale(m_btn, m_img_org, m_img_gray_org, 0.8 * ui_scale)
     set_button_scale(e_btn, e_img_org, e_img_gray_org, 0.8 * ui_scale)
+    set_button_scale(grand_master_btn, gm_img_org, gm_img_gray_org, 0.8 * ui_scale)
     set_button_scale(ai_thinking_btn, ai_thinking_img_org, ai_thinking_img_gray_org, 0.8 * ui_scale)
     set_button_scale(pvp_btn, pvp_img_org, pvp_img_gray_org, 0.8 * ui_scale)
     set_button_scale(aivp_btn, aivp_img_org, aivp_img_gray_org, 0.8 * ui_scale)
     set_button_scale(logo_btn, logo_img_org, logo_img_org, 0.6 * ui_scale)
 
-    set_button_position(replay_button, panel_x + 30, new_height - 145)
-    set_button_position(exit_button, panel_x + 30, new_height - 235)
-    set_button_position(undo_button, panel_x + 30, new_height - 325)
+    panel_shift = max(8, int(10 * ui_scale))
+    set_button_position(replay_button, panel_x + 30 + panel_shift, new_height - 145)
+    set_button_position(exit_button, panel_x + 30 + panel_shift, new_height - 235)
+    set_button_position(undo_button, panel_x + 30 + panel_shift, new_height - 325)
     pause_x = undo_button.rect.x
     pause_y = max(40, undo_button.rect.y - pause_button.rect.height - 12)
     start_x = undo_button.rect.x
     start_y = max(40, pause_y - start_button.rect.height - 12)
     set_button_position(start_button, start_x, start_y)
     set_button_position(pause_button, pause_x, pause_y)
-    set_button_position(ai_btn, panel_x + 30, 305)
-    set_button_position(person_btn, panel_x + 135, 305)
-    set_button_position(h_btn, panel_x + 160, 235)
-    set_button_position(m_btn, panel_x + 95, 235)
-    set_button_position(e_btn, panel_x + 30, 235)
-    set_button_position(ai_thinking_btn, panel_x + 80, 30)
-    set_button_position(pvp_btn, panel_x + 135, 145)
-    set_button_position(aivp_btn, panel_x + 30, 145)
-    set_button_position(logo_btn, panel_x + 50, new_height - 55)
+    set_button_position(ai_btn, panel_x + 30 + panel_shift, 305)
+    set_button_position(person_btn, panel_x + 135 + panel_shift, 305)
+    difficulty_y = 235
+    gap = max(8, int(10 * ui_scale))
+    difficulty_buttons = [e_btn, m_btn, h_btn, grand_master_btn]
+    total_width = sum(btn.rect.width for btn in difficulty_buttons) + gap * (len(difficulty_buttons) - 1)
+    start_x = undo_button.rect.centerx - total_width // 2
+    cur_x = start_x
+    for btn in difficulty_buttons:
+        set_button_position(btn, cur_x, difficulty_y)
+        cur_x += btn.rect.width + gap
+    set_button_position(ai_thinking_btn, panel_x + 80 + panel_shift, 30)
+    undo_exit_gap = max(0, exit_button.rect.y - undo_button.rect.bottom)
+    pvp_row_y = difficulty_y - undo_exit_gap - pvp_btn.rect.height
+    set_button_position(pvp_btn, panel_x + 135 + panel_shift, pvp_row_y)
+    set_button_position(aivp_btn, panel_x + 30 + panel_shift, pvp_row_y)
+    set_button_position(logo_btn, panel_x + 50 + panel_shift, new_height - 55)
 
     return {
         "window_size": [new_width, new_height],
@@ -166,10 +179,11 @@ def layout_benchmark_multi_global(
     x_img_org,
     o_img_org,
 ) -> None:
-    set_button_position(start_button, 12, 8)
-    set_button_position(pause_button, start_button.rect.right + 10, 8)
-    set_button_position(replay_button, pause_button.rect.right + 10, 8)
-    set_button_position(exit_button, max(120, window_w - exit_button.rect.width - 12), 8)
+    top_bar_y = 42
+    set_button_position(start_button, 12, top_bar_y)
+    set_button_position(pause_button, start_button.rect.right + 10, top_bar_y)
+    set_button_position(replay_button, pause_button.rect.right + 10, top_bar_y)
+    set_button_position(exit_button, max(120, window_w - exit_button.rect.width - 12), top_bar_y)
     slots = benchmark_state["slots"]
     bench_multi.layout_slots_grid(
         slots,

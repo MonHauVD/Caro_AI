@@ -1,0 +1,17 @@
+game_seq=1302
+match_id=depth_8_full_b_180s_timer_vs_depth_7_auto__game_2
+actor=depth_7; piece=X; elapsed=0.011s; coord=(6,6)
+actor=depth_8_full_b_180s_timer; piece=O; elapsed=0.009s; coord=(7,6)
+actor=depth_7; piece=X; elapsed=9.196s; coord=(7,7)
+actor=depth_8_full_b_180s_timer; piece=O; elapsed=70.372s; coord=(6,7)
+actor=depth_7; piece=X; elapsed=4.897s; coord=(5,8)
+actor=depth_8_full_b_180s_timer; piece=O; elapsed=104.334s; coord=(8,5)
+actor=depth_7; piece=X; elapsed=8.513s; coord=(6,8)
+actor=depth_8_full_b_180s_timer; piece=O; elapsed=78.176s; coord=(8,8)
+actor=depth_7; piece=X; elapsed=6.056s; coord=(4,8)
+actor=depth_8_full_b_180s_timer; piece=O; elapsed=124.417s; coord=(9,4)
+actor=depth_7; piece=X; elapsed=0.010s; coord=(10,3)
+actor=depth_8_full_b_180s_timer; piece=O; elapsed=151.059s; coord=(8,6)
+actor=depth_7; piece=X; elapsed=1.366s; coord=(3,8)
+actor=depth_8_full_b_180s_timer; piece=O; elapsed=0.013s; coord=(2,8)
+actor=depth_7; piece=X; elapsed=0.013s; coord=(7,8)

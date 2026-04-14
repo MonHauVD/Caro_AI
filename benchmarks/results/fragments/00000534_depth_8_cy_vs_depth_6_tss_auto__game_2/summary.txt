@@ -1,0 +1,10 @@
+completion_index=0
+game_seq=534
+match_id=depth_8_cy_vs_depth_6_tss_auto__game_2
+agent_x={"label": "depth_6_tss", "config": {"depth": 6, "use_cython_search": false, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_cy", "config": {"depth": 8, "use_cython_search": true, "cython_search_min_depth": 5, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 10, "beam_width_inner": 8, "move_time_budget_sec": 20}}
+winner=depth_8_cy
+game_wall_duration_sec=339.9408
+game_moves_time_sec=339.3381
+stats={"completion_index": 0, "game_seq": 534, "x_avg_move_sec": 3.4676, "o_avg_move_sec": 9.1005, "x_moves": 27, "o_moves": 27, "winner_code": 1, "game_wall_duration_sec": 339.9408, "game_moves_time_sec": 339.3381, "x_move_time_min_sec": 0.0084, "x_move_time_median_sec": 2.9844, "x_move_time_max_sec": 16.0403, "o_move_time_min_sec": 0.0081, "o_move_time_median_sec": 9.4304, "o_move_time_max_sec": 20.0184}
+board_ref=depth_8_cy_vs_depth_6_tss_auto__game_2

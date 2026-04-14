@@ -1,0 +1,26 @@
+completion_index=0
+game_seq=31
+match_id=depth7_vs_depth8_tss_enabled__game_1
+winner=depth_7_tss
+agent_x={"label": "depth_7_tss", "config": {"depth": 7, "use_cython_search": false, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8_tss", "config": {"depth": 8, "use_cython_search": false, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+result_for_agent_x=win
+result_for_agent_o=loss
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . X . . . . . . . . . . .
+. . . . . . . O . O O . . . . . . . . .
+. . . . . . . X O O O X . . . O . . . .
+. . . . . . . X O X . O . . X . . . . .
+. . . . . . . X X O X X O X . . . . . .
+. . . . . . X O O O O X X X . . . . . .
+. . . . . . . . . . . X O . . . . . . .
+. . . . . . . . . . X . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . .

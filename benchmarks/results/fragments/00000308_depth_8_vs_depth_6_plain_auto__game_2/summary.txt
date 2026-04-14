@@ -1,0 +1,10 @@
+completion_index=0
+game_seq=308
+match_id=depth_8_vs_depth_6_plain_auto__game_2
+agent_x={"label": "depth_6_plain", "config": {"depth": 6, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_8", "config": {"depth": 8, "use_cython_search": false, "use_tss": false, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+winner=depth_8
+game_wall_duration_sec=457.8024
+game_moves_time_sec=457.103
+stats={"completion_index": 0, "game_seq": 308, "x_avg_move_sec": 2.4735, "o_avg_move_sec": 13.2887, "x_moves": 29, "o_moves": 29, "winner_code": 1, "game_wall_duration_sec": 457.8024, "game_moves_time_sec": 457.103, "x_move_time_min_sec": 0.0107, "x_move_time_median_sec": 2.1999, "x_move_time_max_sec": 6.6312, "o_move_time_min_sec": 0.0105, "o_move_time_median_sec": 16.6789, "o_move_time_max_sec": 20.0208}
+board_ref=depth_8_vs_depth_6_plain_auto__game_2

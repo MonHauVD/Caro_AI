@@ -1,0 +1,10 @@
+completion_index=0
+game_seq=725
+match_id=depth_6_tss_vs_depth_6_full_b_auto__game_1
+agent_x={"label": "depth_6_tss", "config": {"depth": 6, "use_cython_search": false, "use_tss": true, "tss_max_ply": 8, "tss_branch_limit": 2, "use_lazy_smp": false, "beam_width_root": 0, "beam_width_inner": 0, "move_time_budget_sec": 20}}
+agent_o={"label": "depth_6_full_b", "config": {"depth": 6, "use_cython_search": false, "use_tss": true, "tss_max_ply": 10, "tss_branch_limit": 3, "use_lazy_smp": true, "lazy_smp_min_depth": 4, "lazy_smp_max_workers": 6, "beam_width_root": 14, "beam_width_inner": 10, "move_time_budget_sec": 20}}
+winner=depth_6_tss
+game_wall_duration_sec=458.3308
+game_moves_time_sec=457.7657
+stats={"completion_index": 0, "game_seq": 725, "x_avg_move_sec": 4.2541, "o_avg_move_sec": 15.4638, "x_moves": 24, "o_moves": 23, "winner_code": 0, "game_wall_duration_sec": 458.3308, "game_moves_time_sec": 457.7657, "x_move_time_min_sec": 0.0091, "x_move_time_median_sec": 4.1745, "x_move_time_max_sec": 11.7966, "o_move_time_min_sec": 0.0078, "o_move_time_median_sec": 20.0165, "o_move_time_max_sec": 20.0399}
+board_ref=depth_6_tss_vs_depth_6_full_b_auto__game_1

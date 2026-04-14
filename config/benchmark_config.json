@@ -367,7 +367,7 @@
         "move_time_budget_sec": 20
       }
     },
-    "depth_8_no_limit_timer": {
+    "depth_8_180s_timer": {
       "depth": 8,
       "config": {
         "use_cython_search": false,
@@ -375,10 +375,10 @@
         "use_lazy_smp": false,
         "beam_width_root": 0,
         "beam_width_inner": 0,
-        "move_time_budget_sec": 999999
+        "move_time_budget_sec": 180
       }
     },
-    "depth_8_tss_no_limit_timer": {
+    "depth_8_tss_180s_timer": {
       "depth": 8,
       "config": {
         "use_cython_search": false,
@@ -388,10 +388,10 @@
         "use_lazy_smp": false,
         "beam_width_root": 0,
         "beam_width_inner": 0,
-        "move_time_budget_sec": 999999
+        "move_time_budget_sec": 180
       }
     },
-    "depth_8_smp_no_limit_timer": {
+    "depth_8_smp_180s_timer": {
       "depth": 8,
       "config": {
         "use_cython_search": false,
@@ -401,10 +401,10 @@
         "lazy_smp_max_workers": 4,
         "beam_width_root": 0,
         "beam_width_inner": 0,
-        "move_time_budget_sec": 999999
+        "move_time_budget_sec": 180
       }
     },
-    "depth_8_cy_no_limit_timer": {
+    "depth_8_cy_180s_timer": {
       "depth": 8,
       "config": {
         "use_cython_search": true,
@@ -413,10 +413,10 @@
         "use_lazy_smp": false,
         "beam_width_root": 10,
         "beam_width_inner": 8,
-        "move_time_budget_sec": 999999
+        "move_time_budget_sec": 180
       }
     },
-    "depth_8_beam_a_no_limit_timer": {
+    "depth_8_beam_a_180s_timer": {
       "depth": 8,
       "config": {
         "use_cython_search": false,
@@ -424,21 +424,12 @@
         "use_lazy_smp": false,
         "beam_width_root": 12,
         "beam_width_inner": 9,
-        "move_time_budget_sec": 999999
+        "move_time_budget_sec": 180
       }
     },
-    "depth_8_beam_b_no_limit_timer": {
-      "depth": 8,
-      "config": {
-        "use_cython_search": false,
-        "use_tss": false,
-        "use_lazy_smp": false,
-        "beam_width_root": 16,
-        "beam_width_inner": 12,
-        "move_time_budget_sec": 999999
-      }
+    
     },
-    "depth_8_full_no_limit_timer": {
+    "depth_8_full_180s_timer": {
       "depth": 8,
       "config": {
         "use_cython_search": true,
@@ -451,10 +442,10 @@
         "lazy_smp_max_workers": 4,
         "beam_width_root": 12,
         "beam_width_inner": 9,
-        "move_time_budget_sec": 999999
+        "move_time_budget_sec": 180
       }
     },
-    "depth_8_full_a_no_limit_timer": {
+    "depth_8_full_a_180s_timer": {
       "depth": 8,
       "config": {
         "use_cython_search": true,
@@ -467,10 +458,10 @@
         "lazy_smp_max_workers": 4,
         "beam_width_root": 12,
         "beam_width_inner": 9,
-        "move_time_budget_sec": 999999
+        "move_time_budget_sec": 180
       }
     },
-    "depth_8_full_b_no_limit_timer": {
+    "depth_8_full_b_180s_timer": {
       "depth": 8,
       "config": {
         "use_cython_search": false,
@@ -482,7 +473,7 @@
         "lazy_smp_max_workers": 6,
         "beam_width_root": 14,
         "beam_width_inner": 10,
-        "move_time_budget_sec": 999999
+        "move_time_budget_sec": 180
       }
     }
   },
@@ -4142,2349 +4133,2349 @@
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_3_auto",
+      "name": "depth_8_180s_timer_vs_depth_3_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_3"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_4_auto",
+      "name": "depth_8_180s_timer_vs_depth_4_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_4"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_5_auto",
+      "name": "depth_8_180s_timer_vs_depth_5_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_5"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_6_auto",
+      "name": "depth_8_180s_timer_vs_depth_6_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_6"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_6_beam_a_auto",
+      "name": "depth_8_180s_timer_vs_depth_6_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_a"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_6_beam_b_auto",
+      "name": "depth_8_180s_timer_vs_depth_6_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_b"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_6_cy_auto",
+      "name": "depth_8_180s_timer_vs_depth_6_cy_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_cy"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_6_full_a_auto",
+      "name": "depth_8_180s_timer_vs_depth_6_full_a_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_a"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_6_full_b_auto",
+      "name": "depth_8_180s_timer_vs_depth_6_full_b_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_b"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_6_plain_auto",
+      "name": "depth_8_180s_timer_vs_depth_6_plain_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_plain"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_6_smp_auto",
+      "name": "depth_8_180s_timer_vs_depth_6_smp_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_smp"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_6_tss_auto",
+      "name": "depth_8_180s_timer_vs_depth_6_tss_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_tss"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_7_auto",
+      "name": "depth_8_180s_timer_vs_depth_7_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_7"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_7_beam_a_auto",
+      "name": "depth_8_180s_timer_vs_depth_7_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_a"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_7_beam_b_auto",
+      "name": "depth_8_180s_timer_vs_depth_7_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_b"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_7_cy_auto",
+      "name": "depth_8_180s_timer_vs_depth_7_cy_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_cy"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_7_full_a_auto",
+      "name": "depth_8_180s_timer_vs_depth_7_full_a_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_a"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_7_full_b_auto",
+      "name": "depth_8_180s_timer_vs_depth_7_full_b_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_b"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_7_smp_auto",
+      "name": "depth_8_180s_timer_vs_depth_7_smp_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_smp"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_7_tss_auto",
+      "name": "depth_8_180s_timer_vs_depth_7_tss_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_tss"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_8_auto",
+      "name": "depth_8_180s_timer_vs_depth_8_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_8"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_8_beam_a_auto",
+      "name": "depth_8_180s_timer_vs_depth_8_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_a"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_8_beam_b_auto",
+      "name": "depth_8_180s_timer_vs_depth_8_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_b"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_8_cy_auto",
+      "name": "depth_8_180s_timer_vs_depth_8_cy_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_cy"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_8_full_auto",
+      "name": "depth_8_180s_timer_vs_depth_8_full_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_8_full_a_auto",
+      "name": "depth_8_180s_timer_vs_depth_8_full_a_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_a"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_8_full_b_auto",
+      "name": "depth_8_180s_timer_vs_depth_8_full_b_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_b"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_8_smp_auto",
+      "name": "depth_8_180s_timer_vs_depth_8_smp_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_smp"
       }
     },
     {
-      "name": "depth_8_no_limit_timer_vs_depth_8_tss_auto",
+      "name": "depth_8_180s_timer_vs_depth_8_tss_auto",
       "agent_a": {
-        "label": "depth_8_no_limit_timer"
+        "label": "depth_8_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_tss"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_3_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_3_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_3"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_4_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_4_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_4"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_5_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_5_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_5"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_6_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_6_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_6"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_6_beam_a_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_6_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_a"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_6_beam_b_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_6_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_b"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_6_cy_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_6_cy_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_cy"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_6_full_a_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_6_full_a_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_a"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_6_full_b_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_6_full_b_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_b"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_6_plain_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_6_plain_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_plain"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_6_smp_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_6_smp_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_smp"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_6_tss_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_6_tss_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_tss"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_7_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_7_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_7"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_7_beam_a_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_7_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_a"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_7_beam_b_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_7_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_b"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_7_cy_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_7_cy_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_cy"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_7_full_a_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_7_full_a_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_a"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_7_full_b_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_7_full_b_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_b"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_7_smp_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_7_smp_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_smp"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_7_tss_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_7_tss_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_tss"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_8_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_8_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_8"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_8_beam_a_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_8_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_a"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_8_beam_b_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_8_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_b"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_8_cy_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_8_cy_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_cy"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_8_full_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_8_full_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_8_full_a_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_8_full_a_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_a"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_8_full_b_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_8_full_b_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_b"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_8_smp_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_8_smp_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_smp"
       }
     },
     {
-      "name": "depth_8_tss_no_limit_timer_vs_depth_8_tss_auto",
+      "name": "depth_8_tss_180s_timer_vs_depth_8_tss_auto",
       "agent_a": {
-        "label": "depth_8_tss_no_limit_timer"
+        "label": "depth_8_tss_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_tss"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_3_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_3_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_3"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_4_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_4_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_4"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_5_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_5_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_5"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_6_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_6_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_6"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_6_beam_a_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_6_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_a"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_6_beam_b_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_6_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_b"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_6_cy_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_6_cy_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_cy"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_6_full_a_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_6_full_a_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_a"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_6_full_b_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_6_full_b_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_b"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_6_plain_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_6_plain_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_plain"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_6_smp_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_6_smp_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_smp"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_6_tss_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_6_tss_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_tss"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_7_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_7_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_7"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_7_beam_a_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_7_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_a"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_7_beam_b_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_7_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_b"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_7_cy_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_7_cy_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_cy"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_7_full_a_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_7_full_a_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_a"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_7_full_b_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_7_full_b_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_b"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_7_smp_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_7_smp_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_smp"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_7_tss_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_7_tss_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_tss"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_8_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_8_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_8"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_8_beam_a_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_8_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_a"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_8_beam_b_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_8_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_b"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_8_cy_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_8_cy_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_cy"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_8_full_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_8_full_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_8_full_a_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_8_full_a_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_a"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_8_full_b_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_8_full_b_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_b"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_8_smp_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_8_smp_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_smp"
       }
     },
     {
-      "name": "depth_8_smp_no_limit_timer_vs_depth_8_tss_auto",
+      "name": "depth_8_smp_180s_timer_vs_depth_8_tss_auto",
       "agent_a": {
-        "label": "depth_8_smp_no_limit_timer"
+        "label": "depth_8_smp_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_tss"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_3_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_3_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_3"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_4_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_4_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_4"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_5_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_5_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_5"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_6_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_6_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_6"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_6_beam_a_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_6_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_a"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_6_beam_b_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_6_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_b"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_6_cy_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_6_cy_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_cy"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_6_full_a_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_6_full_a_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_a"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_6_full_b_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_6_full_b_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_b"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_6_plain_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_6_plain_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_plain"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_6_smp_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_6_smp_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_smp"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_6_tss_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_6_tss_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_tss"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_7_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_7_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_7"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_7_beam_a_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_7_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_a"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_7_beam_b_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_7_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_b"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_7_cy_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_7_cy_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_cy"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_7_full_a_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_7_full_a_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_a"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_7_full_b_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_7_full_b_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_b"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_7_smp_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_7_smp_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_smp"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_7_tss_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_7_tss_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_tss"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_8_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_8_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_8"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_8_beam_a_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_8_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_a"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_8_beam_b_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_8_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_b"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_8_cy_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_8_cy_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_cy"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_8_full_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_8_full_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_8_full_a_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_8_full_a_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_a"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_8_full_b_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_8_full_b_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_b"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_8_smp_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_8_smp_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_smp"
       }
     },
     {
-      "name": "depth_8_cy_no_limit_timer_vs_depth_8_tss_auto",
+      "name": "depth_8_cy_180s_timer_vs_depth_8_tss_auto",
       "agent_a": {
-        "label": "depth_8_cy_no_limit_timer"
+        "label": "depth_8_cy_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_tss"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_3_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_3_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_3"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_4_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_4_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_4"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_5_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_5_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_5"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_6_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_6_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_6_beam_a_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_6_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_a"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_6_beam_b_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_6_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_b"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_6_cy_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_6_cy_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_cy"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_6_full_a_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_6_full_a_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_a"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_6_full_b_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_6_full_b_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_b"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_6_plain_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_6_plain_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_plain"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_6_smp_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_6_smp_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_smp"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_6_tss_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_6_tss_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_tss"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_7_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_7_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_7"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_7_beam_a_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_7_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_a"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_7_beam_b_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_7_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_b"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_7_cy_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_7_cy_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_cy"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_7_full_a_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_7_full_a_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_a"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_7_full_b_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_7_full_b_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_b"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_7_smp_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_7_smp_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_smp"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_7_tss_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_7_tss_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_tss"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_8_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_8_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_8_beam_a_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_8_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_a"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_8_beam_b_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_8_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_b"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_8_cy_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_8_cy_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_cy"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_8_full_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_8_full_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_8_full_a_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_8_full_a_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_a"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_8_full_b_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_8_full_b_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_b"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_8_smp_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_8_smp_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_smp"
       }
     },
     {
-      "name": "depth_8_beam_a_no_limit_timer_vs_depth_8_tss_auto",
+      "name": "depth_8_beam_a_180s_timer_vs_depth_8_tss_auto",
       "agent_a": {
-        "label": "depth_8_beam_a_no_limit_timer"
+        "label": "depth_8_beam_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_tss"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_3_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_3_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_3"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_4_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_4_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_4"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_5_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_5_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_5"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_6_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_6_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_6_beam_a_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_6_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_a"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_6_beam_b_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_6_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_b"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_6_cy_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_6_cy_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_cy"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_6_full_a_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_6_full_a_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_a"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_6_full_b_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_6_full_b_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_b"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_6_plain_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_6_plain_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_plain"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_6_smp_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_6_smp_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_smp"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_6_tss_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_6_tss_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_tss"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_7_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_7_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_7"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_7_beam_a_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_7_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_a"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_7_beam_b_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_7_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_b"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_7_cy_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_7_cy_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_cy"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_7_full_a_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_7_full_a_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_a"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_7_full_b_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_7_full_b_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_b"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_7_smp_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_7_smp_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_smp"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_7_tss_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_7_tss_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_tss"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_8_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_8_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_8_beam_a_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_8_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_a"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_8_beam_b_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_8_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_b"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_8_cy_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_8_cy_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_cy"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_8_full_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_8_full_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_8_full_a_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_8_full_a_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_a"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_8_full_b_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_8_full_b_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_b"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_8_smp_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_8_smp_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_smp"
       }
     },
     {
-      "name": "depth_8_beam_b_no_limit_timer_vs_depth_8_tss_auto",
+      "name": "depth_8_beam_b_180s_timer_vs_depth_8_tss_auto",
       "agent_a": {
-        "label": "depth_8_beam_b_no_limit_timer"
+        "label": "depth_8_beam_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_tss"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_3_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_3_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_3"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_4_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_4_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_4"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_5_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_5_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_5"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_6_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_6_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_6"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_6_beam_a_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_6_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_a"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_6_beam_b_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_6_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_b"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_6_cy_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_6_cy_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_cy"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_6_full_a_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_6_full_a_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_a"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_6_full_b_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_6_full_b_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_b"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_6_plain_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_6_plain_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_plain"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_6_smp_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_6_smp_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_smp"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_6_tss_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_6_tss_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_tss"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_7_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_7_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_7"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_7_beam_a_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_7_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_a"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_7_beam_b_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_7_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_b"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_7_cy_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_7_cy_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_cy"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_7_full_a_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_7_full_a_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_a"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_7_full_b_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_7_full_b_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_b"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_7_smp_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_7_smp_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_smp"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_7_tss_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_7_tss_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_tss"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_8_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_8_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_8"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_8_beam_a_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_8_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_a"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_8_beam_b_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_8_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_b"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_8_cy_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_8_cy_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_cy"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_8_full_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_8_full_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_8_full_a_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_8_full_a_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_a"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_8_full_b_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_8_full_b_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_b"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_8_smp_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_8_smp_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_smp"
       }
     },
     {
-      "name": "depth_8_full_no_limit_timer_vs_depth_8_tss_auto",
+      "name": "depth_8_full_180s_timer_vs_depth_8_tss_auto",
       "agent_a": {
-        "label": "depth_8_full_no_limit_timer"
+        "label": "depth_8_full_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_tss"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_3_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_3_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_3"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_4_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_4_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_4"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_5_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_5_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_5"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_6_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_6_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_6_beam_a_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_6_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_a"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_6_beam_b_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_6_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_b"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_6_cy_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_6_cy_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_cy"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_6_full_a_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_6_full_a_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_a"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_6_full_b_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_6_full_b_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_b"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_6_plain_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_6_plain_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_plain"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_6_smp_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_6_smp_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_smp"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_6_tss_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_6_tss_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_tss"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_7_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_7_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_7"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_7_beam_a_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_7_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_a"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_7_beam_b_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_7_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_b"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_7_cy_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_7_cy_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_cy"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_7_full_a_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_7_full_a_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_a"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_7_full_b_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_7_full_b_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_b"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_7_smp_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_7_smp_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_smp"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_7_tss_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_7_tss_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_tss"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_8_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_8_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_8_beam_a_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_8_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_a"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_8_beam_b_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_8_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_b"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_8_cy_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_8_cy_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_cy"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_8_full_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_8_full_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_8_full_a_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_8_full_a_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_a"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_8_full_b_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_8_full_b_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_b"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_8_smp_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_8_smp_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_smp"
       }
     },
     {
-      "name": "depth_8_full_a_no_limit_timer_vs_depth_8_tss_auto",
+      "name": "depth_8_full_a_180s_timer_vs_depth_8_tss_auto",
       "agent_a": {
-        "label": "depth_8_full_a_no_limit_timer"
+        "label": "depth_8_full_a_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_tss"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_3_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_3_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_3"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_4_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_4_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_4"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_5_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_5_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_5"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_6_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_6_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_6_beam_a_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_6_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_a"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_6_beam_b_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_6_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_beam_b"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_6_cy_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_6_cy_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_cy"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_6_full_a_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_6_full_a_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_a"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_6_full_b_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_6_full_b_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_full_b"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_6_plain_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_6_plain_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_plain"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_6_smp_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_6_smp_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_smp"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_6_tss_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_6_tss_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_6_tss"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_7_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_7_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_7"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_7_beam_a_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_7_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_a"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_7_beam_b_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_7_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_beam_b"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_7_cy_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_7_cy_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_cy"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_7_full_a_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_7_full_a_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_a"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_7_full_b_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_7_full_b_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_full_b"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_7_smp_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_7_smp_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_smp"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_7_tss_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_7_tss_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_7_tss"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_8_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_8_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_8_beam_a_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_8_beam_a_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_a"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_8_beam_b_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_8_beam_b_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_beam_b"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_8_cy_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_8_cy_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_cy"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_8_full_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_8_full_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_8_full_a_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_8_full_a_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_a"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_8_full_b_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_8_full_b_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_full_b"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_8_smp_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_8_smp_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_smp"
       }
     },
     {
-      "name": "depth_8_full_b_no_limit_timer_vs_depth_8_tss_auto",
+      "name": "depth_8_full_b_180s_timer_vs_depth_8_tss_auto",
       "agent_a": {
-        "label": "depth_8_full_b_no_limit_timer"
+        "label": "depth_8_full_b_180s_timer"
       },
       "agent_b": {
         "label": "depth_8_tss"

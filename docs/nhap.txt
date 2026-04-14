@@ -1,0 +1,3 @@
+bây giờ khi đã lưu cả thứ tự các nước đi của mỗi ván rồi, có cả bàn cờ của từng ván nên tôi muốn bổ sung tính năng mới (có thể bặt tắt bằng 1 bool trong code - hard code).
+1. nếu bấm exit lúc đang benchmark, các bàn cờ chạy dở sẽ lưu lại board và moves vào folder có tên ứng với: tmp_<game_seq>_<match_id>.
+2. lúc chạy lại sẽ ưu tiên chạy tiếp các 

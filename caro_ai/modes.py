@@ -4,7 +4,8 @@ from enum import Enum, auto
 
 
 class GameMode(Enum):
-    """NORMAL: human vs AI; DEVELOPER: AI vs AI; BENCHMARK: automated matchups."""
+    """NORMAL: human vs AI; CUSTOM_AI: custom human vs AI; DEVELOPER: AI vs AI; BENCHMARK: automated matchups."""
     NORMAL = auto()
+    CUSTOM_AI = auto()
     DEVELOPER = auto()
     BENCHMARK = auto()

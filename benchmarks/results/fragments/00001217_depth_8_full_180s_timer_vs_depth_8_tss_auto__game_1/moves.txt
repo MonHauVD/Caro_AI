@@ -1,0 +1,17 @@
+game_seq=1217
+match_id=depth_8_full_180s_timer_vs_depth_8_tss_auto__game_1
+actor=depth_8_full_180s_timer; piece=X; elapsed=0.011s; coord=(13,10)
+actor=depth_8_tss; piece=O; elapsed=0.009s; coord=(14,10)
+actor=depth_8_full_180s_timer; piece=X; elapsed=86.781s; coord=(14,11)
+actor=depth_8_tss; piece=O; elapsed=15.333s; coord=(13,11)
+actor=depth_8_full_180s_timer; piece=X; elapsed=61.348s; coord=(12,12)
+actor=depth_8_tss; piece=O; elapsed=20.013s; coord=(15,9)
+actor=depth_8_full_180s_timer; piece=X; elapsed=155.264s; coord=(12,11)
+actor=depth_8_tss; piece=O; elapsed=20.019s; coord=(12,9)
+actor=depth_8_full_180s_timer; piece=X; elapsed=73.611s; coord=(12,13)
+actor=depth_8_tss; piece=O; elapsed=7.099s; coord=(16,8)
+actor=depth_8_full_180s_timer; piece=X; elapsed=0.010s; coord=(17,7)
+actor=depth_8_tss; piece=O; elapsed=14.304s; coord=(14,9)
+actor=depth_8_full_180s_timer; piece=X; elapsed=38.555s; coord=(12,14)
+actor=depth_8_tss; piece=O; elapsed=0.011s; coord=(12,10)
+actor=depth_8_full_180s_timer; piece=X; elapsed=0.010s; coord=(12,15)

@@ -301,15 +301,16 @@ def _parse_match_id(match_id: str) -> tuple[str, int] | None:
     return matchup_name, game_no
 
 
-def detect_benchmark_resume_position(
+def _collect_completed_match_games(
     benchmark_setup: dict,
     summary_path: str,
     fragments_dir: str | None = None,
-) -> tuple[int, int]:
+) -> tuple[set[tuple[str, int]], int]:
+    """Thu thập tập (matchup_name, game_no) đã hoàn tất từ fragments hoặc summary."""
     matchups = benchmark_setup.get("matchups", [])
     games_per_matchup = max(1, int(benchmark_setup.get("games_per_matchup", 1)))
     if not matchups:
-        return 0, 0
+        return set(), 0
 
     matchup_name_to_idx: dict[str, int] = {}
     for idx, matchup in enumerate(matchups):
@@ -355,11 +356,26 @@ def detect_benchmark_resume_position(
             with open(summary_path, encoding="utf-8") as f:
                 for raw_line in f:
                     _ingest_match_line(raw_line.strip())
-        else:
-            return 0, 0
     except Exception as ex:
         print(f"[BENCH] failed to inspect summary/fragments for resume: {ex}")
+        return set(), 0
+
+    return completed, ignored_count
+
+
+def detect_benchmark_resume_position(
+    benchmark_setup: dict,
+    summary_path: str,
+    fragments_dir: str | None = None,
+) -> tuple[int, int]:
+    matchups = benchmark_setup.get("matchups", [])
+    games_per_matchup = max(1, int(benchmark_setup.get("games_per_matchup", 1)))
+    if not matchups:
         return 0, 0
+
+    completed, ignored_count = _collect_completed_match_games(
+        benchmark_setup, summary_path, fragments_dir
+    )
 
     if ignored_count > 0:
         print(f"[BENCH] ignored {ignored_count} summary entries not in current config or invalid")
@@ -432,6 +448,25 @@ def build_benchmark_task_queue(
     for mi in range(start_mi, len(matchups)):
         g0 = start_gi if mi == start_mi else 0
         for gi in range(g0, gpm):
+            seq = benchmark_game_seq_from_mi_gi(benchmark_setup, mi, gi)
+            q.append((seq, mi, gi))
+    return q
+
+
+def build_benchmark_missing_task_queue(
+    benchmark_setup: dict, completed: set[tuple[str, int]]
+) -> list[tuple[int, int, int]]:
+    """Queue chỉ chứa các ván còn thiếu dựa trên tập (matchup_name, game_no) đã hoàn tất."""
+    matchups = benchmark_setup["matchups"]
+    gpm = max(1, int(benchmark_setup.get("games_per_matchup", 1)))
+    q: list[tuple[int, int, int]] = []
+    for mi, matchup in enumerate(matchups):
+        mn = matchup.get("name")
+        if not isinstance(mn, str):
+            continue
+        for gi in range(gpm):
+            if (mn, gi + 1) in completed:
+                continue
             seq = benchmark_game_seq_from_mi_gi(benchmark_setup, mi, gi)
             q.append((seq, mi, gi))
     return q
@@ -740,7 +775,14 @@ def benchmark_multi_start_all(benchmark_setup: dict, benchmark_state: dict, rt: 
     )
     benchmark_state["resume_matchup_idx"] = rmi
     benchmark_state["resume_game_idx"] = rgi
-    q = build_benchmark_task_queue(benchmark_setup, rmi, rgi)
+    completed, ignored_count = _collect_completed_match_games(
+        benchmark_setup,
+        benchmark_state.get("_summary_path", ""),
+        benchmark_state.get("_fragments_dir"),
+    )
+    if ignored_count > 0:
+        print(f"[BENCH] ignored {ignored_count} summary entries not in current config or invalid")
+    q = build_benchmark_missing_task_queue(benchmark_setup, completed)
     benchmark_state["task_queue"] = deque(q)
     benchmark_state["parallel_total"] = len(q)
     benchmark_state["parallel_done"] = 0
