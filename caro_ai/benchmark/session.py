@@ -270,13 +270,13 @@ def load_benchmark_config(
     *,
     default_config_file: str,
     must_exist: bool = False,
-) -> None:
+) -> bool:
     path = config_path or default_config_file
     if not os.path.isfile(path):
         if must_exist:
             print(f"[BENCH] error: config not found: {path}", file=sys.stderr)
             sys.exit(2)
-        return
+        return False
     try:
         with open(path, "r", encoding="utf-8") as f:
             loaded = json.load(f)
@@ -284,10 +284,12 @@ def load_benchmark_config(
             benchmark_setup.update(loaded)
             normalize_benchmark_setup(benchmark_setup)
             print(f"[BENCH] loaded config from {path}")
+            return True
     except Exception as ex:
         print(f"[BENCH] failed to load config file {path}: {ex}", file=sys.stderr)
         if must_exist:
             sys.exit(2)
+    return False
 
 
 def _parse_match_id(match_id: str) -> tuple[str, int] | None:

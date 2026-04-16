@@ -133,6 +133,8 @@ _DEFAULT_DEV_MODE_SETUP = {
 }
 
 dev_mode_setup: dict = copy.deepcopy(_DEFAULT_DEV_MODE_SETUP)
+dev_config_loaded_from_file = False
+benchmark_config_loaded_from_file = False
 
 benchmark_setup = {
     'games_per_matchup': 4,  # Auto-swap first move by alternating X/O each game.
@@ -276,7 +278,7 @@ def run_benchmark_export_merge_cli(args: argparse.Namespace) -> None:
         )
 
 
-def load_dev_mode_config(path: str, *, explicit_file: bool) -> None:
+def load_dev_mode_config(path: str, *, explicit_file: bool) -> bool:
     """Đặt lại dev_mode_setup từ path; nếu không có file: defaults (hoặc thoát nếu explicit_file)."""
     global dev_mode_setup
     dev_mode_setup = copy.deepcopy(_DEFAULT_DEV_MODE_SETUP)
@@ -285,7 +287,7 @@ def load_dev_mode_config(path: str, *, explicit_file: bool) -> None:
             print(f"[DEV] error: file not found: {path}", file=sys.stderr)
             sys.exit(2)
         print(f"[DEV] config not found ({path}), using built-in defaults")
-        return
+        return False
     try:
         with open(path, 'r', encoding='utf-8') as f:
             loaded = json.load(f)
@@ -301,6 +303,7 @@ def load_dev_mode_config(path: str, *, explicit_file: bool) -> None:
         else:
             dev_mode_setup[k] = copy.deepcopy(v) if isinstance(v, dict) else v
     print(f"[DEV] loaded config from {path}")
+    return True
 
 
 # Cửa sổ pygame chỉ tiến trình chính; worker AI ở caro_ai.benchmark.worker (không import pygame).
@@ -335,6 +338,28 @@ def build_custom_ai_agent(custom_spec: dict) -> Agent:
     )
 
 
+def _log_benchmark_hardcoded_agents() -> None:
+    for matchup in benchmark_setup.get("matchups", []):
+        if not isinstance(matchup, dict):
+            continue
+        for side_key in ("agent_a", "agent_b"):
+            side = matchup.get(side_key)
+            if not isinstance(side, dict):
+                continue
+            print(
+                "[Agent Init]",
+                {
+                    "mode": "benchmark",
+                    "source": "built-in defaults",
+                    "matchup": matchup.get("name", ""),
+                    "side": side_key,
+                    "label": side.get("label", ""),
+                    "max_depth": side.get("depth"),
+                    **(side.get("config") or {}),
+                },
+            )
+
+
 def modal_close_button_rect(panel_rect: pygame.Rect) -> pygame.Rect:
     return pygame.Rect(panel_rect.right - 34, panel_rect.y + 10, 24, 24)
 
@@ -367,6 +392,7 @@ def init_application():
     global ai_btn, person_btn, h_btn, m_btn, e_btn, grand_master_btn, ai_thinking_btn, pvp_btn, aivp_btn, logo_btn
     global done, status, clock, turn_started_at, turn_elapsed_frozen, turn_timer_paused, turn_elapsed_paused
     global ai_is_thinking, ai_future, dev_future, ai_executor, benchmark_state, bench_rt
+    global dev_config_loaded_from_file
 
     pygame.init()
 
@@ -500,11 +526,13 @@ def init_application():
         max_depth=dev_mode_setup['ai_1_depth'],
         XO=dev_mode_setup['ai_1'],
         config=dev_mode_setup['ai_1_config'],
+        log_init=(game_mode is GameMode.DEVELOPER and not dev_config_loaded_from_file),
     )
     agent2 = Agent(
         max_depth=dev_mode_setup['ai_2_depth'],
         XO=dev_mode_setup['ai_2'],
         config=dev_mode_setup['ai_2_config'],
+        log_init=(game_mode is GameMode.DEVELOPER and not dev_config_loaded_from_file),
     )
 
     done = False
@@ -898,6 +926,7 @@ def main(argv: list[str] | None = None):
     global done, ai_is_thinking, ai_future, dev_future, ai_executor
     global normal_mode_difficulty, agent, turn_elapsed_paused, turn_started_at, turn_elapsed_frozen
     global game_mode, dev_mode_setup, agent1, agent2
+    global dev_config_loaded_from_file, benchmark_config_loaded_from_file
 
     args = parse_args(argv)
     if args.bench_export_merge:
@@ -913,17 +942,26 @@ def main(argv: list[str] | None = None):
 
     if args.dev:
         dev_path = args.dev_config if args.dev_config is not None else DEV_MODE_CONFIG_FILE
-        load_dev_mode_config(dev_path, explicit_file=args.dev_config is not None)
+        dev_config_loaded_from_file = load_dev_mode_config(
+            dev_path,
+            explicit_file=args.dev_config is not None,
+        )
     else:
         dev_mode_setup = copy.deepcopy(_DEFAULT_DEV_MODE_SETUP)
+        dev_config_loaded_from_file = False
 
-    bench_path = args.benchmark_config if args.benchmark_config is not None else BENCHMARK_CONFIG_FILE
-    bench_sess.load_benchmark_config(
-        benchmark_setup,
-        bench_path,
-        default_config_file=BENCHMARK_CONFIG_FILE,
-        must_exist=(game_mode is GameMode.BENCHMARK),
-    )
+    if args.benchmark:
+        bench_path = args.benchmark_config if args.benchmark_config is not None else BENCHMARK_CONFIG_FILE
+        benchmark_config_loaded_from_file = bench_sess.load_benchmark_config(
+            benchmark_setup,
+            bench_path,
+            default_config_file=BENCHMARK_CONFIG_FILE,
+            must_exist=True,
+        )
+        if not benchmark_config_loaded_from_file:
+            _log_benchmark_hardcoded_agents()
+    else:
+        benchmark_config_loaded_from_file = False
 
     init_application()
     if game_mode is GameMode.BENCHMARK:
@@ -1180,7 +1218,7 @@ def main(argv: list[str] | None = None):
 
     def _start_dev_mode_from_modal():
         nonlocal active_modal, modal_message
-        global game_mode, agent1, agent2
+        global game_mode, agent1, agent2, dev_config_loaded_from_file
         try:
             left_depth = max(1, int(dev_left_depth.strip()))
             right_depth = max(1, int(dev_right_depth.strip()))
@@ -1197,8 +1235,9 @@ def main(argv: list[str] | None = None):
         dev_mode_setup["ai_2_config"] = right_cfg
         dev_mode_setup["start"] = True
         dev_mode_setup["pause"] = False
-        agent1 = Agent(max_depth=left_depth, XO="X", config=left_cfg)
-        agent2 = Agent(max_depth=right_depth, XO="O", config=right_cfg)
+        dev_config_loaded_from_file = True
+        agent1 = Agent(max_depth=left_depth, XO="X", config=left_cfg, log_init=False)
+        agent2 = Agent(max_depth=right_depth, XO="O", config=right_cfg, log_init=False)
         my_game.reset()
         update_game_status(my_game.get_winner())
         game_mode = GameMode.DEVELOPER
@@ -1237,7 +1276,7 @@ def main(argv: list[str] | None = None):
 
     def _start_benchmark_mode():
         nonlocal active_modal, modal_message, modal_message_is_error, benchmark_path_input, benchmark_workers_input
-        global game_mode
+        global game_mode, benchmark_config_loaded_from_file
         global BENCHMARK_RESULT_SUMMARY_FILE, BENCHMARK_RESULT_BOARD_FILE, BENCHMARK_RESULT_MOVES_FILE, BENCHMARK_FRAGMENTS_DIR
         modal_message = ""
         modal_message_is_error = False
@@ -1266,12 +1305,14 @@ def main(argv: list[str] | None = None):
             active_modal = "benchmark"
             return
         try:
-            bench_sess.load_benchmark_config(
+            benchmark_config_loaded_from_file = bench_sess.load_benchmark_config(
                 benchmark_setup,
                 cfg_path,
                 default_config_file=BENCHMARK_CONFIG_FILE,
                 must_exist=True,
             )
+            if not benchmark_config_loaded_from_file:
+                _log_benchmark_hardcoded_agents()
         except Exception as ex:
             modal_message = f"Failed loading benchmark config: {ex}"
             modal_message_is_error = True

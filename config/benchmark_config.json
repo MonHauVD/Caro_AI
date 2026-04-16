@@ -427,7 +427,16 @@
         "move_time_budget_sec": 180
       }
     },
-    
+    "depth_8_beam_b_180s_timer": {
+      "depth": 8,
+      "config": {
+        "use_cython_search": false,
+        "use_tss": false,
+        "use_lazy_smp": false,
+        "beam_width_root": 16,
+        "beam_width_inner": 12,
+        "move_time_budget_sec": 180
+      }
     },
     "depth_8_full_180s_timer": {
       "depth": 8,
